@@ -132,10 +132,10 @@ class MusteriDetayPage extends StatelessWidget {
                             color: Colors.grey,
                           ),
                         ),
-                        Text(
-                          "${musteri.urunAdi}",
+                        const Text(
+                          "ÜRÜN BİLGİLERİ",
                           style: TextStyle(
-                              color: Renkler.Blue,
+                              color: Renkler.Grey,
                               fontWeight: FontWeight.bold,
                               fontSize: 18),
                         ),
