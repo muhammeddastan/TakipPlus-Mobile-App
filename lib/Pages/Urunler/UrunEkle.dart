@@ -11,6 +11,7 @@ class UrunEkle extends StatelessWidget {
         title: Text('Burası Ürün Ekle Sayfası'),
       ),
       body: Column(
+        // asdasdasd
         children: [
           const Padding(
             padding: EdgeInsets.all(15.0),
