@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
 import 'package:takip_plus/Models/MusteriModel.dart';
+import 'package:takip_plus/Models/UrunModel.dart';
 import 'package:takip_plus/Pages/MusteriDetayPage.dart';
 
 class MusterilerScreen extends StatefulWidget {
@@ -14,21 +15,30 @@ class MusterilerScreen extends StatefulWidget {
 class _MusterilerScreenState extends State<MusterilerScreen> {
   final List<MusteriModel> Musteriler = [
     MusteriModel(
-        adi: "Muhammed",
-        soyad: "Daştan",
-        adres: "ASD mah. ASDA sk. No:11 D:3",
-        telNo: "05512345678",
-        urunAdi: "SAD ÜRÜN",
-        urunFiyati: 3900,
-        bakimOlacakMi: false),
+      adiSoyadi: "Muhammed Daştan",
+      adres: "ASD mah. ASDA sk. No:11 D:3",
+      telNo: "05512345678",
+    ),
     MusteriModel(
-        adi: "Serhat",
-        soyad: "Güneş",
-        adres: "BAC mah. DAFG sk. No:11 D:5",
-        telNo: "01234567890",
-        urunAdi: "ASD ÜRÜN",
-        urunFiyati: 2800,
-        bakimOlacakMi: true),
+      adiSoyadi: "Serhat Güneş",
+      adres: "BAC mah. DAFG sk. No:11 D:5",
+      telNo: "01234567890",
+    )
+  ];
+
+  final List<UrunModel> Urunler = [
+    UrunModel(
+        urunAdi: "urunAdi",
+        urunFiyati: 300,
+        urunAdet: 1,
+        urunTarih: DateTime(2023, 7, 2, 2, 2),
+        bakimVarMi: false),
+    UrunModel(
+        urunAdi: "urunAdi",
+        urunFiyati: 300,
+        urunAdet: 1,
+        urunTarih: DateTime(2023, 7, 2, 2, 2),
+        bakimVarMi: true)
   ];
 
   @override
@@ -45,8 +55,7 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
               return ListTile(
                 leading: const Icon(CupertinoIcons
                     .person_alt_circle_fill), // Sol taraftaki icon
-                title:
-                    Text('${Musteriler[index].adi} ${Musteriler[index].soyad}'),
+                title: Text(Musteriler[index].adiSoyadi),
                 subtitle: Text(Musteriler[index].adres), // Adres bilgisi
                 trailing: const Icon(Icons.search), // Sağdaki ok iconu
                 onTap: () {
@@ -57,6 +66,8 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
                       builder: (context) => MusteriDetayPage(
                         musteri: Musteriler[index],
                         Musteriler: Musteriler[index],
+                        urun: Urunler[index],
+                        Urunler: Urunler[index],
                       ),
                     ),
                   );

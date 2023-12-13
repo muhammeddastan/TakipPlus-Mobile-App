@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,9 +13,9 @@ class BakimScreen extends StatefulWidget {
 }
 
 class _BakimScreenState extends State<BakimScreen> {
-  DateTime _hedefTarih = DateTime(2024, 6, 7, 1, 0, 0); // Hedef tarih
+  final DateTime _hedefTarih = DateTime(2024, 6, 7, 1, 0, 0); // Hedef tarih
   late Duration _kalanSure;
-  late Timer _timer;
+  late Timer _sayac;
 
   @override
   void initState() {
@@ -27,10 +28,10 @@ class _BakimScreenState extends State<BakimScreen> {
     _kalanSure = _hedefTarih.difference(currentDate);
 
     // Her saniye yeniden hesaplama
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _sayac = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (_kalanSure.inSeconds > 0) {
-          _kalanSure = _kalanSure - Duration(seconds: 1);
+          _kalanSure = _kalanSure - const Duration(seconds: 1);
         } else {
           timer.cancel();
         }
@@ -41,7 +42,7 @@ class _BakimScreenState extends State<BakimScreen> {
   @override
   void dispose() {
     // Timer'ı dispose etme
-    _timer.cancel();
+    _sayac.cancel();
     super.dispose();
   }
 
@@ -123,7 +124,7 @@ class _BakimScreenState extends State<BakimScreen> {
                           ),
                           child: IconButton(
                             onPressed: () {},
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.phone,
                               color: Renkler.White,
                               size: 40,
@@ -142,7 +143,7 @@ class _BakimScreenState extends State<BakimScreen> {
                           ),
                           child: IconButton(
                             onPressed: () {},
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.message_outlined,
                               color: Renkler.White,
                               size: 40,
@@ -152,7 +153,7 @@ class _BakimScreenState extends State<BakimScreen> {
                       ),
                     ],
                   ),
-                  Text(
+                  const Text(
                     "İletişime Geç",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.black54),
