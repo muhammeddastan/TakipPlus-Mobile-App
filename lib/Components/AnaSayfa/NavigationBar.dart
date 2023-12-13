@@ -171,7 +171,7 @@ class _NavigationBarBottomState extends State<NavigationBarBottom>
       backgroundColor: Renkler.White,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Container(
-        height: 95,
+        height: MediaQuery.of(context).size.height * 0.10,
         decoration: BoxDecoration(
           border: Border(
             top: BorderSide(

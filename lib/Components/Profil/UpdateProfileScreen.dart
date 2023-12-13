@@ -15,8 +15,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Renkler.Blue,
-        leading:
-            IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_back)),
         title: const Text(
           'Profilim',
           style: TextStyle(fontWeight: FontWeight.w600, color: Renkler.White),
@@ -24,7 +22,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       ),
       body: SingleChildScrollView(
           child: Container(
-        padding: const EdgeInsets.all(50),
+        padding: const EdgeInsets.all(30),
         child: Column(
           children: [
             Stack(
@@ -58,11 +56,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             const SizedBox(height: 50),
             const Form(
                 child: Column(
-              children: <Widget>[
+              children: [
                 TextField(
                   decoration: InputDecoration(
                       label: Text("Adınız"),
-                      prefixIcon: Icon(Icons.supervisor_account_rounded)),
+                      prefixIcon: Icon(Icons.supervisor_account_rounded),
+                      border:
+                          OutlineInputBorder(borderSide: BorderSide(width: 5))),
                 ),
                 SizedBox(
                   height: 20,
