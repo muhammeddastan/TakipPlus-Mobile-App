@@ -1,15 +1,20 @@
-// ignore_for_file: file_names
-
+// ignore_for_file: file_names, non_constant_identifier_names
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:takip_plus/Models/MusteriModel.dart'; // MusteriModel import edildiğinden emin olmalısınız
+import 'package:takip_plus/Models/MusteriModel.dart';
+import 'package:takip_plus/Models/UrunModel.dart'; // MusteriModel import edildiğinden emin olmalısınız
 
 class MusteriDetayPage extends StatelessWidget {
   final MusteriModel musteri;
+  final UrunModel urun;
 
   const MusteriDetayPage(
-      {Key? key, required this.musteri, required MusteriModel Musteriler})
+      {Key? key,
+      required this.musteri,
+      required MusteriModel Musteriler,
+      required this.urun,
+      required UrunModel Urunler})
       : super(key: key);
 
   @override
@@ -17,12 +22,12 @@ class MusteriDetayPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Renkler.White,
       appBar: AppBar(
-        title: Text("Müşteri Bilgileri"),
+        title: const Text("Müşteri Bilgileri"),
         foregroundColor: Renkler.White,
         backgroundColor: Renkler.Blue,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -48,7 +53,7 @@ class MusteriDetayPage extends StatelessWidget {
                           child: Text(
                             "Müşteri Bilgileri",
                             style: TextStyle(
-                                color: Colors.grey,
+                                color: Renkler.Grey,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -62,59 +67,64 @@ class MusteriDetayPage extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 20.0, left: 15),
                     child: Row(
                       children: [
-                        const Text(
-                          "Adı Soyadı:",
+                        Text(
+                          "Adı Soyadı: ",
                           style: TextStyle(
-                              color: Renkler.Blue,
-                              fontSize: 17,
+                              color: Renkler.Black.withOpacity(0.3),
+                              fontSize: 15,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          '${musteri.adi} ${musteri.soyad}',
+                          '${musteri.adiSoyadi}',
                           style: const TextStyle(
-                              fontSize: 17,
+                              fontSize: 15,
                               fontWeight: FontWeight.normal,
-                              color: Colors.grey),
+                              color: Renkler.Grey),
                         ),
                       ],
                     ),
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(left: 15.0, top: 5),
+                    padding: const EdgeInsets.only(left: 15.0, top: 15),
                     child: Row(
                       children: [
-                        const Text(
+                        Text(
                           'Adres: ',
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                            color: Renkler.Black.withOpacity(0.3),
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
                           musteri.adres,
                           style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 17,
+                              color: Renkler.Grey,
+                              fontSize: 15,
                               fontWeight: FontWeight.normal),
                         )
                       ],
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 15.0, top: 5),
+                    padding: const EdgeInsets.only(left: 15.0, top: 15),
                     child: Row(
                       children: [
-                        const Text(
+                        Text(
                           'Telefon: ',
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                              color: Renkler.Black.withOpacity(0.3),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
                         ),
                         Text(
                           musteri.telNo,
                           style: const TextStyle(
-                              fontSize: 17,
+                              fontSize: 15,
                               fontWeight: FontWeight.normal,
-                              color: Colors.grey),
-                        )
+                              color: Renkler.Grey),
+                        ),
                       ],
                     ),
                   ),
@@ -129,11 +139,11 @@ class MusteriDetayPage extends StatelessWidget {
                           child: Icon(
                             CupertinoIcons.cube_box,
                             size: MediaQuery.of(context).size.height * 0.04,
-                            color: Colors.grey,
+                            color: Renkler.Blue,
                           ),
                         ),
                         const Text(
-                          "ÜRÜN BİLGİLERİ",
+                          "Ürün Bilgileri",
                           style: TextStyle(
                               color: Renkler.Grey,
                               fontWeight: FontWeight.bold,
@@ -142,22 +152,90 @@ class MusteriDetayPage extends StatelessWidget {
                       ],
                     ),
                   ),
+
                   Padding(
-                    padding: EdgeInsets.only(left: 15, top: 15),
-                    child: Text(
-                      'Ürün Fiyatı: ${musteri.urunFiyati}',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    padding: const EdgeInsets.only(left: 15, top: 15),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Ürün Fiyatı: ',
+                          style: TextStyle(
+                              color: Renkler.Black.withOpacity(0.3),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '${urun.urunFiyati}',
+                          style: const TextStyle(
+                              color: Renkler.Grey,
+                              fontSize: 15,
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 15, top: 10, bottom: 25),
-                    child: Text(
-                      musteri.bakimOlacakMi == true
-                          ? 'Bakım Olacak Mı?: Evet'
-                          : "Bakım Olacak Mı?: Hayır",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    padding: const EdgeInsets.only(left: 15, top: 15),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Satış Fiyatı: ',
+                          style: TextStyle(
+                              color: Renkler.Black.withOpacity(0.3),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '${urun.urunFiyati}',
+                          style: TextStyle(
+                              color: Renkler.Grey,
+                              fontSize: 15,
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, top: 15),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Satış Tarihi: ',
+                          style: TextStyle(
+                              color: Renkler.Black.withOpacity(0.3),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const Text(
+                          "12/07/2020",
+                          style: TextStyle(
+                              color: Renkler.Grey,
+                              fontSize: 15,
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 15, top: 15, bottom: 25),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Bakım Var Mı? : ",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.Black.withOpacity(0.3)),
+                        ),
+                        Text(
+                          urun.bakimVarMi == true ? "Evet" : "Hayır",
+                          style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.normal,
+                              color: Renkler.Grey),
+                        ),
+                      ],
                     ),
                   ),
                 ],
