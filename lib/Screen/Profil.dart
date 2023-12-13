@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:takip_plus/Pages/widgets/ProfilMenu.dart';
-import 'package:takip_plus/Pages/widgets/UpdateProfileScreen.dart';
+import 'package:takip_plus/Components/Profil/ProfilMenu.dart';
+import 'package:takip_plus/Components/Profil/UpdateProfileScreen.dart';
 
 class ProfilScreen extends StatefulWidget {
   const ProfilScreen({Key? key}) : super(key: key);
