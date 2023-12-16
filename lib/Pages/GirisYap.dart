@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
+            children: [
               const SizedBox(
                 height: 80,
               ),
@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                         child: Column(
-                          children: <Widget>[
+                          children: [
                             Container(
                               padding: const EdgeInsets.all(10),
                               decoration: const BoxDecoration(

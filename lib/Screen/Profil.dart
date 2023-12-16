@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
+import 'package:takip_plus/Components/Profil/AboutProfileScreen.dart';
 import 'package:takip_plus/Components/Profil/ProfilMenu.dart';
 import 'package:takip_plus/Components/Profil/UpdateProfileScreen.dart';
+import 'package:takip_plus/Components/Profil/UygulamaHakkindaScreen.dart';
 
 class ProfilScreen extends StatefulWidget {
   const ProfilScreen({Key? key}) : super(key: key);
@@ -116,12 +118,23 @@ class _ProfilScreenState extends State<ProfilScreen> {
               ProfileMenuWidget(
                 title: 'Uygulama Hakkında',
                 icon: Icons.aod_outlined,
-                OnPress: () {},
+                OnPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const UygulamaHakkindaScreen()));
+                },
               ),
               ProfileMenuWidget(
                 title: 'Biz Kimiz?',
                 icon: Icons.accessibility_new_outlined,
-                OnPress: () {},
+                OnPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AboutProfileScreen()));
+                },
               ),
               Divider(
                 color:
