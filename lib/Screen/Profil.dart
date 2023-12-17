@@ -4,6 +4,7 @@ import 'package:takip_plus/Components/Profil/AboutProfileScreen.dart';
 import 'package:takip_plus/Components/Profil/ProfilMenu.dart';
 import 'package:takip_plus/Components/Profil/UpdateProfileScreen.dart';
 import 'package:takip_plus/Components/Profil/UygulamaHakkindaScreen.dart';
+import 'package:takip_plus/Pages/GirisYap.dart';
 
 class ProfilScreen extends StatefulWidget {
   const ProfilScreen({Key? key}) : super(key: key);
@@ -147,7 +148,42 @@ class _ProfilScreenState extends State<ProfilScreen> {
                 title: 'Çıkış Yap',
                 icon: Icons.power_settings_new,
                 endIcon: false,
-                OnPress: () {},
+                OnPress: () => showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    backgroundColor: Renkler.White,
+                    title: const Text('Takip Plus'),
+                    content: const Text('Uygulamadan çıkmak istiyor musunuz?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginPage(),
+                            )),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Renkler.Danger),
+                        ),
+                        child: const Text(
+                          'Evet',
+                          style: TextStyle(color: Renkler.White),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'Hayır'),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Renkler.Blue),
+                        ),
+                        child: const Text(
+                          'Hayır',
+                          style: TextStyle(color: Renkler.White),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),

@@ -10,6 +10,7 @@ class ProfileMenuWidget extends StatelessWidget {
     required this.OnPress,
     this.endIcon = true,
     this.textColor,
+    required,
   });
 
   final String title;
