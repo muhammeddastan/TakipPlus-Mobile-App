@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// ignore: unused_import
+import 'package:takip_plus/Colors/Renkler.dart';
 import 'package:takip_plus/Pages/Splash.dart';
 
 void main() {
