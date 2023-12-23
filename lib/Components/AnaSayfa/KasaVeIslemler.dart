@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
+import 'package:takip_plus/Pages/Urunler/StokSayfasi.dart';
 import 'package:takip_plus/Pages/Urunler/UrunEkle.dart';
 
 class KasaVeIslemler extends StatelessWidget {
@@ -113,7 +114,12 @@ class KasaVeIslemler extends StatelessWidget {
                           color: Colors.white.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(30)),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => StokSayfasi()),
+                          );
+                        },
                         icon: Icon(CupertinoIcons.cube_box,
                             size: MediaQuery.of(context).size.width * 0.1,
                             color: Renkler.White),
