@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:takip_plus/Colors/Renkler.dart';
 import 'package:takip_plus/Pages/Urunler/UrunEkle.dart';
-import 'package:flutter/src/material/divider.dart';
+//import 'package:flutter/src/material/divider.dart';
 
 class StokSayfasi extends StatelessWidget {
   final List _posts = [
     'post 1',
     'post 2',
+    'post 3',
+    'post 4',
+    'post 5',
+    'post 6',
+    'post 7',
+    'post 8',
   ];
 
   @override
@@ -32,86 +39,117 @@ class Urun extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            width: 120,
-            height: 150,
-            margin: EdgeInsets.all(0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10),topLeft: Radius.circular(10),topRight: Radius.circular(10), ),
-              child: Image(
-                image: AssetImage('assets/images/kombin.jpg'),
-              ),
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: const Text(
-                  'Burası Ürün Başlığı',
-                  style: TextStyle(fontSize: 17, color: Colors.black),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: 70,
+              height: 90,
+              margin: EdgeInsets.all(0),
+              child: const ClipRRect(
+                child: Image(
+                  image: AssetImage('assets/images/kombin.jpg'),
                 ),
               ),
-              const Row(
-                children: [
-                  Text(
-                    'Beden : ',
-                    style: TextStyle(fontSize: 17, color: Colors.black),
-                  ),
-                  Text(
-                    '46-6 Drop',
-                    style: TextStyle(fontSize: 17, color: Colors.black45),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  const Text(
-                    '4500.00 TL',
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  child: const Text(
+                    'Ürün Başlığı Buraya Gelecek',
                     style: TextStyle(
-                        color: Colors.orange,
-                        fontSize: 20,
-                        fontWeight: FontWeight.normal),
-                  ),
-                  const SizedBox(
-                    width: 50,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      print('Sepete Eklendi.');
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.orange,
-                          width: 2.0,
-                          style: BorderStyle.solid,
-                        ),
-                      ),
-                      child: const Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 6, horizontal: 10),
-                        child: Text(
-                          'Sepete Ekle',
-                          style: TextStyle(
-                              color: Colors.orange,
-                              fontSize: 17,
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ),
+                      fontSize: 18,
+                      color: Colors.black,
                     ),
                   ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
+                ),
+                const Row(
+                  children: [
+                    Text(
+                      '24.12.2023',
+                      style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      'Adet : 48',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      '49.99 TL',
+                      style: TextStyle(
+                          color: Renkler.Blue,
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    InkWell(
+                      child: const Icon(
+                        Icons.settings,
+                        color: Renkler.Blue,
+                        size: 30,
+                      ),
+                      onTap: () {
+                        print('Ürün Düzenlendi');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const UrunEkle()),
+                        );
+                      },
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    InkWell(
+                      child: const Icon(
+                        Icons.delete,
+                        color: Renkler.Blue,
+                        size: 30,
+                      ),
+                      onTap: () {
+                        print('Ürün Silindi');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const UrunEkle()),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+        Divider(),],
     );
   }
 }
