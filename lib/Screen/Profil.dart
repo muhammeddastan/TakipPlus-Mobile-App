@@ -41,21 +41,6 @@ class _ProfilScreenState extends State<ProfilScreen> {
                           image: AssetImage('assets/images/avatar.jpg')),
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                      width: 35,
-                      height: 35,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: Renkler.Blue),
-                      child: const Icon(
-                        Icons.create_sharp,
-                        color: Renkler.White,
-                      ),
-                    ),
-                  ),
                 ],
               ),
               const SizedBox(
@@ -67,11 +52,6 @@ class _ProfilScreenState extends State<ProfilScreen> {
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     color: Renkler.Grey),
-              ),
-              const Text(
-                "demo@gmail.com",
-                style:
-                    TextStyle(fontWeight: FontWeight.w500, color: Renkler.Grey),
               ),
               const SizedBox(
                 height: 20,
@@ -152,11 +132,22 @@ class _ProfilScreenState extends State<ProfilScreen> {
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                     backgroundColor: Renkler.White,
-                    title: const Text('Takip Plus'),
-                    content: const Text('Uygulamadan çıkmak istiyor musunuz?'),
+                    title: const Text('Çıkış Yap'),
+                    content: const Text("Çıkmak istediğinize emin misiniz?"),
                     actions: [
                       TextButton(
-                        onPressed: () => Navigator.pushReplacement(
+                        onPressed: () => Navigator.pop(context, 'İptal'),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Renkler.Blue),
+                        ),
+                        child: const Text(
+                          'İptal',
+                          style: TextStyle(color: Renkler.White),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => const LoginPage(),
@@ -166,18 +157,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
                               MaterialStateProperty.all(Renkler.Danger),
                         ),
                         child: const Text(
-                          'Evet',
-                          style: TextStyle(color: Renkler.White),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'Hayır'),
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Renkler.Blue),
-                        ),
-                        child: const Text(
-                          'Hayır',
+                          'Çıkış Yap',
                           style: TextStyle(color: Renkler.White),
                         ),
                       ),

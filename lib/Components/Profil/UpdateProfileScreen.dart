@@ -1,5 +1,10 @@
+// ignore: unused_import
+import 'dart:ffi';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
+import 'package:takip_plus/Components/Profil/UpdateImage.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({Key? key}) : super(key: key);
@@ -9,6 +14,15 @@ class UpdateProfileScreen extends StatefulWidget {
 }
 
 class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
+  Uint8List? _image;
+
+  void selectImage() async {
+    Uint8List img = await pickImage(ImageSource.gallery);
+    setState(() {
+      _image = img;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,32 +44,24 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             children: [
               Stack(
                 children: [
-                  SizedBox(
-                    width: 120,
-                    height: 120,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: const Image(
-                        image: AssetImage('assets/images/avatar.jpg'),
-                      ),
-                    ),
-                  ),
+                  _image != null
+                      ? CircleAvatar(
+                          radius: 64,
+                          backgroundImage: MemoryImage(_image!),
+                        )
+                      : const CircleAvatar(
+                          radius: 64,
+                          backgroundImage:
+                              AssetImage("assets/images/avatar.jpg"),
+                        ),
                   Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                      width: 35,
-                      height: 35,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Renkler.Blue,
-                      ),
-                      child: const Icon(
-                        Icons.create_sharp,
-                        color: Renkler.White,
-                      ),
+                    child: IconButton(
+                      onPressed: selectImage,
+                      icon: const Icon(Icons.add_a_photo),
                     ),
-                  ),
+                    bottom: -10,
+                    left: 80,
+                  )
                 ],
               ),
               const SizedBox(height: 50),
