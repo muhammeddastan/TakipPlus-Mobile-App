@@ -619,5 +619,4 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 // Kayit Ekleme İşlemleri
-void KayitEkle() {
-}
+void KayitEkle() {}

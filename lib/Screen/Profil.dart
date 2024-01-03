@@ -47,7 +47,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
                 height: 10,
               ),
               const Text(
-                "Serhat Güneş",
+                "Serhat Güneş Developer",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
