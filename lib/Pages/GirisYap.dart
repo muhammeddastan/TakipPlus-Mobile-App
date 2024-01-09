@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
-              colors: [Renkler.Blue, Renkler.DarkBlue],
+              colors: [Renkler.Green, Renkler.Green],
             ),
           ),
           child: Column(
@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                               decoration: InputDecoration(
                                 labelText: "E-Posta adresi ",
                                 hintText: "E-Posta adresi",
-                                counterStyle: TextStyle(color: Renkler.Blue),
+                                counterStyle: TextStyle(color: Renkler.Green),
                                 prefixIcon: Icon(Icons.mail_outline_outlined,
                                     color: Renkler.Grey),
                                 hintStyle: TextStyle(color: Renkler.Grey),
@@ -104,8 +104,8 @@ class _LoginPageState extends State<LoginPage> {
                                       BorderRadius.all(Radius.circular(20)),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(width: 2, color: Renkler.Blue),
+                                  borderSide: BorderSide(
+                                      width: 2, color: Renkler.Green),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)),
                                 ),
@@ -117,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                               decoration: InputDecoration(
                                 labelText: "Şifreniz",
                                 hintText: "Şifreniz",
-                                counterStyle: TextStyle(color: Renkler.Blue),
+                                counterStyle: TextStyle(color: Renkler.Green),
                                 prefixIcon: Icon(Icons.lock_open_sharp,
                                     color: Renkler.Grey),
                                 hintStyle: TextStyle(color: Renkler.Grey),
@@ -128,8 +128,8 @@ class _LoginPageState extends State<LoginPage> {
                                       BorderRadius.all(Radius.circular(20)),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(width: 2, color: Renkler.Blue),
+                                  borderSide: BorderSide(
+                                      width: 2, color: Renkler.Green),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)),
                                 ),
@@ -145,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                         textAlign: TextAlign.center,
                         "Parolanızı mı unuttunuz?",
                         style: TextStyle(
-                          color: Renkler.Blue,
+                          color: Renkler.Green,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -181,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
                           margin: const EdgeInsets.symmetric(horizontal: 50),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Renkler.DarkBlue),
+                              color: Renkler.Green),
                           child: const Center(
                             child: Text(
                               "Oturum Aç",
@@ -291,7 +291,7 @@ class _LoginPageState extends State<LoginPage> {
                                               style: GoogleFonts.roboto(
                                                   fontSize: 25,
                                                   fontWeight: FontWeight.bold,
-                                                  color: Renkler.Blue)),
+                                                  color: Renkler.Green)),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.all(20),
@@ -320,7 +320,7 @@ class _LoginPageState extends State<LoginPage> {
                                                     labelText: "Ad Soyad",
                                                     hintText: "Ad Soyad",
                                                     counterStyle: TextStyle(
-                                                        color: Renkler.Blue),
+                                                        color: Renkler.Green),
                                                     prefixIcon: Icon(
                                                         Icons
                                                             .account_circle_outlined,
@@ -340,7 +340,7 @@ class _LoginPageState extends State<LoginPage> {
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                           width: 2,
-                                                          color: Renkler.Blue),
+                                                          color: Renkler.Green),
                                                       borderRadius:
                                                           BorderRadius.all(
                                                               Radius.circular(
@@ -357,7 +357,7 @@ class _LoginPageState extends State<LoginPage> {
                                                     labelText: "E-posta",
                                                     hintText: "E-posta",
                                                     counterStyle: TextStyle(
-                                                        color: Renkler.Blue),
+                                                        color: Renkler.Green),
                                                     prefixIcon: Icon(
                                                         Icons
                                                             .attach_email_outlined,
@@ -377,7 +377,7 @@ class _LoginPageState extends State<LoginPage> {
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                           width: 2,
-                                                          color: Renkler.Blue),
+                                                          color: Renkler.Green),
                                                       borderRadius:
                                                           BorderRadius.all(
                                                               Radius.circular(
@@ -394,7 +394,7 @@ class _LoginPageState extends State<LoginPage> {
                                                     labelText: "Telefon",
                                                     hintText: "Telefon",
                                                     counterStyle: TextStyle(
-                                                        color: Renkler.Blue),
+                                                        color: Renkler.Green),
                                                     prefixIcon: Icon(
                                                         Icons.phone,
                                                         color: Renkler.Grey),
@@ -413,7 +413,7 @@ class _LoginPageState extends State<LoginPage> {
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                           width: 2,
-                                                          color: Renkler.Blue),
+                                                          color: Renkler.Green),
                                                       borderRadius:
                                                           BorderRadius.all(
                                                               Radius.circular(
@@ -430,7 +430,7 @@ class _LoginPageState extends State<LoginPage> {
                                                     labelText: "Şifre Oluştur",
                                                     hintText: "Şifre Oluştur",
                                                     counterStyle: TextStyle(
-                                                        color: Renkler.Blue),
+                                                        color: Renkler.Green),
                                                     prefixIcon: Icon(
                                                         Icons.lock_open_sharp,
                                                         color: Renkler.Grey),
@@ -449,7 +449,7 @@ class _LoginPageState extends State<LoginPage> {
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                           width: 2,
-                                                          color: Renkler.Blue),
+                                                          color: Renkler.Green),
                                                       borderRadius:
                                                           BorderRadius.all(
                                                               Radius.circular(
@@ -474,7 +474,7 @@ class _LoginPageState extends State<LoginPage> {
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
-                                                color: Renkler.DarkBlue),
+                                                color: Renkler.Green),
                                             child: const Center(
                                               child: Text(
                                                 "Kayıt Ol",
@@ -598,7 +598,7 @@ class _LoginPageState extends State<LoginPage> {
                                 "Bir Hesap Oluştur",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Renkler.Blue,
+                                  color: Renkler.Green,
                                   decoration: TextDecoration.underline,
                                 ),
                               ),

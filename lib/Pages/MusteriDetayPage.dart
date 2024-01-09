@@ -24,7 +24,7 @@ class MusteriDetayPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Müşteri Bilgileri"),
         foregroundColor: Renkler.White,
-        backgroundColor: Renkler.Blue,
+        backgroundColor: Renkler.Green,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -46,7 +46,7 @@ class MusteriDetayPage extends StatelessWidget {
                         Icon(
                           CupertinoIcons.person_alt_circle,
                           size: MediaQuery.of(context).size.height * 0.04,
-                          color: Renkler.Blue,
+                          color: Renkler.Green,
                         ),
                         const Padding(
                           padding: EdgeInsets.only(left: 10),
@@ -139,7 +139,7 @@ class MusteriDetayPage extends StatelessWidget {
                           child: Icon(
                             CupertinoIcons.cube_box,
                             size: MediaQuery.of(context).size.height * 0.04,
-                            color: Renkler.Blue,
+                            color: Renkler.Green,
                           ),
                         ),
                         const Text(

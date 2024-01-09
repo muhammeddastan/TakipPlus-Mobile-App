@@ -98,7 +98,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       );
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Renkler.Blue),
+                      backgroundColor: MaterialStateProperty.all(Renkler.Green),
                       shape: MaterialStateProperty.all(const CircleBorder()),
                       fixedSize: MaterialStateProperty.all(const Size(85, 60)),
                     ),
@@ -140,9 +140,8 @@ class _DotIndicatorState extends State<DotIndicator> {
         height: widget.isActive ? 13 : 4,
         width: 4,
         decoration: BoxDecoration(
-          color: widget.isActive
-              ? Renkler.DarkBlue
-              : Renkler.Blue.withOpacity(0.4),
+          color:
+              widget.isActive ? Renkler.Green : Renkler.Green.withOpacity(0.4),
           borderRadius: const BorderRadius.all(Radius.circular(11)),
         ),
       ),

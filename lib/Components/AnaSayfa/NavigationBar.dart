@@ -103,7 +103,7 @@ class _NavigationBarBottomState extends State<NavigationBarBottom>
             alignment: Alignment.bottomCenter,
             children: [
               CircularTransformButton(
-                color: Renkler.Blue,
+                color: Renkler.Green,
                 width: 60,
                 height: 60,
                 icon: const Icon(
@@ -186,7 +186,7 @@ class _NavigationBarBottomState extends State<NavigationBarBottom>
             Padding(
               padding: const EdgeInsets.only(left: 20, bottom: 10),
               child: IconButton(
-                color: secilenIndex == 0 ? Renkler.Blue : Renkler.Grey,
+                color: secilenIndex == 0 ? Renkler.Green : Renkler.Grey,
                 iconSize: 25,
                 icon: Icon(secilenIndex == 0
                     ? (CupertinoIcons.house_fill)
@@ -197,7 +197,7 @@ class _NavigationBarBottomState extends State<NavigationBarBottom>
             Padding(
               padding: const EdgeInsets.only(left: 20, bottom: 10, right: 50),
               child: IconButton(
-                color: secilenIndex == 1 ? Renkler.Blue : Renkler.Grey,
+                color: secilenIndex == 1 ? Renkler.Green : Renkler.Grey,
                 icon: Icon(secilenIndex == 1
                     ? (CupertinoIcons.timer_fill)
                     : (CupertinoIcons.timer)),
@@ -208,7 +208,7 @@ class _NavigationBarBottomState extends State<NavigationBarBottom>
             Padding(
               padding: const EdgeInsets.only(left: 50, bottom: 10, right: 20),
               child: IconButton(
-                color: secilenIndex == 2 ? Renkler.Blue : Renkler.Grey,
+                color: secilenIndex == 2 ? Renkler.Green : Renkler.Grey,
                 icon: Icon(secilenIndex == 2
                     ? (CupertinoIcons.person_3_fill)
                     : (CupertinoIcons.person_3)),
@@ -219,7 +219,7 @@ class _NavigationBarBottomState extends State<NavigationBarBottom>
             Padding(
               padding: const EdgeInsets.only(bottom: 10, right: 10),
               child: IconButton(
-                color: secilenIndex == 3 ? Renkler.Blue : Renkler.Grey,
+                color: secilenIndex == 3 ? Renkler.Green : Renkler.Grey,
                 icon: Icon(secilenIndex == 3
                     ? (CupertinoIcons.person_alt_circle_fill)
                     : (CupertinoIcons.person_alt_circle)),
