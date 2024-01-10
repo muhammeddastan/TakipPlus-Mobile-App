@@ -1,6 +1,5 @@
 // ignore_for_file: file_names, prefer_const_constructors
 
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
@@ -28,7 +27,7 @@ class _NavigationBarBottomState extends State<NavigationBarBottom>
     ProfilScreen(),
   ];
 
-  void _onItemTapped(int index) {
+  void _aktifIcon(int index) {
     setState(() {
       secilenIndex = index;
     });
@@ -45,132 +44,69 @@ class _NavigationBarBottomState extends State<NavigationBarBottom>
           height: MediaQuery.of(context).size.height * 0.08,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.black,
             borderRadius: BorderRadius.circular(30),
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-
               Container(
                 decoration: BoxDecoration(
-                  color: secilenIndex == 0 ? Renkler.White : Colors.white,
+                  color: secilenIndex == 0 ? Renkler.White : Renkler.Black,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: IconButton(
                   onPressed: () {
-                    _onItemTapped(0);
+                    _aktifIcon(0);
                   },
                   icon: Icon(Icons.home),
-                  color: secilenIndex == 0 ? Colors.blue : Renkler.Grey,
-              Container(
-                decoration: BoxDecoration(
-                  color: secilenIndex == 1 ? Renkler.White : Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    _onItemTapped(1);
-                  },
-                  icon: Icon(Icons.search),
-                  color: secilenIndex == 1 ? Colors.blue : Renkler.Grey,
+                  color: secilenIndex == 0 ? Renkler.Black : Renkler.White,
                 ),
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: secilenIndex == 2 ? Renkler.White : Colors.white,
+                  color: secilenIndex == 1 ? Renkler.White : Renkler.Black,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: IconButton(
                   onPressed: () {
-                    _onItemTapped(2);
+                    _aktifIcon(1);
+                  },
+                  icon: Icon(Icons.shopping_basket_rounded),
+                  color: secilenIndex == 1 ? Renkler.Black : Renkler.White,
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: secilenIndex == 2 ? Renkler.White : Renkler.Black,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    _aktifIcon(2);
                   },
                   icon: Icon(Icons.settings),
-                  color: secilenIndex == 2 ? Colors.blue : Renkler.Grey,
+                  color: secilenIndex == 2 ? Renkler.Black : Renkler.White,
                 ),
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: secilenIndex == 3 ? Renkler.White : Colors.white,
+                  color: secilenIndex == 3 ? Renkler.White : Renkler.Black,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: IconButton(
                   onPressed: () {
-                    _onItemTapped(3);
+                    _aktifIcon(3);
                   },
                   icon: Icon(Icons.person),
-                  color: secilenIndex == 3 ? Colors.blue : Renkler.Grey,
+                  color: secilenIndex == 3 ? Renkler.Black : Renkler.White,
                 ),
               ),
             ],
           ),
         ),
       ),
-      backgroundColor: Renkler.White,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: Container(
-        height: MediaQuery.of(context).size.height * 0.10,
-        decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(
-              width: 0.1,
-              color: Renkler.Grey,
-            ), // Opsiyonel: Üzerinde bir çizgi ekleyebilirsiniz.
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 20, bottom: 10),
-              child: IconButton(
-                color: secilenIndex == 0 ? Renkler.Green : Renkler.Grey,
-                iconSize: 25,
-                icon: Icon(secilenIndex == 0
-                    ? (CupertinoIcons.house_fill)
-                    : (CupertinoIcons.house)),
-                onPressed: () => _onItemTapped(0),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, bottom: 10, right: 50),
-              child: IconButton(
-                color: secilenIndex == 1 ? Renkler.Green : Renkler.Grey,
-                icon: Icon(secilenIndex == 1
-                    ? (CupertinoIcons.timer_fill)
-                    : (CupertinoIcons.timer)),
-                iconSize: 25,
-                onPressed: () => _onItemTapped(1),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 50, bottom: 10, right: 20),
-              child: IconButton(
-                color: secilenIndex == 2 ? Renkler.Green : Renkler.Grey,
-                icon: Icon(secilenIndex == 2
-                    ? (CupertinoIcons.person_3_fill)
-                    : (CupertinoIcons.person_3)),
-                iconSize: 25,
-                onPressed: () => _onItemTapped(2),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10, right: 10),
-              child: IconButton(
-                color: secilenIndex == 3 ? Renkler.Green : Renkler.Grey,
-                icon: Icon(secilenIndex == 3
-                    ? (CupertinoIcons.person_alt_circle_fill)
-                    : (CupertinoIcons.person_alt_circle)),
-                iconSize: 25,
-                onPressed: () => _onItemTapped(3),
-              ),
-            ),
-            SizedBox(width: 5),
-          ],
-        ),
-      ),
-
     );
   }
 }
