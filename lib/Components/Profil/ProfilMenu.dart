@@ -23,32 +23,34 @@ class ProfileMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 5, top: 5),
+      padding: const EdgeInsets.only(
+        left: 5,
+      ),
       child: ListTile(
         onTap: OnPress,
         leading: Container(
-          width: 40,
-          height: 40,
+          width: 35,
+          height: 35,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
-            color: Renkler.BlueDark.withOpacity(0.1),
+            color: Renkler.Green.withOpacity(0.1),
           ),
           child: Icon(
             icon,
-            color: Renkler.Blue,
+            color: Renkler.Green,
           ),
         ),
         title: Text(
           title,
           style: const TextStyle(
             color: Renkler.Grey,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w500,
           ).apply(color: textColor),
         ),
         trailing: endIcon
             ? Container(
-                width: 30,
-                height: 30,
+                width: 21,
+                height: 21,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
                   color: Renkler.Grey.withOpacity(0.1),
@@ -56,7 +58,7 @@ class ProfileMenuWidget extends StatelessWidget {
                 child: const Icon(
                   Icons.arrow_forward_ios,
                   color: Renkler.Grey,
-                  size: 18.0,
+                  size: 14.0,
                 ))
             : null,
       ),

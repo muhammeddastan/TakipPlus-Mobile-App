@@ -14,7 +14,7 @@ class _AboutProfileScreenState extends State<AboutProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Renkler.Blue,
+        backgroundColor: Renkler.Green,
         foregroundColor: Renkler.White,
         title: const Text("Biz Kimiz?"),
       ),

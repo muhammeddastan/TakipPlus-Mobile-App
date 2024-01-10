@@ -15,7 +15,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Renkler.Blue,
+      backgroundColor: Renkler.Green,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(

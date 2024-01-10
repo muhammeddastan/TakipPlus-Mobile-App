@@ -42,7 +42,7 @@ class BakimContainer extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    color: Renkler.Blue),
+                    color: Renkler.Green),
               ),
             ),
             const SizedBox(
@@ -63,7 +63,7 @@ class BakimContainer extends StatelessWidget {
                   child: Text(
                     "Muhammed Daştan",
                     style: GoogleFonts.poppins(
-                        color: Renkler.Blue, fontWeight: FontWeight.w400),
+                        color: Renkler.Green, fontWeight: FontWeight.w400),
                   ),
                 ),
               ],
@@ -89,7 +89,7 @@ class BakimContainer extends StatelessWidget {
                   child: Text(
                     "XYZ Arıtma Sistemi",
                     style: GoogleFonts.poppins(
-                        color: Renkler.Blue, fontWeight: FontWeight.w400),
+                        color: Renkler.Green, fontWeight: FontWeight.w400),
                   ),
                 ),
               ],
@@ -115,7 +115,7 @@ class BakimContainer extends StatelessWidget {
                   child: Text(
                     "Tk plus Mah. Tk Sk. No: 10 D:3",
                     style: GoogleFonts.poppins(
-                        color: Renkler.Blue, fontWeight: FontWeight.w400),
+                        color: Renkler.Green, fontWeight: FontWeight.w400),
                   ),
                 ),
               ],
@@ -141,7 +141,7 @@ class BakimContainer extends StatelessWidget {
                   child: Text(
                     "0555 123 4567",
                     style: GoogleFonts.poppins(
-                        color: Renkler.Blue, fontWeight: FontWeight.w400),
+                        color: Renkler.Green, fontWeight: FontWeight.w400),
                   ),
                 ),
               ],

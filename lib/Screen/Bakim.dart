@@ -63,7 +63,7 @@ class _BakimScreenState extends State<BakimScreen> {
               height: MediaQuery.of(context).size.height * 0.42,
               width: double.infinity,
               decoration: const BoxDecoration(
-                  color: Renkler.Blue,
+                  color: Renkler.Green,
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20))),

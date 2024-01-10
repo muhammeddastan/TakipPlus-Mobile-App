@@ -56,7 +56,7 @@ class SonIslemler extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
-                          color: Renkler.Blue),
+                          color: Renkler.Green),
                     ),
                   ),
                 )
@@ -78,7 +78,7 @@ class SonIslemler extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.1,
                         child: Icon(
                           Icons.arrow_circle_left_outlined,
-                          color: Renkler.Blue,
+                          color: Renkler.Green,
                           size: MediaQuery.of(context).size.width * 0.1,
                         ),
                       ),
@@ -124,7 +124,7 @@ class SonIslemler extends StatelessWidget {
                     const Text(
                       "x2",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Renkler.Blue),
+                          fontWeight: FontWeight.bold, color: Renkler.Green),
                     ),
                     const Spacer(),
 

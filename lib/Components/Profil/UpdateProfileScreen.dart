@@ -28,7 +28,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Renkler.Blue,
+        backgroundColor: Renkler.Green,
         foregroundColor: Renkler.White,
         title: const Text(
           'Profilim',
@@ -72,7 +72,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
                         labelText: "Ad Soyad",
-                        counterStyle: TextStyle(color: Renkler.Blue),
+                        counterStyle: TextStyle(color: Renkler.Green),
                         hintText: "Ad Soyad",
                         prefixIcon: Icon(Icons.supervisor_account_rounded,
                             color: Renkler.Grey),
@@ -82,7 +82,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2, color: Renkler.Blue),
+                          borderSide: BorderSide(width: 2, color: Renkler.Green),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                       ),
@@ -103,7 +103,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2, color: Renkler.Blue),
+                          borderSide: BorderSide(width: 2, color: Renkler.Green),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                       ),
@@ -123,7 +123,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(100)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2, color: Renkler.Blue),
+                          borderSide: BorderSide(width: 2, color: Renkler.Green),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                       ),
@@ -136,7 +136,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       decoration: InputDecoration(
                         labelText: "Şifreniz",
                         hintText: "Şifreniz",
-                        counterStyle: TextStyle(color: Renkler.Blue),
+                        counterStyle: TextStyle(color: Renkler.Green),
                         prefixIcon:
                             Icon(Icons.lock_open_sharp, color: Renkler.Grey),
                         hintStyle: TextStyle(color: Renkler.Grey),
@@ -145,7 +145,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2, color: Renkler.Blue),
+                          borderSide: BorderSide(width: 2, color: Renkler.Green),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                       ),
@@ -158,7 +158,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Renkler.Blue,
+                          backgroundColor: Renkler.Green,
                           side: BorderSide.none,
                           shape: const StadiumBorder(),
                         ),
