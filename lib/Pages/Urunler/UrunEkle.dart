@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
+import 'package:input_quantity/input_quantity.dart';
 
 class UrunEkle extends StatelessWidget {
   const UrunEkle({super.key});
@@ -8,85 +10,137 @@ class UrunEkle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Burası Ürün Ekle Sayfası'),
+        backgroundColor: Renkler.Green,
+        title: const Text(
+          "Ürün Ekle",
+          style: TextStyle(color: Renkler.White, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
-      body: Column(
-        // asdasdasd
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(15.0),
-            child: TextField(
-              keyboardType: TextInputType.name,
-              decoration: InputDecoration(
-                label: Text("Ürün Adı"),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: Colors.grey),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.blue),
-                ),
-              ),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(15.0),
-            child: TextField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                label: Text("Ürün Adeti"),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: Colors.grey),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.blue),
+      body: SingleChildScrollView(
+        child: Form(
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              const Padding(
+                padding: EdgeInsets.all(15),
+                child: TextField(
+                  keyboardType: TextInputType.name,
+                  decoration: InputDecoration(
+                    labelText: "Ürün Adı",
+                    counterStyle: TextStyle(color: Renkler.Green),
+                    hintText: "Ürün Adı",
+                    prefixIcon: Icon(Icons.shopping_cart, color: Renkler.Green),
+                    hintStyle: TextStyle(color: Renkler.Grey),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(width: 5, color: Renkler.Grey),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Renkler.Green),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(15.0),
-            child: TextField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                label: Text("Ürün Fiyatı"),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: Colors.grey),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.blue),
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: Row(
+                  children: [
+                    const Expanded(
+                      child: TextField(
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                          labelText: "Barkod",
+                          counterStyle: TextStyle(color: Renkler.Green),
+                          hintText: "Barkod",
+                          prefixIcon:
+                              Icon(Icons.qr_code_2, color: Renkler.Green),
+                          hintStyle: TextStyle(color: Renkler.Grey),
+                          border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 5, color: Renkler.Grey),
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 2, color: Renkler.Green),
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.qr_code_2,
+                        color: Renkler.Green,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(15.0),
-            child: TextField(
-              keyboardType: TextInputType.datetime,
-              decoration: InputDecoration(
-                label: Text("Ürün Tarih"),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: Colors.grey),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.blue),
+              const Padding(
+                padding: EdgeInsets.all(15),
+                child: TextField(
+                  keyboardType: TextInputType.name,
+                  decoration: InputDecoration(
+                    labelText: "Açıklama",
+                    counterStyle: TextStyle(color: Renkler.Green),
+                    hintText: "Açıklama",
+                    prefixIcon: Icon(Icons.edit, color: Renkler.Green),
+                    hintStyle: TextStyle(color: Renkler.Grey),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(width: 5, color: Renkler.Grey),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Renkler.Green),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                  ),
                 ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: Row(
+                  children: [
+                    const Expanded(
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          labelText: "Miktar",
+                          counterStyle: TextStyle(color: Renkler.Green),
+                          hintText: "Miktar",
+                          prefixIcon: Icon(Icons.edit_road_outlined,
+                              color: Renkler.Green),
+                          hintStyle: TextStyle(color: Renkler.Grey),
+                          border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 5, color: Renkler.Grey),
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 2, color: Renkler.Green),
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.edit_road_outlined,
+                        color: Renkler.Green,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          ElevatedButton(
-
-            style: ButtonStyle(
-
-              backgroundColor: MaterialStatePropertyAll(Renkler.Blue),
-            ),
-            onPressed: () {},
-            child: Text(
-
-              'ÜRÜN EKLE',
-              style: TextStyle(color: Renkler.White,fontSize: 17, ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

@@ -16,7 +16,7 @@ SingleChildScrollView AnasayfaButonlar() {
               height: 180,
               width: 200,
               decoration: BoxDecoration(
-                  color: Renkler.Blue, borderRadius: BorderRadius.circular(15)),
+                  color: Renkler.Green, borderRadius: BorderRadius.circular(15)),
             ),
           ),
           Padding(
@@ -25,7 +25,7 @@ SingleChildScrollView AnasayfaButonlar() {
               height: 180,
               width: 200,
               decoration: BoxDecoration(
-                  color: Renkler.Blue, borderRadius: BorderRadius.circular(15)),
+                  color: Renkler.Green, borderRadius: BorderRadius.circular(15)),
             ),
           ),
           Padding(
@@ -34,7 +34,7 @@ SingleChildScrollView AnasayfaButonlar() {
               height: 180,
               width: 200,
               decoration: BoxDecoration(
-                  color: Renkler.Blue, borderRadius: BorderRadius.circular(15)),
+                  color: Renkler.Green, borderRadius: BorderRadius.circular(15)),
             ),
           ),
           Padding(
@@ -43,7 +43,7 @@ SingleChildScrollView AnasayfaButonlar() {
               height: 180,
               width: 200,
               decoration: BoxDecoration(
-                  color: Renkler.Blue, borderRadius: BorderRadius.circular(15)),
+                  color: Renkler.Green, borderRadius: BorderRadius.circular(15)),
             ),
           ),
         ],

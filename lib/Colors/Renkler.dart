@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class Renkler {
-  static const Color Blue = Color(0XFF33A9DE);
+  static const Color Green = Color(0XFF4F6F52);
   static const Color DarkBlue = Color(0XFF0094D6);
   static const Color White = Color(0XFFECECEC);
   static const Color Grey = Color(0XFF616161);

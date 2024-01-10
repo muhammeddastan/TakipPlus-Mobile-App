@@ -5,6 +5,7 @@ import 'package:takip_plus/Components/Profil/ProfilMenu.dart';
 import 'package:takip_plus/Components/Profil/UpdateProfileScreen.dart';
 import 'package:takip_plus/Components/Profil/UygulamaHakkindaScreen.dart';
 import 'package:takip_plus/Pages/GirisYap.dart';
+import 'package:takip_plus/Pages/Urunler/UrunListesi.dart';
 
 class ProfilScreen extends StatefulWidget {
   const ProfilScreen({Key? key}) : super(key: key);
@@ -19,85 +20,81 @@ class _ProfilScreenState extends State<ProfilScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Renkler.Blue,
+        backgroundColor: Renkler.Green,
         title: const Text(
-          "Profil Bilgilerim",
+          "Takip Plus",
           style: TextStyle(color: Renkler.White, fontWeight: FontWeight.bold),
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 30),
+        padding: const EdgeInsets.only(top: 1),
         child: Center(
           child: Column(
             children: [
-              Stack(
-                children: [
-                  SizedBox(
-                    width: 120,
-                    height: 120,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: const Image(
-                          image: AssetImage('assets/images/avatar.jpg')),
-                    ),
-                  ),
-                ],
+              SizedBox(height: 10),
+              ProfileMenuWidget(
+                title: 'Ürünler',
+                icon: Icons.shopping_cart,
+                OnPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const UrunListesi()),
+                  );
+                },
               ),
-              const SizedBox(
-                height: 10,
+              ProfileMenuWidget(
+                title: 'Belgeler',
+                icon: Icons.edit_document,
+                OnPress: () {},
               ),
-              const Text(
-                "Serhat Güneş Developer",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Renkler.Grey),
+              ProfileMenuWidget(
+                title: 'Masraflar',
+                icon: Icons.monetization_on_sharp,
+                OnPress: () {},
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                width: 200,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const UpdateProfileScreen(),
-                      ),
-                    );
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Renkler.Blue),
-                  ),
-                  child: const Text(
-                    "Profil Düzenle",
-                    style: TextStyle(color: Renkler.White),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 30,
+              ProfileMenuWidget(
+                title: 'Raporlar',
+                icon: Icons.analytics_outlined,
+                OnPress: () {},
               ),
               Divider(
                 color:
                     const Color.fromARGB(255, 110, 110, 110).withOpacity(0.4),
               ),
-              const SizedBox(
-                height: 10,
+              ProfileMenuWidget(
+                title: 'Tedarikçiler',
+                icon: Icons.person_pin_outlined,
+                OnPress: () {},
               ),
               ProfileMenuWidget(
-                title: 'Grafikler',
-                icon: Icons.graphic_eq,
+                title: 'Müşteriler',
+                icon: Icons.person_2_rounded,
                 OnPress: () {},
+              ),
+              ProfileMenuWidget(
+                title: 'Depolar',
+                icon: Icons.store_mall_directory_sharp,
+                OnPress: () {},
+              ),
+              Divider(
+                color:
+                    const Color.fromARGB(255, 110, 110, 110).withOpacity(0.4),
               ),
               ProfileMenuWidget(
                 title: 'Ayarlar',
                 icon: Icons.settings,
                 OnPress: () {},
               ),
+
               ProfileMenuWidget(
-                title: 'Uygulama Hakkında',
+                title: 'Yardım',
+                icon: Icons.help_outline_rounded,
+                OnPress: () {},
+              ),
+
+              ProfileMenuWidget(
+                title: 'Gizlilik Politikası',
                 icon: Icons.aod_outlined,
                 OnPress: () {
                   Navigator.push(
@@ -107,23 +104,16 @@ class _ProfilScreenState extends State<ProfilScreen> {
                               const UygulamaHakkindaScreen()));
                 },
               ),
-              ProfileMenuWidget(
-                title: 'Biz Kimiz?',
-                icon: Icons.accessibility_new_outlined,
-                OnPress: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AboutProfileScreen()));
-                },
-              ),
-              Divider(
-                color:
-                    const Color.fromARGB(255, 110, 110, 110).withOpacity(0.4),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
+              // ProfileMenuWidget(
+              //   title: 'Biz Kimiz?',
+              //   icon: Icons.accessibility_new_outlined,
+              //   OnPress: () {
+              //     Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //             builder: (context) => const AboutProfileScreen()));
+              //   },
+              // ),
               ProfileMenuWidget(
                 title: 'Çıkış Yap',
                 icon: Icons.power_settings_new,
@@ -139,7 +129,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
                         onPressed: () => Navigator.pop(context, 'İptal'),
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(Renkler.Blue),
+                              MaterialStateProperty.all(Renkler.Green),
                         ),
                         child: const Text(
                           'İptal',

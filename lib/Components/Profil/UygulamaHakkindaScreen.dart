@@ -14,7 +14,7 @@ class _UygulamaHakkindaScreenState extends State<UygulamaHakkindaScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Renkler.Blue,
+        backgroundColor: Renkler.Green,
         foregroundColor: Renkler.White,
         title: const Text(
           'Uygulama Hakkında',

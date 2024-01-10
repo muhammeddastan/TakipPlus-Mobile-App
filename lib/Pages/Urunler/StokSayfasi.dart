@@ -72,7 +72,7 @@ class Urun extends StatelessWidget {
                       '24.12.2023',
                       style: TextStyle(
                         fontSize: 17,
-                        color: Colors.blue,
+                        color: Renkler.Green,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -94,7 +94,7 @@ class Urun extends StatelessWidget {
                     Text(
                       '49.99 TL',
                       style: TextStyle(
-                          color: Renkler.Blue,
+                          color: Renkler.Green,
                           fontSize: 23,
                           fontWeight: FontWeight.bold),
                     ),
@@ -113,7 +113,7 @@ class Urun extends StatelessWidget {
                     InkWell(
                       child: const Icon(
                         Icons.settings,
-                        color: Renkler.Blue,
+                        color: Renkler.Green,
                         size: 30,
                       ),
                       onTap: () {
@@ -131,7 +131,7 @@ class Urun extends StatelessWidget {
                     InkWell(
                       child: const Icon(
                         Icons.delete,
-                        color: Renkler.Blue,
+                        color: Renkler.Green,
                         size: 30,
                       ),
                       onTap: () {
@@ -149,7 +149,8 @@ class Urun extends StatelessWidget {
             ),
           ],
         ),
-        Divider(),],
+        Divider(),
+      ],
     );
   }
 }
