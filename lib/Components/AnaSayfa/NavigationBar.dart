@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, prefer_const_constructors
 
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
@@ -18,51 +19,6 @@ class NavigationBarBottom extends StatefulWidget {
 
 class _NavigationBarBottomState extends State<NavigationBarBottom>
     with SingleTickerProviderStateMixin {
-  late AnimationController animationController;
-  late Animation<double> addButtonTranslationAnimation,
-      cameraButtonTranslationAnimation,
-      profileButtonTranslationAnimation,
-      rotationAnimation;
-
-  @override
-  void dispose() {
-    animationController.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 250),
-    );
-    addButtonTranslationAnimation = Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(animationController);
-    cameraButtonTranslationAnimation = Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(animationController);
-    profileButtonTranslationAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1,
-    ).animate(animationController);
-    rotationAnimation = Tween<double>(
-      begin: 180.0,
-      end: 0.0,
-    ).animate(
-      CurvedAnimation(
-        parent: animationController,
-        curve: Curves.easeOut,
-      ),
-    );
-    super.initState();
-    animationController.addListener(() {
-      setState(() {});
-    });
-  }
-
   int secilenIndex = 0;
 
   final List<Widget> ekranlar = [
@@ -81,88 +37,71 @@ class _NavigationBarBottomState extends State<NavigationBarBottom>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AnimatedSwitcher(
-        duration: Duration(milliseconds: 300),
-        child: ekranlar[secilenIndex],
-        transitionBuilder: (Widget child, Animation<double> animation) {
-          return SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(1.0, 0.0),
-              end: Offset.zero,
-            ).animate(animation),
-            child: child,
-          );
-        },
-      ),
-      floatingActionButton: SizedBox(
-        height: 300,
-        width: 500,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Stack(
-            alignment: Alignment.bottomCenter,
+      body: ekranlar[secilenIndex],
+      backgroundColor: Renkler.White,
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 25.0, left: 20, right: 20),
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.08,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              CircularTransformButton(
-                color: Renkler.Green,
-                width: 60,
-                height: 60,
-                icon: const Icon(
-                  Icons.menu,
-                  color: Colors.white,
+
+              Container(
+                decoration: BoxDecoration(
+                  color: secilenIndex == 0 ? Renkler.White : Colors.white,
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                rotationAnimation: rotationAnimation,
-                onClick: () {
-                  if (animationController.isCompleted) {
-                    animationController.reverse();
-                  } else {
-                    animationController.forward();
-                  }
-                },
+                child: IconButton(
+                  onPressed: () {
+                    _onItemTapped(0);
+                  },
+                  icon: Icon(Icons.home),
+                  color: secilenIndex == 0 ? Colors.blue : Renkler.Grey,
+              Container(
+                decoration: BoxDecoration(
+                  color: secilenIndex == 1 ? Renkler.White : Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    _onItemTapped(1);
+                  },
+                  icon: Icon(Icons.search),
+                  color: secilenIndex == 1 ? Colors.blue : Renkler.Grey,
+                ),
               ),
-              CircularTransformButton(
-                color: Colors.red,
-                width: 60,
-                height: 60,
-                icon: const Icon(
-                  CupertinoIcons.add,
-                  color: Colors.white,
+              Container(
+                decoration: BoxDecoration(
+                  color: secilenIndex == 2 ? Renkler.White : Colors.white,
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                rotationAnimation: rotationAnimation,
-                onClick: () {
-                  print('Ürün Ekle');
-                },
-                direction: 320,
-                translationAnimation: addButtonTranslationAnimation,
+                child: IconButton(
+                  onPressed: () {
+                    _onItemTapped(2);
+                  },
+                  icon: Icon(Icons.settings),
+                  color: secilenIndex == 2 ? Colors.blue : Renkler.Grey,
+                ),
               ),
-              CircularTransformButton(
-                color: Colors.green,
-                width: 60,
-                height: 60,
-                icon: const Icon(
-                  CupertinoIcons.bag_badge_plus,
-                  color: Colors.white,
+              Container(
+                decoration: BoxDecoration(
+                  color: secilenIndex == 3 ? Renkler.White : Colors.white,
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                rotationAnimation: rotationAnimation,
-                onClick: () {
-                  print('Camera button');
-                },
-                direction: 270,
-                translationAnimation: cameraButtonTranslationAnimation,
-              ),
-              CircularTransformButton(
-                color: Colors.amber,
-                width: 60,
-                height: 60,
-                icon: const Icon(
-                  Icons.person,
-                  color: Colors.white,
+                child: IconButton(
+                  onPressed: () {
+                    _onItemTapped(3);
+                  },
+                  icon: Icon(Icons.person),
+                  color: secilenIndex == 3 ? Colors.blue : Renkler.Grey,
                 ),
-                rotationAnimation: rotationAnimation,
-                onClick: () {
-                  print('Profile button');
-                },
-                direction: 220,
-                translationAnimation: profileButtonTranslationAnimation,
               ),
             ],
           ),
@@ -231,88 +170,7 @@ class _NavigationBarBottomState extends State<NavigationBarBottom>
           ],
         ),
       ),
+
     );
-  }
-}
-
-class CircularTransformButton extends StatelessWidget {
-  const CircularTransformButton({
-    required this.color,
-    required this.width,
-    required this.height,
-    required this.icon,
-    required this.rotationAnimation,
-    required this.onClick,
-    this.direction,
-    this.translationAnimation,
-    Key? key,
-  }) : super(key: key);
-
-  final Color color;
-  final double width;
-  final double height;
-  final Icon icon;
-  final Animation<double> rotationAnimation;
-  final VoidCallback onClick;
-
-  final double? direction;
-  final Animation<double>? translationAnimation;
-
-  double getRadiansFromDegree(double degree) {
-    return degree * (pi / 180); // Radyan hesabı için pi sayısını kullanın.
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return direction != null && translationAnimation != null
-        ? AnimatedBuilder(
-            animation:
-                Listenable.merge([rotationAnimation, translationAnimation!]),
-            builder: (context, child) {
-              return Transform.translate(
-                offset: Offset.fromDirection(
-                  getRadiansFromDegree(direction!),
-                  translationAnimation!.value * 100.0,
-                ),
-                child: Transform(
-                  transform: Matrix4.rotationZ(
-                        getRadiansFromDegree(rotationAnimation.value),
-                      ) *
-                      Matrix4.diagonal3Values(
-                        translationAnimation!.value,
-                        translationAnimation!.value,
-                        1.0,
-                      ),
-                  alignment: Alignment.center,
-                  child: Container(
-                    decoration:
-                        BoxDecoration(color: color, shape: BoxShape.circle),
-                    width: width,
-                    height: height,
-                    child: IconButton(
-                      icon: icon,
-                      enableFeedback: true,
-                      onPressed: onClick,
-                    ),
-                  ),
-                ),
-              );
-            },
-          )
-        : Transform(
-            transform: Matrix4.rotationZ(
-                getRadiansFromDegree(rotationAnimation.value)),
-            alignment: Alignment.center,
-            child: Container(
-              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-              width: width,
-              height: height,
-              child: IconButton(
-                icon: icon,
-                enableFeedback: true,
-                onPressed: onClick,
-              ),
-            ),
-          );
   }
 }
