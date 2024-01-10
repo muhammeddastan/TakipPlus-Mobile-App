@@ -50,7 +50,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
               ),
               ProfileMenuWidget(
                 title: 'Masraflar',
-                icon: Icons.monetization_on_sharp,
+                icon: Icons.currency_lira,
                 OnPress: () {},
               ),
               ProfileMenuWidget(
