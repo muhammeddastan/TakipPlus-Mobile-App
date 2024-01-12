@@ -10,13 +10,24 @@ class UrunEkle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Renkler.Green,
-        title: const Text(
-          "Ürün Ekle",
-          style: TextStyle(color: Renkler.White, fontWeight: FontWeight.bold),
+        backgroundColor: Renkler.White,
+        centerTitle: false,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              "ÜRÜN EKLE",
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "Ürünlerinizi görebilmek için ürün ekleyin.",
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
+            ),
+          ],
         ),
-        centerTitle: true,
       ),
+      backgroundColor: Renkler.White,
       body: SingleChildScrollView(
         child: Form(
           child: Column(
@@ -28,16 +39,16 @@ class UrunEkle extends StatelessWidget {
                   keyboardType: TextInputType.name,
                   decoration: InputDecoration(
                     labelText: "Ürün Adı",
-                    counterStyle: TextStyle(color: Renkler.Green),
+                    counterStyle: TextStyle(color: Renkler.Black),
                     hintText: "Ürün Adı",
-                    prefixIcon: Icon(Icons.shopping_cart, color: Renkler.Green),
-                    hintStyle: TextStyle(color: Renkler.Grey),
+                    prefixIcon: Icon(Icons.shopping_cart, color: Renkler.Black),
+                    hintStyle: TextStyle(color: Renkler.Black),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 5, color: Renkler.Grey),
+                      borderSide: BorderSide(width: 5, color: Renkler.Black),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: Renkler.Green),
+                      borderSide: BorderSide(width: 2, color: Renkler.Black),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                   ),
@@ -52,19 +63,19 @@ class UrunEkle extends StatelessWidget {
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
                           labelText: "Barkod",
-                          counterStyle: TextStyle(color: Renkler.Green),
+                          counterStyle: TextStyle(color: Renkler.Black),
                           hintText: "Barkod",
                           prefixIcon:
-                              Icon(Icons.qr_code_2, color: Renkler.Green),
-                          hintStyle: TextStyle(color: Renkler.Grey),
+                              Icon(Icons.qr_code_2, color: Renkler.Black),
+                          hintStyle: TextStyle(color: Renkler.Black),
                           border: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 5, color: Renkler.Grey),
+                                BorderSide(width: 5, color: Renkler.Black),
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 2, color: Renkler.Green),
+                                BorderSide(width: 2, color: Renkler.Black),
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
                         ),
@@ -74,7 +85,7 @@ class UrunEkle extends StatelessWidget {
                       onPressed: () {},
                       icon: const Icon(
                         Icons.qr_code_2,
-                        color: Renkler.Green,
+                        color: Renkler.Black,
                       ),
                     ),
                   ],
@@ -86,16 +97,16 @@ class UrunEkle extends StatelessWidget {
                   keyboardType: TextInputType.name,
                   decoration: InputDecoration(
                     labelText: "Açıklama",
-                    counterStyle: TextStyle(color: Renkler.Green),
+                    counterStyle: TextStyle(color: Renkler.Black),
                     hintText: "Açıklama",
-                    prefixIcon: Icon(Icons.edit, color: Renkler.Green),
-                    hintStyle: TextStyle(color: Renkler.Grey),
+                    prefixIcon: Icon(Icons.edit, color: Renkler.Black),
+                    hintStyle: TextStyle(color: Renkler.Black),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 5, color: Renkler.Grey),
+                      borderSide: BorderSide(width: 5, color: Renkler.Black),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: Renkler.Green),
+                      borderSide: BorderSide(width: 2, color: Renkler.Black),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                   ),
@@ -110,19 +121,19 @@ class UrunEkle extends StatelessWidget {
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: "Miktar",
-                          counterStyle: TextStyle(color: Renkler.Green),
+                          counterStyle: TextStyle(color: Renkler.Black),
                           hintText: "Miktar",
                           prefixIcon: Icon(Icons.edit_road_outlined,
-                              color: Renkler.Green),
-                          hintStyle: TextStyle(color: Renkler.Grey),
+                              color: Renkler.Black),
+                          hintStyle: TextStyle(color: Renkler.Black),
                           border: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 5, color: Renkler.Grey),
+                                BorderSide(width: 5, color: Renkler.Black),
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 2, color: Renkler.Green),
+                                BorderSide(width: 2, color: Renkler.Black),
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
                         ),
@@ -132,7 +143,7 @@ class UrunEkle extends StatelessWidget {
                       onPressed: () {},
                       icon: const Icon(
                         Icons.edit_road_outlined,
-                        color: Renkler.Green,
+                        color: Renkler.Black,
                       ),
                     ),
                   ],
