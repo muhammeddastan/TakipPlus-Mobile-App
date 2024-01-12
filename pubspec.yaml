@@ -40,6 +40,12 @@ dependencies:
   intl: ^0.19.0
   image_picker: ^1.0.5
   input_quantity: ^2.2.0
+  crystal_navigation_bar: ^1.0.0
+  flutter_iconly: ^1.0.2
+  iconsax: ^0.0.8
+  scroll_bottom_navigation_bar: ^4.0.0
+  fl_chart: ^0.66.0
+  
  
   
 
