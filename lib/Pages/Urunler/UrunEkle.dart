@@ -1,10 +1,34 @@
+
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:takip_plus/Colors/Renkler.dart';
+import 'package:input_quantity/input_quantity.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:takip_plus/Components/Profil/UpdateImage.dart';
+
+class UrunEkle extends StatefulWidget {
+  UrunEkle({super.key});
+
+  @override
+  State<UrunEkle> createState() => _UrunEkleState();
+}
+
+class _UrunEkleState extends State<UrunEkle> {
+  Uint8List? _image;
+=======
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-
-class UrunEkle extends StatelessWidget {
-  const UrunEkle({super.key});
+  void selectImage() async {
+    Uint8List img;
+    img = await pickImage(ImageSource.gallery);
+    setState(() {
+      _image = img as Uint8List?;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,6 +163,59 @@ class UrunEkle extends StatelessWidget {
                         ),
                       ),
                     ),
+
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: SizedBox(
+                  height: 150,
+                  width: 400,
+                  child: Stack(
+                    children: [
+                      Column(
+                        children: [
+                          _image != null
+                              ? CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage:
+                                      MemoryImage(_image! as Uint8List),
+                                )
+                              : const CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage:
+                                      AssetImage("assets/urunler/ürün-1.png"),
+                                ),
+                          Center(
+                            child: Positioned(
+                              child: IconButton(
+                                onPressed: selectImage,
+                                icon: Icon(Icons.add_a_photo),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text("Ürünü Ekle"),
+                      style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStatePropertyAll(Renkler.White),
+                          backgroundColor:
+                              MaterialStatePropertyAll(Renkler.Black)),
+                    ),
+                  ],
+                ),
                   ],
                 ),
               ),
