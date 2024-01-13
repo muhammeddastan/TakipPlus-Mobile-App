@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,14 +5,15 @@ import 'package:iconsax/iconsax.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
 
 class AnaSayfa extends StatefulWidget {
-  const AnaSayfa({super.key});
+  final String adSoyad;
+  const AnaSayfa({super.key, required this.adSoyad});
 
   @override
   State<AnaSayfa> createState() => _AnaSayfaState();
 }
 
 Future<void> _refresh() {
-  return Future.delayed(Duration(seconds: 2));
+  return Future.delayed(const Duration(seconds: 2));
 }
 
 class _AnaSayfaState extends State<AnaSayfa> {
@@ -31,17 +31,17 @@ class _AnaSayfaState extends State<AnaSayfa> {
             foregroundImage: AssetImage("assets/images/avatar.jpg"),
           ),
         ),
-        title: const Column(
+        title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Hoşgeldiniz",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
             ),
             Text(
-              "Muhammed Daştan",
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+              widget.adSoyad,
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
             ),
           ],
         ),
@@ -74,7 +74,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               const Padding(
                 padding: EdgeInsets.only(left: 15),
                 child: Align(
@@ -128,7 +128,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
                         ),
                       ),
                       const Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
+                        padding: EdgeInsets.only(left: 20.0),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -152,7 +152,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
                             ),
                             IconButton(
                                 onPressed: () {},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.arrow_right_alt,
                                   size: 40,
                                   color: Renkler.White,
@@ -164,7 +164,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -227,7 +227,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
                               ),
                               IconButton(
                                   onPressed: () {},
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.arrow_right_alt,
                                     size: 30,
                                     color: Renkler.White,
@@ -297,7 +297,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
                               ),
                               IconButton(
                                 onPressed: () {},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.arrow_right_alt,
                                   size: 30,
                                   color: Renkler.White,
@@ -311,7 +311,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 150,
               )
             ],
