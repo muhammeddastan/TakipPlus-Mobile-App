@@ -112,11 +112,11 @@ class UrunEkle extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(15),
+              const Padding(
+                padding: EdgeInsets.all(15),
                 child: Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: TextField(
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
@@ -139,16 +139,64 @@ class UrunEkle extends StatelessWidget {
                         ),
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.edit_road_outlined,
-                        color: Renkler.Black,
-                      ),
-                    ),
                   ],
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 15,
+                  right: 15,
+                ),
+                child: SizedBox(
+                  height: 150,
+                  width: 400,
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          height: 150 - 48 / 2,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Renkler.Black, width: 2),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              "Ürün Görsel Seç",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.image_outlined,
+                                  color: Renkler.Black,
+                                ))
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text("Ürünü Ekle"),
+                  style: ButtonStyle(
+                      foregroundColor: MaterialStatePropertyAll(Renkler.White),
+                      backgroundColor: MaterialStatePropertyAll(Renkler.Black)),
+                ),
+              )
             ],
           ),
         ),
