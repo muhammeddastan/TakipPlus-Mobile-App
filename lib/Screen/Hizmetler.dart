@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:takip_plus/Components/Profil/AboutProfileScreen.dart';
-import 'package:takip_plus/Components/Profil/ProfilMenu.dart';
-import 'package:takip_plus/Components/Profil/UpdateProfileScreen.dart';
 import 'package:takip_plus/Components/Profil/UygulamaHakkindaScreen.dart';
 import 'package:takip_plus/Pages/Depo/Depolar.dart';
-import 'package:takip_plus/Pages/GirisYap.dart';
+import 'package:takip_plus/Pages/Giris/Login-SignUp/GirisYap.dart';
 import 'package:takip_plus/Pages/Urunler/UrunEkle.dart';
 
 class HizmetScreen extends StatefulWidget {
@@ -54,10 +51,10 @@ class _HizmetScreenState extends State<HizmetScreen> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
                 color: Renkler.Black.withOpacity(0.1)),
-            child:
-                IconButton(onPressed: () {}, icon: Icon(IconlyLight.profile)),
+            child: IconButton(
+                onPressed: () {}, icon: const Icon(IconlyLight.profile)),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
         ],
       ),
       backgroundColor: Renkler.White,
@@ -68,7 +65,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
         child: Center(
           child: Column(
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: InkWell(
@@ -90,7 +87,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                          padding: EdgeInsets.only(left: 20.0),
                           child: Icon(
                             IconlyLight.buy,
                             color: Renkler.White,
@@ -134,7 +131,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                          padding: EdgeInsets.only(left: 20.0),
                           child: Icon(
                             Iconsax.money_send,
                             color: Renkler.White,
@@ -178,7 +175,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                          padding: EdgeInsets.only(left: 20.0),
                           child: Icon(
                             IconlyLight.graph,
                             color: Renkler.White,
@@ -226,7 +223,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                          padding: EdgeInsets.only(left: 20.0),
                           child: Icon(
                             IconlyLight.addUser,
                             color: Renkler.White,
@@ -276,7 +273,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                          padding: EdgeInsets.only(left: 20.0),
                           child: Icon(
                             IconlyLight.home,
                             color: Renkler.White,
@@ -324,7 +321,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                          padding: EdgeInsets.only(left: 20.0),
                           child: Icon(
                             IconlyLight.setting,
                             color: Renkler.White,
@@ -368,7 +365,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                          padding: EdgeInsets.only(left: 20.0),
                           child: Icon(
                             IconlyLight.dangerTriangle,
                             color: Renkler.White,
@@ -418,7 +415,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                          padding: EdgeInsets.only(left: 20.0),
                           child: Icon(
                             IconlyLight.shieldFail,
                             color: Renkler.White,
@@ -467,7 +464,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                          padding: EdgeInsets.only(left: 20.0),
                           child: Icon(
                             IconlyLight.user2,
                             color: Renkler.White,
@@ -518,11 +515,15 @@ class _HizmetScreenState extends State<HizmetScreen> {
                             ),
                           ),
                           TextButton(
-                            onPressed: () => Navigator.push(
+                            onPressed: () {
+                              Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const LoginPage(),
-                                )),
+                                    builder: (context) => const LoginPage()),
+                                (route) =>
+                                    false, // Geçmişteki tüm sayfaları kapat
+                              );
+                            },
                             style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Renkler.Danger),
@@ -548,7 +549,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                          padding: EdgeInsets.only(left: 20.0),
                           child: Icon(
                             IconlyLight.closeSquare,
                             color: Renkler.White,
@@ -574,7 +575,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 130,
               )
             ],

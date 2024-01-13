@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: file_names
+
+import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
 import 'package:takip_plus/Screen/AnaSayfa.dart';
-import 'package:takip_plus/Screen/Urunler.dart';
-import 'package:takip_plus/Screen/Musteriler.dart';
 import 'package:takip_plus/Screen/Hizmetler.dart';
-import 'dart:math';
-import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
+import 'package:takip_plus/Screen/Musteriler.dart';
+import 'package:takip_plus/Screen/Urunler.dart';
 
 class NavigationBarBottom extends StatefulWidget {
   const NavigationBarBottom({Key? key}) : super(key: key);
@@ -21,10 +21,12 @@ class _NavigationBarBottomState extends State<NavigationBarBottom>
   int secilenIndex = 0;
 
   final List<Widget> ekranlar = [
-    AnaSayfa(),
-    UrunListe(),
-    MusterilerScreen(),
-    HizmetScreen(),
+    const AnaSayfa(
+      adSoyad: '',
+    ),
+    const UrunListe(),
+    const MusterilerScreen(),
+    const HizmetScreen(),
   ];
 
   void _aktifIcon(int index) {

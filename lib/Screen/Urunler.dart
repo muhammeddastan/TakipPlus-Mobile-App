@@ -69,15 +69,6 @@ class _UrunListeState extends State<UrunListe> {
           ],
         ),
         actions: [
-          Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: Renkler.Black.withOpacity(0.1)),
-            child: IconButton(
-                onPressed: () {}, icon: const Icon(IconlyLight.filter2)),
-          ),
           const SizedBox(width: 10),
           Container(
             height: 40,

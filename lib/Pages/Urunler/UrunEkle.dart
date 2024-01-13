@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:input_quantity/input_quantity.dart';
 
 class UrunEkle extends StatelessWidget {
   const UrunEkle({super.key});
@@ -176,7 +174,7 @@ class UrunEkle extends StatelessWidget {
                             ),
                             IconButton(
                                 onPressed: () {},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.image_outlined,
                                   color: Renkler.Black,
                                 ))
@@ -191,10 +189,10 @@ class UrunEkle extends StatelessWidget {
                 padding: const EdgeInsets.all(15),
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: Text("Ürünü Ekle"),
-                  style: ButtonStyle(
+                  style: const ButtonStyle(
                       foregroundColor: MaterialStatePropertyAll(Renkler.White),
                       backgroundColor: MaterialStatePropertyAll(Renkler.Black)),
+                  child: const Text("Ürünü Ekle"),
                 ),
               )
             ],
