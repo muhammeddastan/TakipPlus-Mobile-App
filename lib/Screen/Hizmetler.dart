@@ -6,6 +6,7 @@ import 'package:takip_plus/Components/Profil/AboutProfileScreen.dart';
 import 'package:takip_plus/Components/Profil/ProfilMenu.dart';
 import 'package:takip_plus/Components/Profil/UpdateProfileScreen.dart';
 import 'package:takip_plus/Components/Profil/UygulamaHakkindaScreen.dart';
+import 'package:takip_plus/Pages/Depo/Depolar.dart';
 import 'package:takip_plus/Pages/GirisYap.dart';
 import 'package:takip_plus/Pages/Urunler/UrunEkle.dart';
 
@@ -256,6 +257,12 @@ class _HizmetScreenState extends State<HizmetScreen> {
                 child: InkWell(
                   onTap: () {
                     //SAYFA YÖNLENDİRME ALANI
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DepolarScreen(),
+                      ),
+                    );
                   },
                   child: Container(
                     height: 50,
@@ -393,10 +400,11 @@ class _HizmetScreenState extends State<HizmetScreen> {
                   onTap: () {
                     //SAYFA YÖNLENDİRME ALANI
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const UygulamaHakkindaScreen()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const UygulamaHakkindaScreen(),
+                      ),
+                    );
                   },
                   child: Container(
                     height: 50,
