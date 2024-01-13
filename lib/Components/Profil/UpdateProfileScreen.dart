@@ -1,6 +1,8 @@
 // ignore: unused_import
-import 'dart:ffi';
+// ignore_for_file: file_names
+
 import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
@@ -55,12 +57,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               AssetImage("assets/images/avatar.jpg"),
                         ),
                   Positioned(
+                    bottom: -10,
+                    left: 80,
                     child: IconButton(
                       onPressed: selectImage,
                       icon: const Icon(Icons.add_a_photo),
                     ),
-                    bottom: -10,
-                    left: 80,
                   )
                 ],
               ),
@@ -82,7 +84,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2, color: Renkler.Green),
+                          borderSide:
+                              BorderSide(width: 2, color: Renkler.Green),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                       ),
@@ -103,7 +106,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2, color: Renkler.Green),
+                          borderSide:
+                              BorderSide(width: 2, color: Renkler.Green),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                       ),
@@ -123,7 +127,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(100)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2, color: Renkler.Green),
+                          borderSide:
+                              BorderSide(width: 2, color: Renkler.Green),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                       ),
@@ -145,7 +150,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2, color: Renkler.Green),
+                          borderSide:
+                              BorderSide(width: 2, color: Renkler.Green),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                       ),

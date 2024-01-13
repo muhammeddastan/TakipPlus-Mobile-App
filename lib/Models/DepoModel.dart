@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 class DepoModel {
   late final String depoAdi;
   late final String depoTelno;

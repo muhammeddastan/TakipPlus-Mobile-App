@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 class UyeModel {
   late final String adSoyad;
   late final String ePosta;

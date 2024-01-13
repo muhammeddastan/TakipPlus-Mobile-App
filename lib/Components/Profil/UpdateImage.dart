@@ -1,5 +1,5 @@
 // ignore: unused_import
-// ignore_for_file: file_names
+// ignore_for_file: file_names, avoid_print
 
 import 'package:image_picker/image_picker.dart';
 
