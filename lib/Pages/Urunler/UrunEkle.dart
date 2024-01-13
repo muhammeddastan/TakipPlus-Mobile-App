@@ -1,12 +1,11 @@
-
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
 import 'package:input_quantity/input_quantity.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:takip_plus/Components/Profil/UpdateImage.dart';
+import 'package:takip_plus/Colors/Renkler.dart';
 
 class UrunEkle extends StatefulWidget {
   UrunEkle({super.key});
@@ -17,11 +16,7 @@ class UrunEkle extends StatefulWidget {
 
 class _UrunEkleState extends State<UrunEkle> {
   Uint8List? _image;
-=======
-// ignore_for_file: file_names
 
-import 'package:flutter/material.dart';
-import 'package:takip_plus/Colors/Renkler.dart';
   void selectImage() async {
     Uint8List img;
     img = await pickImage(ImageSource.gallery);
@@ -163,7 +158,6 @@ import 'package:takip_plus/Colors/Renkler.dart';
                         ),
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -196,69 +190,6 @@ import 'package:takip_plus/Colors/Renkler.dart';
                             ),
                           ),
                         ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text("Ürünü Ekle"),
-                      style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStatePropertyAll(Renkler.White),
-                          backgroundColor:
-                              MaterialStatePropertyAll(Renkler.Black)),
-                    ),
-                  ],
-                ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 15,
-                  right: 15,
-                ),
-                child: SizedBox(
-                  height: 150,
-                  width: 400,
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          height: 150 - 48 / 2,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Renkler.Black, width: 2),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text(
-                              "Ürün Görsel Seç",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.image_outlined,
-                                  color: Renkler.Black,
-                                ))
-                          ],
-                        ),
                       ),
                     ],
                   ),
