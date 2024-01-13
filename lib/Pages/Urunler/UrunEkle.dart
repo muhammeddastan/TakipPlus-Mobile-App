@@ -12,7 +12,7 @@ class UrunEkle extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Renkler.White,
         centerTitle: false,
-        title: Column(
+        title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
