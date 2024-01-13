@@ -1,6 +1,9 @@
+// ignore_for_file: file_names
+
 import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:takip_plus/Pages/OnboardingScreen.dart';
+import 'package:takip_plus/Pages/Giris/OnboardingScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

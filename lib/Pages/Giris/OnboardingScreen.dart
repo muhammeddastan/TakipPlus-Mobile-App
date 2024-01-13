@@ -1,6 +1,8 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:takip_plus/Pages/GirisYap.dart';
+import 'package:takip_plus/Pages/Giris/Login-SignUp/GirisYap.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -52,7 +54,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         child: Text(
                           'Atla',
                           style: TextStyle(
-                              color: Renkler.Grey,
+                              color: Renkler.Black,
                               fontSize: 18,
                               fontWeight: FontWeight.normal),
                         ),
@@ -98,7 +100,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       );
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Renkler.Green),
+                      backgroundColor: MaterialStateProperty.all(Renkler.Black),
                       shape: MaterialStateProperty.all(const CircleBorder()),
                       fixedSize: MaterialStateProperty.all(const Size(85, 60)),
                     ),
@@ -141,7 +143,7 @@ class _DotIndicatorState extends State<DotIndicator> {
         width: 4,
         decoration: BoxDecoration(
           color:
-              widget.isActive ? Renkler.Green : Renkler.Green.withOpacity(0.4),
+              widget.isActive ? Renkler.Black : Renkler.Black.withOpacity(0.4),
           borderRadius: const BorderRadius.all(Radius.circular(11)),
         ),
       ),
@@ -201,16 +203,17 @@ class OnboardingContent extends StatelessWidget {
         Text(
           title,
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-              fontWeight: FontWeight.w500,
-              color: const Color.fromARGB(255, 51, 51, 51)),
+          style: Theme.of(context)
+              .textTheme
+              .headlineSmall!
+              .copyWith(fontWeight: FontWeight.w500, color: Renkler.Black),
         ),
         Padding(
           padding: const EdgeInsets.all(12.0),
           child: Text(
             description,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Renkler.Grey),
+            style: const TextStyle(color: Renkler.Black),
           ),
         ),
         const Spacer(),

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 class UrunModel {
   late final String urunAdi;
   late final int urunBarkod;
