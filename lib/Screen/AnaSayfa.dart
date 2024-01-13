@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,8 +7,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
 
 class AnaSayfa extends StatefulWidget {
-  final String adSoyad;
-  const AnaSayfa({super.key, required this.adSoyad});
+  const AnaSayfa({super.key});
 
   @override
   State<AnaSayfa> createState() => _AnaSayfaState();
@@ -31,17 +32,17 @@ class _AnaSayfaState extends State<AnaSayfa> {
             foregroundImage: AssetImage("assets/images/avatar.jpg"),
           ),
         ),
-        title: Column(
+        title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Hoşgeldiniz",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
             ),
             Text(
-              widget.adSoyad,
-              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+              "Muhammed Daştan",
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
             ),
           ],
         ),

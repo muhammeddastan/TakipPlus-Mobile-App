@@ -21,9 +21,7 @@ class _NavigationBarBottomState extends State<NavigationBarBottom>
   int secilenIndex = 0;
 
   final List<Widget> ekranlar = [
-    const AnaSayfa(
-      adSoyad: '',
-    ),
+    const AnaSayfa(),
     const UrunListe(),
     const MusterilerScreen(),
     const HizmetScreen(),

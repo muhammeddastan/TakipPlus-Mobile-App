@@ -1,16 +1,19 @@
+// ignore_for_file: file_names, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
+import 'package:takip_plus/Components/AnaSayfa/NavigationBar.dart';
 import 'package:takip_plus/Models/UyeModel.dart';
 import 'package:takip_plus/Pages/Giris/Login-SignUp/KayitOl.dart';
-import 'package:takip_plus/Screen/AnaSayfa.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   static List<UyeModel> uyeler = [
-    UyeModel(adSoyad: "Ali Cabbar", ePosta: "1", sifre: "1")
+    UyeModel(adSoyad: "Ali Cabbar", ePosta: "1", sifre: "1"),
+    UyeModel(adSoyad: "feridun", ePosta: "2", sifre: "2")
   ];
 
   @override
@@ -149,8 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  AnaSayfa(adSoyad: kullanici.adSoyad),
+                              builder: (context) => const NavigationBarBottom(),
                             ),
                             (route) => false,
                           );

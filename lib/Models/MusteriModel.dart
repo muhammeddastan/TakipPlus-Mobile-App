@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 class MusteriModel {
   late final String adiSoyadi;
   late final String adres;
