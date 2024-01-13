@@ -1,10 +1,29 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
 import 'package:input_quantity/input_quantity.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:takip_plus/Components/Profil/UpdateImage.dart';
 
-class UrunEkle extends StatelessWidget {
-  const UrunEkle({super.key});
+class UrunEkle extends StatefulWidget {
+  UrunEkle({super.key});
+
+  @override
+  State<UrunEkle> createState() => _UrunEkleState();
+}
+
+class _UrunEkleState extends State<UrunEkle> {
+  Uint8List? _image;
+
+  void selectImage() async {
+    Uint8List img;
+    img = await pickImage(ImageSource.gallery);
+    setState(() {
+      _image = img as Uint8List?;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,45 +162,34 @@ class UrunEkle extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 15,
-                  right: 15,
-                ),
+                padding: const EdgeInsets.all(15),
                 child: SizedBox(
                   height: 150,
                   width: 400,
                   child: Stack(
                     children: [
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          height: 150 - 48 / 2,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Renkler.Black, width: 2),
-                            borderRadius: BorderRadius.circular(16),
+                      Column(
+                        children: [
+                          _image != null
+                              ? CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage:
+                                      MemoryImage(_image! as Uint8List),
+                                )
+                              : const CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage:
+                                      AssetImage("assets/urunler/ürün-1.png"),
+                                ),
+                          Center(
+                            child: Positioned(
+                              child: IconButton(
+                                onPressed: selectImage,
+                                icon: Icon(Icons.add_a_photo),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text(
-                              "Ürün Görsel Seç",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.image_outlined,
-                                  color: Renkler.Black,
-                                ))
-                          ],
-                        ),
+                        ],
                       ),
                     ],
                   ),
@@ -189,12 +197,18 @@ class UrunEkle extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text("Ürünü Ekle"),
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStatePropertyAll(Renkler.White),
-                      backgroundColor: MaterialStatePropertyAll(Renkler.Black)),
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text("Ürünü Ekle"),
+                      style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStatePropertyAll(Renkler.White),
+                          backgroundColor:
+                              MaterialStatePropertyAll(Renkler.Black)),
+                    ),
+                  ],
                 ),
               )
             ],
