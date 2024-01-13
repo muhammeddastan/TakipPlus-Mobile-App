@@ -1,41 +1,45 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
 import 'package:takip_plus/Models/MusteriModel.dart';
-import 'package:takip_plus/Models/UrunModel.dart';
-import 'package:takip_plus/Pages/MusteriDetayPage.dart';
+import 'package:takip_plus/Pages/Musteri/MusteriDetayPage.dart';
+import 'package:takip_plus/Pages/Musteri/MusteriEkle.dart';
 
 class MusterilerScreen extends StatefulWidget {
-  const MusterilerScreen({super.key});
+  static final List<MusteriModel> musteriler = [
+    MusteriModel(
+      adiSoyadi: "Muhammed Daştan",
+      adres: "ASD mah. ASDA sk. No:11 D:3",
+      telNo: "05512345678",
+      aciklama: "Bu bir deneme yazısıdır",
+      mail: "asdasda@adkajhsdkas.com",
+    ),
+    MusteriModel(
+      adiSoyadi: "Serhat Güneş",
+      adres: "BAC mah. DAFG sk. No:11 D:5",
+      telNo: "01234567890",
+      aciklama: "Bu bir deneme yazısıdır",
+      mail: "asdasda@adkajhsdkas.com",
+    ),
+    MusteriModel(
+      adiSoyadi: "Mehmet Özbek",
+      adres: "BAC mah. DAFG sk. No:11 D:5",
+      telNo: "01234567890",
+      aciklama: "Bu bir deneme yazısıdır",
+      mail: "asdasda@adkajhsdkas.com",
+    ),
+    // Diğer müşterileri buraya ekleyebilirsiniz.
+  ];
+
+  const MusterilerScreen({Key? key}) : super(key: key);
 
   @override
   State<MusterilerScreen> createState() => _MusterilerScreenState();
 }
 
 class _MusterilerScreenState extends State<MusterilerScreen> {
-  final List<MusteriModel> Musteriler = [
-    MusteriModel(
-        adiSoyadi: "Muhammed Daştan",
-        adres: "ASD mah. ASDA sk. No:11 D:3",
-        telNo: "05512345678",
-        aciklama: "Bu bir deneme yazısıdır"),
-    MusteriModel(
-        adiSoyadi: "Serhat Güneş",
-        adres: "BAC mah. DAFG sk. No:11 D:5",
-        telNo: "01234567890",
-        aciklama: "Bu bir deneme yazısıdır"),
-    MusteriModel(
-        adiSoyadi: "Mehmet Özbek",
-        adres: "BAC mah. DAFG sk. No:11 D:5",
-        telNo: "01234567890",
-        aciklama: "Bu bir deneme yazısıdır"),
-
-    // Diğer müşterileri buraya ekleyebilirsiniz.
-  ];
-
-  Future<void> _refresh() {
-    return Future.delayed(Duration(seconds: 2));
+  Future<void> _refresh() async {
+    setState(() {});
   }
 
   @override
@@ -46,8 +50,9 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
         centerTitle: false,
         leading: Container(
           decoration: BoxDecoration(
-              color: Renkler.Black.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(50)),
+            color: Renkler.Black.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(50),
+          ),
           child: const Icon(
             IconlyLight.user3,
             size: 30,
@@ -72,12 +77,26 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
             height: 40,
             width: 40,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: Renkler.Black.withOpacity(0.1)),
-            child:
-                IconButton(onPressed: () {}, icon: Icon(IconlyLight.addUser)),
+              borderRadius: BorderRadius.circular(50),
+              color: Renkler.Black.withOpacity(0.1),
+            ),
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MusteriEkleScreen(),
+                  ),
+                ).then(
+                  (value) => {
+                    // setState(() {}),
+                  },
+                );
+              },
+              icon: const Icon(IconlyLight.addUser),
+            ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Container(
             height: 40,
             width: 40,
@@ -85,9 +104,18 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
               borderRadius: BorderRadius.circular(50),
               color: Renkler.Black.withOpacity(0.1),
             ),
-            child: IconButton(onPressed: () {}, icon: Icon(IconlyLight.search)),
+            child: IconButton(
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: CustomSearchDelegate(
+                      musteriler: MusterilerScreen.musteriler),
+                );
+              },
+              icon: const Icon(IconlyLight.search),
+            ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
         ],
       ),
       backgroundColor: Renkler.White,
@@ -97,12 +125,12 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
         onRefresh: _refresh,
         child: Column(
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
-                itemCount: Musteriler.length,
+                itemCount: MusterilerScreen.musteriler.length,
                 itemBuilder: (context, index) {
-                  MusteriModel musteri = Musteriler[index];
+                  MusteriModel musteri = MusterilerScreen.musteriler[index];
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
@@ -135,8 +163,9 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
                               Text(
                                 musteri.adiSoyadi,
                                 style: const TextStyle(
-                                    color: Renkler.White,
-                                    fontWeight: FontWeight.bold),
+                                  color: Renkler.White,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               Text(
                                 musteri.telNo,
@@ -184,7 +213,8 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
                                       TextButton(
                                         onPressed: () {
                                           setState(() {
-                                            Musteriler.removeAt(index);
+                                            MusterilerScreen.musteriler
+                                                .removeAt(index);
                                           });
                                           Navigator.pop(context);
                                         },
@@ -247,6 +277,86 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CustomSearchDelegate extends SearchDelegate {
+  final List<MusteriModel> musteriler;
+
+  CustomSearchDelegate({required this.musteriler});
+
+  @override
+  String get searchFieldLabel => "Müşteri Ara";
+
+  @override
+  Widget buildLeading(BuildContext context) => IconButton(
+        onPressed: () => close(context, null),
+        icon: const Icon(Icons.arrow_back_ios),
+      );
+
+  @override
+  List<Widget>? buildActions(BuildContext context) => [
+        IconButton(
+          onPressed: () {
+            if (query.isEmpty) {
+              close(context, null);
+            } else {
+              query = "";
+            }
+          },
+          icon: const Icon(Icons.clear),
+        ),
+      ];
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List<MusteriModel> filteredMusteriler = musteriler
+        .where((musteri) =>
+            musteri.adiSoyadi.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
+    return ListView.builder(
+      itemCount: filteredMusteriler.length,
+      itemBuilder: (context, index) {
+        MusteriModel musteri = filteredMusteriler[index];
+        return ListTile(
+          title: Text(musteri.adiSoyadi),
+          onTap: () {
+            // Burada tıklanan müşteriye ait detay sayfasına git
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MusteriDetayPage(musteri: musteri),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> suggestions = musteriler
+        .where((musteri) =>
+            musteri.adiSoyadi.toLowerCase().contains(query.toLowerCase()))
+        .map((musteri) => musteri.adiSoyadi)
+        .toList();
+
+    return ListView.builder(
+      itemCount: suggestions.length,
+      itemBuilder: (context, index) {
+        final suggestion = suggestions[index];
+
+        return ListTile(
+          title: Text(suggestion),
+          onTap: () {
+            query = suggestion;
+            showResults(context);
+          },
+        );
+      },
     );
   }
 }

@@ -1,11 +1,11 @@
 // ignore_for_file: file_names
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
 import 'package:takip_plus/Models/UrunModel.dart';
+import 'package:takip_plus/Pages/Urunler/UrunDetay.dart';
 
 class UrunListe extends StatefulWidget {
   const UrunListe({super.key});
@@ -14,29 +14,27 @@ class UrunListe extends StatefulWidget {
   State<UrunListe> createState() => _UrunListeState();
 }
 
-final List<UrunModel> Urunler = [
+List<UrunModel> urunler = [
   UrunModel(
       urunAdi: "ATA YAYINCILIK",
-      urunBarkod: 123456789,
+      urunBarkod: 980,
       urunAdet: 200,
       urunAciklama: "Tüm dersler test kitabı konu anlatımlı"),
   UrunModel(
       urunAdi: "Türkmen Yayıncılık",
-      urunBarkod: 123456789,
+      urunBarkod: 567,
       urunAdet: 50,
       urunAciklama: "Matematik 1200 Soru Test Kitabı"),
   UrunModel(
       urunAdi: "Türkmen Yayıncılık",
-      urunBarkod: 123456789,
+      urunBarkod: 123,
       urunAdet: 50,
       urunAciklama: "Matematik 1200 Soru Test Kitabı"),
 ];
 
 Future<void> _refresh() async {
-  // Bir Future.delayed ile gecikme simülasyonu
-  await Future.delayed(Duration(seconds: 2));
+  await Future.delayed(const Duration(seconds: 2));
 
-  // Geleceği başarıyla tamamladığından emin olun
   return Future.value();
 }
 
@@ -77,10 +75,10 @@ class _UrunListeState extends State<UrunListe> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
                 color: Renkler.Black.withOpacity(0.1)),
-            child:
-                IconButton(onPressed: () {}, icon: Icon(IconlyLight.filter2)),
+            child: IconButton(
+                onPressed: () {}, icon: const Icon(IconlyLight.filter2)),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Container(
             height: 40,
             width: 40,
@@ -88,9 +86,16 @@ class _UrunListeState extends State<UrunListe> {
               borderRadius: BorderRadius.circular(50),
               color: Renkler.Black.withOpacity(0.1),
             ),
-            child: IconButton(onPressed: () {}, icon: Icon(IconlyLight.search)),
+            child: IconButton(
+                onPressed: () {
+                  showSearch(
+                    context: context,
+                    delegate: CustomSearchDelegate(urunler: urunler),
+                  );
+                },
+                icon: const Icon(IconlyLight.search)),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
         ],
       ),
       backgroundColor: Renkler.White,
@@ -100,12 +105,12 @@ class _UrunListeState extends State<UrunListe> {
         onRefresh: _refresh,
         child: Column(
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
-                itemCount: Urunler.length,
+                itemCount: urunler.length,
                 itemBuilder: (context, index) {
-                  UrunModel urun = Urunler[index];
+                  UrunModel urun = urunler[index];
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
@@ -182,15 +187,15 @@ class _UrunListeState extends State<UrunListe> {
                                       borderRadius: BorderRadius.circular(50)),
                                   child: IconButton(
                                     onPressed: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) =>
-                                      //         UrunDetaySayfasi(urun: urun),
-                                      //   ),
-                                      // );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              UrunDetayScreen(urun: urun),
+                                        ),
+                                      );
                                     },
-                                    icon: Icon(
+                                    icon: const Icon(
                                       IconlyLight.show,
                                       color: Renkler.White,
                                     ),
@@ -207,7 +212,7 @@ class _UrunListeState extends State<UrunListe> {
                                       borderRadius: BorderRadius.circular(50)),
                                   child: IconButton(
                                     onPressed: () {},
-                                    icon: Icon(
+                                    icon: const Icon(
                                       IconlyLight.edit,
                                       color: Renkler.DarkBlue,
                                     ),
@@ -231,7 +236,7 @@ class _UrunListeState extends State<UrunListe> {
                                           backgroundColor: Renkler.White,
                                           content: const Text(
                                               "Silmek istediğinize emin misiniz?"),
-                                          icon: Icon(
+                                          icon: const Icon(
                                             IconlyLight.delete,
                                             size: 30,
                                             color: Renkler.GoogleRenk,
@@ -254,7 +259,7 @@ class _UrunListeState extends State<UrunListe> {
                                             TextButton(
                                               onPressed: () {
                                                 setState(() {
-                                                  Urunler.removeAt(index);
+                                                  urunler.removeAt(index);
                                                 });
                                                 Navigator.pop(context);
                                               },
@@ -273,7 +278,7 @@ class _UrunListeState extends State<UrunListe> {
                                         ),
                                       );
                                     },
-                                    icon: Icon(
+                                    icon: const Icon(
                                       IconlyLight.delete,
                                       color: Renkler.GoogleRenk,
                                     ),
@@ -292,6 +297,90 @@ class _UrunListeState extends State<UrunListe> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CustomSearchDelegate extends SearchDelegate {
+  final List<UrunModel> urunler;
+
+  CustomSearchDelegate({required this.urunler});
+
+  @override
+  String get searchFieldLabel => "Ürün Adı veya Barkod No Girin";
+
+  @override
+  Widget buildLeading(BuildContext context) => IconButton(
+        onPressed: () => close(context, null),
+        icon: const Icon(Icons.arrow_back_ios),
+      );
+
+  @override
+  List<Widget>? buildActions(BuildContext context) => [
+        IconButton(
+          onPressed: () {
+            if (query.isEmpty) {
+              close(context, null);
+            } else {
+              query = "";
+            }
+          },
+          icon: const Icon(Icons.clear),
+        ),
+      ];
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List<UrunModel> filteredUrunler = urunler.where(
+      (urun) {
+        String lowerCaseQuery = query.toLowerCase();
+        return urun.urunAdi.toLowerCase().contains(lowerCaseQuery) ||
+            urun.urunBarkod.toString().contains(lowerCaseQuery);
+      },
+    ).toList();
+
+    return ListView.builder(
+      itemCount: filteredUrunler.length,
+      itemBuilder: (context, index) {
+        UrunModel urun = filteredUrunler[index];
+        return ListTile(
+          title: Text(urun.urunBarkod.toString()),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => UrunDetayScreen(urun: urun),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<UrunModel> suggestions = urunler.where(
+      (urun) {
+        String lowerCaseQuery = query.toLowerCase();
+        return urun.urunAdi.toLowerCase().contains(lowerCaseQuery) ||
+            urun.urunBarkod.toString().contains(lowerCaseQuery);
+      },
+    ).toList();
+
+    return ListView.builder(
+      itemCount: suggestions.length,
+      itemBuilder: (context, index) {
+        final UrunModel suggestion = suggestions[index];
+
+        return ListTile(
+          title: Text(suggestion.urunAdi),
+          onTap: () {
+            query = suggestion.urunAdi;
+            showResults(context);
+          },
+        );
+      },
     );
   }
 }

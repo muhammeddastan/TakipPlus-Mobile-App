@@ -1,24 +1,17 @@
-// ignore_for_file: file_names, non_constant_identifier_names
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:takip_plus/Models/MusteriModel.dart';
-import 'package:takip_plus/Models/UrunModel.dart'; // MusteriModel import edildiğinden emin olmalısınız
+import 'package:takip_plus/Models/UrunModel.dart';
 
-class MusteriDetayPage extends StatefulWidget {
-  final MusteriModel musteri;
-
-  MusteriDetayPage({
-    Key? key,
-    required this.musteri,
-  }) : super(key: key);
+class UrunDetayScreen extends StatefulWidget {
+  final UrunModel urun;
+  const UrunDetayScreen({super.key, required this.urun});
 
   @override
-  State<MusteriDetayPage> createState() => _MusteriDetayPageState();
+  State<UrunDetayScreen> createState() => _UrunDetayScreenState();
 }
 
-class _MusteriDetayPageState extends State<MusteriDetayPage> {
+class _UrunDetayScreenState extends State<UrunDetayScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,16 +19,16 @@ class _MusteriDetayPageState extends State<MusteriDetayPage> {
       appBar: AppBar(
         backgroundColor: Renkler.White,
         centerTitle: false,
-        title: Column(
+        title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              "MÜŞTERİLER",
+              "ÜRÜNLER",
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
             Text(
-              "Müşterilerinizi inceleyin.",
+              "Ürünlerinizi inceleyin.",
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
             ),
           ],
@@ -44,17 +37,17 @@ class _MusteriDetayPageState extends State<MusteriDetayPage> {
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             CircleAvatar(
               maxRadius: 50,
               backgroundColor: Renkler.Black.withOpacity(0.4),
-              child: Icon(
+              child: const Icon(
                 IconlyLight.profile,
                 color: Renkler.White,
                 size: 50,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
@@ -69,16 +62,16 @@ class _MusteriDetayPageState extends State<MusteriDetayPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        "Ad Soyad",
+                      const Text(
+                        "Ürün Adı",
                         style: TextStyle(
                             color: Renkler.White,
                             fontWeight: FontWeight.w400,
                             fontSize: 15),
                       ),
                       Text(
-                        widget.musteri.adiSoyadi,
-                        style: TextStyle(
+                        widget.urun.urunAdi,
+                        style: const TextStyle(
                             color: Renkler.White,
                             fontSize: 17,
                             fontWeight: FontWeight.bold),
@@ -102,16 +95,16 @@ class _MusteriDetayPageState extends State<MusteriDetayPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        "Telefon No",
+                      const Text(
+                        "Stok",
                         style: TextStyle(
                             color: Renkler.White,
                             fontWeight: FontWeight.w400,
                             fontSize: 15),
                       ),
                       Text(
-                        widget.musteri.telNo,
-                        style: TextStyle(
+                        widget.urun.urunAdet.toString(),
+                        style: const TextStyle(
                             color: Renkler.White,
                             fontSize: 17,
                             fontWeight: FontWeight.bold),
@@ -135,7 +128,7 @@ class _MusteriDetayPageState extends State<MusteriDetayPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Adres",
                         style: TextStyle(
                             color: Renkler.White,
@@ -143,8 +136,8 @@ class _MusteriDetayPageState extends State<MusteriDetayPage> {
                             fontSize: 15),
                       ),
                       Text(
-                        widget.musteri.adres,
-                        style: TextStyle(
+                        widget.urun.urunBarkod.toString(),
+                        style: const TextStyle(
                             color: Renkler.White,
                             fontSize: 17,
                             fontWeight: FontWeight.bold),
@@ -168,7 +161,7 @@ class _MusteriDetayPageState extends State<MusteriDetayPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Açıklama",
                         style: TextStyle(
                             color: Renkler.White,
@@ -176,8 +169,8 @@ class _MusteriDetayPageState extends State<MusteriDetayPage> {
                             fontSize: 15),
                       ),
                       Text(
-                        widget.musteri.aciklama,
-                        style: TextStyle(
+                        widget.urun.urunAciklama,
+                        style: const TextStyle(
                             color: Renkler.White,
                             fontSize: 17,
                             fontWeight: FontWeight.bold),
