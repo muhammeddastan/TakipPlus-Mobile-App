@@ -1,78 +1,364 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
 import 'package:takip_plus/Models/MusteriModel.dart';
-import 'package:takip_plus/Models/UrunModel.dart';
-import 'package:takip_plus/Pages/MusteriDetayPage.dart';
+import 'package:takip_plus/Pages/Musteri/MusteriDetayPage.dart';
+import 'package:takip_plus/Pages/Musteri/MusteriEkle.dart';
 
 class MusterilerScreen extends StatefulWidget {
-  const MusterilerScreen({super.key});
+  static final List<MusteriModel> musteriler = [
+    MusteriModel(
+      adiSoyadi: "Muhammed Daştan",
+      adres: "ASD mah. ASDA sk. No:11 D:3",
+      telNo: "05512345678",
+      aciklama: "Bu bir deneme yazısıdır",
+      mail: "asdasda@adkajhsdkas.com",
+    ),
+    MusteriModel(
+      adiSoyadi: "Serhat Güneş",
+      adres: "BAC mah. DAFG sk. No:11 D:5",
+      telNo: "01234567890",
+      aciklama: "Bu bir deneme yazısıdır",
+      mail: "asdasda@adkajhsdkas.com",
+    ),
+    MusteriModel(
+      adiSoyadi: "Mehmet Özbek",
+      adres: "BAC mah. DAFG sk. No:11 D:5",
+      telNo: "01234567890",
+      aciklama: "Bu bir deneme yazısıdır",
+      mail: "asdasda@adkajhsdkas.com",
+    ),
+    // Diğer müşterileri buraya ekleyebilirsiniz.
+  ];
+
+  const MusterilerScreen({Key? key}) : super(key: key);
 
   @override
   State<MusterilerScreen> createState() => _MusterilerScreenState();
 }
 
 class _MusterilerScreenState extends State<MusterilerScreen> {
-  final List<MusteriModel> Musteriler = [
-    MusteriModel(
-      adiSoyadi: "Muhammed Daştan",
-      adres: "ASD mah. ASDA sk. No:11 D:3",
-      telNo: "05512345678",
-    ),
-    MusteriModel(
-      adiSoyadi: "Serhat Güneş",
-      adres: "BAC mah. DAFG sk. No:11 D:5",
-      telNo: "01234567890",
-    )
-  ];
-
-  final List<UrunModel> Urunler = [
-    UrunModel(
-        urunAdi: "urunAdi",
-        urunFiyati: 300,
-        urunAdet: 1,
-        urunTarih: DateTime(2023, 7, 2, 2, 2),
-        bakimVarMi: false),
-    UrunModel(
-        urunAdi: "urunAdi",
-        urunFiyati: 300,
-        urunAdet: 1,
-        urunTarih: DateTime(2023, 7, 2, 2, 2),
-        bakimVarMi: true)
-  ];
+  Future<void> _refresh() async {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
         backgroundColor: Renkler.White,
-        appBar: AppBar(
-          title: const Text("Müşteriler"),
-          backgroundColor: Renkler.White,
+        centerTitle: false,
+        leading: Container(
+          decoration: BoxDecoration(
+            color: Renkler.Black.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: const Icon(
+            IconlyLight.user3,
+            size: 30,
+          ),
         ),
-        body: ListView.builder(
-            itemCount: Musteriler.length,
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                leading: const Icon(CupertinoIcons
-                    .person_alt_circle_fill), // Sol taraftaki icon
-                title: Text(Musteriler[index].adiSoyadi),
-                subtitle: Text(Musteriler[index].adres), // Adres bilgisi
-                trailing: const Icon(Icons.search), // Sağdaki ok iconu
-                onTap: () {
-                  // Müşteri detay sayfasına gitmek için onTap event'i
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MusteriDetayPage(
-                        musteri: Musteriler[index],
-                        Musteriler: Musteriler[index],
-                        urun: Urunler[index],
-                        Urunler: Urunler[index],
+        title: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              "MÜŞTERİLER",
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "Müşterilerinizi inceleyebilir, düzenleyebilir ve silebilirsiniz.",
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
+            ),
+          ],
+        ),
+        actions: [
+          Container(
+            height: 40,
+            width: 40,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              color: Renkler.Black.withOpacity(0.1),
+            ),
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MusteriEkleScreen(),
+                  ),
+                ).then(
+                  (value) => {
+                    // setState(() {}),
+                  },
+                );
+              },
+              icon: const Icon(IconlyLight.addUser),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Container(
+            height: 40,
+            width: 40,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              color: Renkler.Black.withOpacity(0.1),
+            ),
+            child: IconButton(
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: CustomSearchDelegate(
+                      musteriler: MusterilerScreen.musteriler),
+                );
+              },
+              icon: const Icon(IconlyLight.search),
+            ),
+          ),
+          const SizedBox(width: 10),
+        ],
+      ),
+      backgroundColor: Renkler.White,
+      body: RefreshIndicator(
+        color: Renkler.Black,
+        backgroundColor: Renkler.White,
+        onRefresh: _refresh,
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            Expanded(
+              child: ListView.builder(
+                itemCount: MusterilerScreen.musteriler.length,
+                itemBuilder: (context, index) {
+                  MusteriModel musteri = MusterilerScreen.musteriler[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Renkler.Black,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Renkler.White.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: const Icon(
+                                IconlyLight.profile,
+                                color: Renkler.White,
+                              ),
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                musteri.adiSoyadi,
+                                style: const TextStyle(
+                                  color: Renkler.White,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                musteri.telNo,
+                                style: const TextStyle(color: Renkler.White),
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              color: Renkler.White.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    backgroundColor: Renkler.White,
+                                    content: const Text(
+                                        "Silmek istediğinize emin misiniz?"),
+                                    icon: const Icon(
+                                      IconlyLight.delete,
+                                      size: 30,
+                                      color: Renkler.GoogleRenk,
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'İptal'),
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Renkler.Black),
+                                        ),
+                                        child: const Text(
+                                          'İptal',
+                                          style:
+                                              TextStyle(color: Renkler.White),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            MusterilerScreen.musteriler
+                                                .removeAt(index);
+                                          });
+                                          Navigator.pop(context);
+                                        },
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Renkler.Danger),
+                                        ),
+                                        child: const Text(
+                                          'Sil',
+                                          style:
+                                              TextStyle(color: Renkler.White),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                              icon: const Icon(
+                                IconlyLight.delete,
+                                color: Renkler.GoogleRenk,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 10.0, right: 10),
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Renkler.White.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MusteriDetayPage(
+                                        musteri: musteri,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(
+                                  IconlyLight.show,
+                                  color: Renkler.White,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   );
                 },
-              );
-            }));
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CustomSearchDelegate extends SearchDelegate {
+  final List<MusteriModel> musteriler;
+
+  CustomSearchDelegate({required this.musteriler});
+
+  @override
+  String get searchFieldLabel => "Müşteri Ara";
+
+  @override
+  Widget buildLeading(BuildContext context) => IconButton(
+        onPressed: () => close(context, null),
+        icon: const Icon(Icons.arrow_back_ios),
+      );
+
+  @override
+  List<Widget>? buildActions(BuildContext context) => [
+        IconButton(
+          onPressed: () {
+            if (query.isEmpty) {
+              close(context, null);
+            } else {
+              query = "";
+            }
+          },
+          icon: const Icon(Icons.clear),
+        ),
+      ];
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List<MusteriModel> filteredMusteriler = musteriler
+        .where((musteri) =>
+            musteri.adiSoyadi.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
+    return ListView.builder(
+      itemCount: filteredMusteriler.length,
+      itemBuilder: (context, index) {
+        MusteriModel musteri = filteredMusteriler[index];
+        return ListTile(
+          title: Text(musteri.adiSoyadi),
+          onTap: () {
+            // Burada tıklanan müşteriye ait detay sayfasına git
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MusteriDetayPage(musteri: musteri),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> suggestions = musteriler
+        .where((musteri) =>
+            musteri.adiSoyadi.toLowerCase().contains(query.toLowerCase()))
+        .map((musteri) => musteri.adiSoyadi)
+        .toList();
+
+    return ListView.builder(
+      itemCount: suggestions.length,
+      itemBuilder: (context, index) {
+        final suggestion = suggestions[index];
+
+        return ListTile(
+          title: Text(suggestion),
+          onTap: () {
+            query = suggestion;
+            showResults(context);
+          },
+        );
+      },
+    );
   }
 }

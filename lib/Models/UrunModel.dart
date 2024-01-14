@@ -1,14 +1,14 @@
+// ignore_for_file: file_names
+
 class UrunModel {
   late final String urunAdi;
-  late final int urunFiyati;
+  late final int urunBarkod;
   late final int urunAdet;
-  late final DateTime urunTarih;
-  late final bool bakimVarMi;
+  late final String urunAciklama;
 
   UrunModel(
       {required this.urunAdi,
-      required this.urunFiyati,
+      required this.urunBarkod,
       required this.urunAdet,
-      required this.urunTarih,
-      required this.bakimVarMi});
+      required this.urunAciklama});
 }
