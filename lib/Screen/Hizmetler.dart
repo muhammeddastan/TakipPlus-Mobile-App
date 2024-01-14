@@ -75,6 +75,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const UrunEkle()),
+                      MaterialPageRoute(builder: (context) => UrunEkle()),
                     );
                   },
                   child: Container(
