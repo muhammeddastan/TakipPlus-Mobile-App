@@ -1,32 +1,45 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
+import 'package:takip_plus/Database/DataBaseHelper.dart';
 import 'package:takip_plus/Models/DepoModel.dart';
 import 'package:takip_plus/Pages/Depo/DepoDetay.dart';
 import 'package:takip_plus/Pages/Depo/DepoEkle.dart';
 
 class DepolarScreen extends StatefulWidget {
   const DepolarScreen({super.key});
-  static List<DepoModel> depolar = [
-    DepoModel(
-        depoAdi: "ABC DEPOSU",
-        depoTelno: "01233233232",
-        depoSehir: "ESKİŞEHİR",
-        depoAdres: "QWERT MAH. MNBVC SK. NO:10 ODUNPAZARI/ESKİŞEHİR"),
-    DepoModel(
-        depoAdi: "ÇÖMNB DEPOSU",
-        depoTelno: "09877654321",
-        depoSehir: "İSTANBUL",
-        depoAdres: "QWERT MAH. ÜĞPOIUYRLJD SK. NO:29 MASLAK/İSTANBUL")
-  ];
 
   @override
   State<DepolarScreen> createState() => _DepolarScreenState();
 }
 
 class _DepolarScreenState extends State<DepolarScreen> {
+  // DatabaseHelper sınıfını kullanmak için instance oluşturduk
+  final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
+
+  List<DepoModel> _depolar = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getDepolar(); // Uygulama başladığında verileri çekiyoruz
+  }
+
+  // Veritabanından ürünleri çekmek için bu işlevi kullanıyoruz
+  void _getDepolar() async {
+    final List<Map<String, dynamic>> depolarMapList =
+        await _databaseHelper.queryAllDepoData();
+
+    List<DepoModel> depolar =
+        depolarMapList.map((map) => DepoModel.fromMap(map)).toList();
+
+    setState(() {
+      _depolar = depolar; // Burada _depolar listesini güncelliyoruz
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +76,9 @@ class _DepolarScreenState extends State<DepolarScreen> {
                     ),
                   ).then(
                     (value) => {
-                      setState(() {}),
+                      setState(() {
+                        _getDepolar();
+                      }),
                     },
                   );
                 },
@@ -81,8 +96,7 @@ class _DepolarScreenState extends State<DepolarScreen> {
                 onPressed: () {
                   showSearch(
                     context: context,
-                    delegate:
-                        CustomSearchDelegate(depolar: DepolarScreen.depolar),
+                    delegate: CustomSearchDelegate(depolar: _depolar),
                   );
                 },
                 icon: const Icon(IconlyLight.search)),
@@ -96,9 +110,9 @@ class _DepolarScreenState extends State<DepolarScreen> {
           children: [
             Expanded(
               child: ListView.builder(
-                itemCount: DepolarScreen.depolar.length,
+                itemCount: _depolar.length,
                 itemBuilder: ((context, index) {
-                  DepoModel depo = DepolarScreen.depolar[index];
+                  DepoModel depo = _depolar[index];
                   return Padding(
                     padding: const EdgeInsets.all(10),
                     child: Container(
@@ -145,7 +159,7 @@ class _DepolarScreenState extends State<DepolarScreen> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(5.0),
                                   child: Text(
-                                    "Telefon: ${depo.depoTelno}",
+                                    "Telefon: ${depo.depoTelNo}",
                                     style: const TextStyle(
                                         color: Renkler.White,
                                         fontSize: 18,
@@ -260,10 +274,12 @@ class _DepolarScreenState extends State<DepolarScreen> {
                                               ),
                                             ),
                                             TextButton(
-                                              onPressed: () {
+                                              onPressed: () async {
+                                                await _databaseHelper
+                                                    .deleteDepo(
+                                                        _depolar[index].id);
                                                 setState(() {
-                                                  DepolarScreen.depolar
-                                                      .removeAt(index);
+                                                  _depolar.removeAt(index);
                                                 });
                                                 Navigator.pop(context);
                                               },

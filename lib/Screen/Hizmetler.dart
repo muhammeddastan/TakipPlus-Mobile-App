@@ -75,7 +75,6 @@ class _HizmetScreenState extends State<HizmetScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const UrunEkle()),
-                      MaterialPageRoute(builder: (context) => UrunEkle()),
                     );
                   },
                   child: Container(
@@ -510,7 +509,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                             onPressed: () => Navigator.pop(context, 'İptal'),
                             style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Renkler.Green),
+                                  MaterialStateProperty.all(Renkler.Black),
                             ),
                             child: const Text(
                               'İptal',

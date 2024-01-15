@@ -75,7 +75,7 @@ class _MusteriDetayPageState extends State<MusteriDetayPage> {
                             fontSize: 15),
                       ),
                       Text(
-                        widget.musteri.adiSoyadi,
+                        widget.musteri.musteriAdi,
                         style: const TextStyle(
                             color: Renkler.White,
                             fontSize: 17,
@@ -108,12 +108,45 @@ class _MusteriDetayPageState extends State<MusteriDetayPage> {
                             fontSize: 15),
                       ),
                       Text(
-                        widget.musteri.telNo,
+                        widget.musteri.musteriTelNo,
                         style: const TextStyle(
                             color: Renkler.White,
                             fontSize: 17,
                             fontWeight: FontWeight.bold),
                       ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Renkler.Black,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "E-Posta",
+                        style: TextStyle(
+                            color: Renkler.White,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15),
+                      ),
+                      Text(
+                        widget.musteri.musteriEposta,
+                        style: const TextStyle(
+                            color: Renkler.White,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold),
+                      )
                     ],
                   ),
                 ),
@@ -141,7 +174,7 @@ class _MusteriDetayPageState extends State<MusteriDetayPage> {
                             fontSize: 15),
                       ),
                       Text(
-                        widget.musteri.adres,
+                        widget.musteri.musteriAdres,
                         style: const TextStyle(
                             color: Renkler.White,
                             fontSize: 17,
@@ -174,7 +207,7 @@ class _MusteriDetayPageState extends State<MusteriDetayPage> {
                             fontSize: 15),
                       ),
                       Text(
-                        widget.musteri.aciklama,
+                        widget.musteri.musteriAciklama,
                         style: const TextStyle(
                             color: Renkler.White,
                             fontSize: 17,

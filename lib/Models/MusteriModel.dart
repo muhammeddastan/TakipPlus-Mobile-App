@@ -1,19 +1,28 @@
 // ignore_for_file: file_names
 
 class MusteriModel {
-  late final String adiSoyadi;
-  late final String adres;
-  late final String telNo;
-  late final String mail;
-  late final String aciklama;
+  late final int id;
+  late final String musteriAdi;
+  late final String musteriTelNo;
+  late final String musteriAdres;
+  late final String musteriEposta;
+  late final String musteriAciklama;
 
-  MusteriModel({
-    required this.adiSoyadi,
-    required this.adres,
-    required this.telNo,
-    required this.mail,
-    required this.aciklama,
-  });
+  MusteriModel(
+      {required this.id,
+      required this.musteriAdi,
+      required this.musteriTelNo,
+      required this.musteriAdres,
+      required this.musteriEposta,
+      required this.musteriAciklama});
 
-  toLowerCase() {}
+  factory MusteriModel.fromMap(Map<String, dynamic> map) {
+    return MusteriModel(
+        id: map['id'] ?? "",
+        musteriAdi: map['musteriAdi'] ?? "",
+        musteriTelNo: map['musteriTelNo'] ?? "",
+        musteriAdres: map['musteriAdres'] ?? "",
+        musteriEposta: map['musteriEposta'] ?? "",
+        musteriAciklama: map['musteriAciklama'] ?? "");
+  }
 }

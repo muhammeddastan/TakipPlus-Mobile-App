@@ -1,11 +1,13 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, use_build_context_synchronously
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
+import 'package:takip_plus/Database/DataBaseHelper.dart';
 import 'package:takip_plus/Models/UrunModel.dart';
 import 'package:takip_plus/Pages/Urunler/UrunDetay.dart';
+import 'package:takip_plus/Pages/Urunler/UrunEkle.dart';
 
 class UrunListe extends StatefulWidget {
   const UrunListe({super.key});
@@ -14,31 +16,36 @@ class UrunListe extends StatefulWidget {
   State<UrunListe> createState() => _UrunListeState();
 }
 
-List<UrunModel> urunler = [
-  UrunModel(
-      urunAdi: "ATA YAYINCILIK",
-      urunBarkod: 980,
-      urunAdet: 200,
-      urunAciklama: "Tüm dersler test kitabı konu anlatımlı"),
-  UrunModel(
-      urunAdi: "Türkmen Yayıncılık",
-      urunBarkod: 567,
-      urunAdet: 50,
-      urunAciklama: "Matematik 1200 Soru Test Kitabı"),
-  UrunModel(
-      urunAdi: "Türkmen Yayıncılık",
-      urunBarkod: 123,
-      urunAdet: 50,
-      urunAciklama: "Matematik 1200 Soru Test Kitabı"),
-];
-
-Future<void> _refresh() async {
-  await Future.delayed(const Duration(seconds: 2));
-
-  return Future.value();
-}
-
 class _UrunListeState extends State<UrunListe> {
+// DatabaseHelper sınıfını kullanmak için instance oluşturduk
+  final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
+
+  // UrunModel listesini tutacak bir liste oluşturuyoruz
+  List<UrunModel> _urunler = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getUrunler(); // Uygulama başladığında verileri çekiyoruz
+  }
+
+  // Veritabanından ürünleri çekmek için bu işlevi kullanıyoruz
+  void _getUrunler() async {
+    final List<Map<String, dynamic>> urunlerMapList =
+        await _databaseHelper.queryAllUrunData();
+
+    List<UrunModel> urunler =
+        urunlerMapList.map((map) => UrunModel.fromMap(map)).toList();
+
+    setState(() {
+      _urunler = urunler;
+    });
+  }
+
+  Future<void> _refresh() async {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,12 +70,35 @@ class _UrunListeState extends State<UrunListe> {
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
             Text(
-              "Ürünlerinizi inceleyebilir, düzenleyebilir ve silebilirsiniz.",
+              "Ürünlerinizi inceleyebilir, silebilirsiniz.",
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
             ),
           ],
         ),
         actions: [
+          Container(
+            height: 40,
+            width: 40,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              color: Renkler.Black.withOpacity(0.1),
+            ),
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const UrunEkle()),
+                ).then((value) => {
+                      setState(
+                        () {
+                          _getUrunler();
+                        },
+                      )
+                    });
+              },
+              icon: const Icon(IconlyLight.plus),
+            ),
+          ),
           const SizedBox(width: 10),
           Container(
             height: 40,
@@ -81,7 +111,7 @@ class _UrunListeState extends State<UrunListe> {
                 onPressed: () {
                   showSearch(
                     context: context,
-                    delegate: CustomSearchDelegate(urunler: urunler),
+                    delegate: CustomSearchDelegate(urunler: _urunler),
                   );
                 },
                 icon: const Icon(IconlyLight.search)),
@@ -99,9 +129,9 @@ class _UrunListeState extends State<UrunListe> {
             const SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
-                itemCount: urunler.length,
+                itemCount: _urunler.length,
                 itemBuilder: (context, index) {
-                  UrunModel urun = urunler[index];
+                  UrunModel urun = _urunler[index];
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
@@ -118,17 +148,22 @@ class _UrunListeState extends State<UrunListe> {
                                 padding: const EdgeInsets.only(
                                     top: 20.0, bottom: 20, left: 15, right: 15),
                                 child: Container(
-                                  height: 100,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                    color: Renkler.White.withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Image.asset(
-                                    "assets/images/avatar.jpg",
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                                    height: 100,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                      color: Renkler.White.withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: _urunler[index].urunFoto != null
+                                        ? Image.memory(
+                                            _urunler[index].urunFoto!,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : const Icon(
+                                            IconlyLight.image,
+                                            size: 50,
+                                            color: Renkler.White,
+                                          )),
                               ),
                               Expanded(
                                 child: Column(
@@ -154,7 +189,7 @@ class _UrunListeState extends State<UrunListe> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      "Barkod: ${urun.urunBarkod}",
+                                      "Barkod: ${urun.barkodNo}",
                                       style: const TextStyle(
                                           color: Renkler.White,
                                           fontWeight: FontWeight.bold),
@@ -202,23 +237,6 @@ class _UrunListeState extends State<UrunListe> {
                                       color: Renkler.White.withOpacity(0.2),
                                       borderRadius: BorderRadius.circular(50)),
                                   child: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      IconlyLight.edit,
-                                      color: Renkler.DarkBlue,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                      color: Renkler.White.withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(50)),
-                                  child: IconButton(
                                     onPressed: () {
                                       showDialog(
                                         context: context,
@@ -248,10 +266,14 @@ class _UrunListeState extends State<UrunListe> {
                                               ),
                                             ),
                                             TextButton(
-                                              onPressed: () {
+                                              onPressed: () async {
+                                                await _databaseHelper
+                                                    .deleteUrun(
+                                                        _urunler[index].id);
                                                 setState(() {
-                                                  urunler.removeAt(index);
+                                                  _urunler.removeAt(index);
                                                 });
+
                                                 Navigator.pop(context);
                                               },
                                               style: ButtonStyle(
@@ -326,7 +348,7 @@ class CustomSearchDelegate extends SearchDelegate {
       (urun) {
         String lowerCaseQuery = query.toLowerCase();
         return urun.urunAdi.toLowerCase().contains(lowerCaseQuery) ||
-            urun.urunBarkod.toString().contains(lowerCaseQuery);
+            urun.barkodNo.toString().contains(lowerCaseQuery);
       },
     ).toList();
 
@@ -335,7 +357,7 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         UrunModel urun = filteredUrunler[index];
         return ListTile(
-          title: Text(urun.urunBarkod.toString()),
+          title: Text(urun.barkodNo.toString()),
           onTap: () {
             Navigator.push(
               context,
@@ -355,7 +377,7 @@ class CustomSearchDelegate extends SearchDelegate {
       (urun) {
         String lowerCaseQuery = query.toLowerCase();
         return urun.urunAdi.toLowerCase().contains(lowerCaseQuery) ||
-            urun.urunBarkod.toString().contains(lowerCaseQuery);
+            urun.barkodNo.toString().contains(lowerCaseQuery);
       },
     ).toList();
 
