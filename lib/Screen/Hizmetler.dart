@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
+import 'package:takip_plus/Components/Profil/UpdateProfileScreen.dart';
 import 'package:takip_plus/Components/Profil/UygulamaHakkindaScreen.dart';
 import 'package:takip_plus/Pages/Depo/Depolar.dart';
 import 'package:takip_plus/Pages/Giris/Login-SignUp/GirisYap.dart';
@@ -54,7 +55,15 @@ class _HizmetScreenState extends State<HizmetScreen> {
                 borderRadius: BorderRadius.circular(50),
                 color: Renkler.Black.withOpacity(0.1)),
             child: IconButton(
-                onPressed: () {}, icon: const Icon(IconlyLight.profile)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const UpdateProfileScreen(),
+                    ),
+                  );
+                },
+                icon: const Icon(IconlyLight.profile)),
           ),
           const SizedBox(width: 10),
         ],
@@ -74,7 +83,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const UrunEkle()),
+                      MaterialPageRoute(builder: (context) => UrunEkle()),
                     );
                   },
                   child: Container(
@@ -509,7 +518,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                             onPressed: () => Navigator.pop(context, 'İptal'),
                             style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Renkler.Black),
+                                  MaterialStateProperty.all(Renkler.Green),
                             ),
                             child: const Text(
                               'İptal',
