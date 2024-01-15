@@ -1,38 +1,14 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
+import 'package:takip_plus/Database/DataBaseHelper.dart';
 import 'package:takip_plus/Models/MusteriModel.dart';
 import 'package:takip_plus/Pages/Musteri/MusteriDetayPage.dart';
 import 'package:takip_plus/Pages/Musteri/MusteriEkle.dart';
 
 class MusterilerScreen extends StatefulWidget {
-  static final List<MusteriModel> musteriler = [
-    MusteriModel(
-      adiSoyadi: "Muhammed Daştan",
-      adres: "ASD mah. ASDA sk. No:11 D:3",
-      telNo: "05512345678",
-      aciklama: "Bu bir deneme yazısıdır",
-      mail: "asdasda@adkajhsdkas.com",
-    ),
-    MusteriModel(
-      adiSoyadi: "Serhat Güneş",
-      adres: "BAC mah. DAFG sk. No:11 D:5",
-      telNo: "01234567890",
-      aciklama: "Bu bir deneme yazısıdır",
-      mail: "asdasda@adkajhsdkas.com",
-    ),
-    MusteriModel(
-      adiSoyadi: "Mehmet Özbek",
-      adres: "BAC mah. DAFG sk. No:11 D:5",
-      telNo: "01234567890",
-      aciklama: "Bu bir deneme yazısıdır",
-      mail: "asdasda@adkajhsdkas.com",
-    ),
-    // Diğer müşterileri buraya ekleyebilirsiniz.
-  ];
-
   const MusterilerScreen({Key? key}) : super(key: key);
 
   @override
@@ -40,6 +16,30 @@ class MusterilerScreen extends StatefulWidget {
 }
 
 class _MusterilerScreenState extends State<MusterilerScreen> {
+  // DatabaseHelper sınıfını kullanmak için instance oluşturduk
+  final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
+
+  // MusteriModel listesini tutacak bir liste oluştyoruz
+  List<MusteriModel> _musteriler = [];
+  @override
+  void initState() {
+    super.initState();
+    _getMusteriler(); // Uygulama başladığında verileri çekiyoruz
+  }
+
+  // Veritabanından ürünleri çekmek için bu işlevi kullanıyoruz
+  void _getMusteriler() async {
+    final List<Map<String, dynamic>> musterilerMapList =
+        await _databaseHelper.queryAllMusteriData();
+
+    List<MusteriModel> musteriler =
+        musterilerMapList.map((map) => MusteriModel.fromMap(map)).toList();
+
+    setState(() {
+      _musteriler = musteriler; // Burada _musteriler listesini güncelliyoruz
+    });
+  }
+
   Future<void> _refresh() async {
     setState(() {});
   }
@@ -89,11 +89,13 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
                   MaterialPageRoute(
                     builder: (context) => const MusteriEkleScreen(),
                   ),
-                ).then(
-                  (value) => {
-                    // setState(() {}),
-                  },
-                );
+                ).then((value) => {
+                      setState(
+                        () {
+                          _getMusteriler();
+                        },
+                      )
+                    });
               },
               icon: const Icon(IconlyLight.addUser),
             ),
@@ -110,8 +112,7 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: CustomSearchDelegate(
-                      musteriler: MusterilerScreen.musteriler),
+                  delegate: CustomSearchDelegate(musteriler: _musteriler),
                 );
               },
               icon: const Icon(IconlyLight.search),
@@ -130,9 +131,9 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
             const SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
-                itemCount: MusterilerScreen.musteriler.length,
+                itemCount: _musteriler.length,
                 itemBuilder: (context, index) {
-                  MusteriModel musteri = MusterilerScreen.musteriler[index];
+                  MusteriModel musteri = _musteriler[index];
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
@@ -163,14 +164,14 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                musteri.adiSoyadi,
+                                musteri.musteriAdi,
                                 style: const TextStyle(
                                   color: Renkler.White,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
-                                musteri.telNo,
+                                musteri.musteriTelNo,
                                 style: const TextStyle(color: Renkler.White),
                               ),
                             ],
@@ -213,10 +214,11 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
                                         ),
                                       ),
                                       TextButton(
-                                        onPressed: () {
+                                        onPressed: () async {
+                                          await _databaseHelper.deleteMusteri(
+                                              _musteriler[index].id);
                                           setState(() {
-                                            MusterilerScreen.musteriler
-                                                .removeAt(index);
+                                            _musteriler.removeAt(index);
                                           });
                                           Navigator.pop(context);
                                         },
@@ -315,7 +317,7 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     List<MusteriModel> filteredMusteriler = musteriler
         .where((musteri) =>
-            musteri.adiSoyadi.toLowerCase().contains(query.toLowerCase()))
+            musteri.musteriAdi.toLowerCase().contains(query.toLowerCase()))
         .toList();
 
     return ListView.builder(
@@ -323,7 +325,7 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         MusteriModel musteri = filteredMusteriler[index];
         return ListTile(
-          title: Text(musteri.adiSoyadi),
+          title: Text(musteri.musteriAdi),
           onTap: () {
             // Burada tıklanan müşteriye ait detay sayfasına git
             Navigator.push(
@@ -342,8 +344,8 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     List<String> suggestions = musteriler
         .where((musteri) =>
-            musteri.adiSoyadi.toLowerCase().contains(query.toLowerCase()))
-        .map((musteri) => musteri.adiSoyadi)
+            musteri.musteriAdi.toLowerCase().contains(query.toLowerCase()))
+        .map((musteri) => musteri.musteriAdi)
         .toList();
 
     return ListView.builder(

@@ -38,7 +38,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
           children: [
             Text(
               "Hoşgeldiniz",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w100),
             ),
             Text(
               "Muhammed Daştan",
@@ -220,7 +220,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                "Tahsilatlar",
+                                "Gelirler",
                                 style: GoogleFonts.raleway(
                                     fontSize: 20,
                                     color: Renkler.White,
@@ -290,7 +290,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                "Ödemeler",
+                                "Giderler",
                                 style: GoogleFonts.raleway(
                                     fontSize: 20,
                                     color: Renkler.White,
@@ -314,7 +314,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
               ),
               const SizedBox(
                 height: 150,
-              )
+              ),
             ],
           ),
         ),

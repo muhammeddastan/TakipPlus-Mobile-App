@@ -109,7 +109,7 @@ class _DepoDetayPageState extends State<DepoDetayPage> {
                             fontSize: 15),
                       ),
                       Text(
-                        widget.depo.depoTelno,
+                        widget.depo.depoTelNo,
                         style: const TextStyle(
                             color: Renkler.White,
                             fontSize: 17,

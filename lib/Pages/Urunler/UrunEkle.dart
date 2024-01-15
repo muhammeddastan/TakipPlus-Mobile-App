@@ -1,34 +1,55 @@
-
-// ignore_for_file: file_names
+// ignore_for_file: file_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:takip_plus/Screen/Barcode.dart';
-import 'dart:io';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:input_quantity/input_quantity.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:takip_plus/Components/Profil/UpdateImage.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
+import 'package:takip_plus/Components/Profil/UpdateImage.dart';
+import 'package:takip_plus/Database/DataBaseHelper.dart';
 
 class UrunEkle extends StatefulWidget {
-  UrunEkle({super.key});
+  const UrunEkle({super.key});
 
   @override
   State<UrunEkle> createState() => _UrunEkleState();
 }
 
 class _UrunEkleState extends State<UrunEkle> {
+  final TextEditingController _urunAdiController = TextEditingController();
+  final TextEditingController _barkodNoController = TextEditingController();
+  final TextEditingController _aciklamaController = TextEditingController();
+  final TextEditingController _urunAdetController = TextEditingController();
+  String _barkodNoTara = '';
   Uint8List? _image;
 
+  // DatabaseHelper sınıfını kullanmak için instance oluşturduk
+  final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
+
   void selectImage() async {
-    Uint8List img;
-    img = await pickImage(ImageSource.gallery);
-    setState(() {
-      _image = img as Uint8List?;
-    });
+    Uint8List? img = await pickImage(ImageSource.gallery);
+
+    if (img != null) {
+      setState(() {
+        _image = img;
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          duration: Duration(seconds: 1),
+          content: Text(
+            'Resim seçme işlemi iptal edildi veya bir hata oluştu.',
+            style: TextStyle(
+              color: Renkler.White,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          backgroundColor: Renkler.GoogleRenk,
+        ),
+      );
+    }
   }
 
   @override
@@ -58,13 +79,14 @@ class _UrunEkleState extends State<UrunEkle> {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              const Padding(
-                padding: EdgeInsets.all(15),
+              Padding(
+                padding: const EdgeInsets.all(15),
                 child: TextField(
+                  controller: _urunAdiController,
                   keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Ürün Adı",
-                    counterStyle: TextStyle(color: Renkler.Black),
+                    labelStyle: TextStyle(color: Renkler.Black),
                     hintText: "Ürün Adı",
                     prefixIcon: Icon(Icons.shopping_cart, color: Renkler.Black),
                     hintStyle: TextStyle(color: Renkler.Black),
@@ -83,15 +105,16 @@ class _UrunEkleState extends State<UrunEkle> {
                 padding: const EdgeInsets.all(15),
                 child: Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: TextField(
-                        keyboardType: TextInputType.name,
-                        decoration: InputDecoration(
+                        controller: _barkodNoController,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
                           labelText: "Barkod",
-                          counterStyle: TextStyle(color: Renkler.Black),
+                          labelStyle: TextStyle(color: Renkler.Black),
                           hintText: "Barkod",
                           prefixIcon:
-                              Icon(Icons.qr_code_2, color: Renkler.Black),
+                              Icon(IconlyBold.scan, color: Renkler.Black),
                           hintStyle: TextStyle(color: Renkler.Black),
                           border: OutlineInputBorder(
                             borderSide:
@@ -108,53 +131,27 @@ class _UrunEkleState extends State<UrunEkle> {
                     ),
                     IconButton(
                       onPressed: () {
-                        //BARCODE AÇILIŞ EKRANI
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const BarcodeScreen(),
-                          ),
-                        );
+                        scanBarcodeNormal();
                       },
                       icon: const Icon(
-                        Icons.qr_code_2,
+                        IconlyBold.scan,
                         color: Renkler.Black,
                       ),
                     ),
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.all(15),
-                child: TextField(
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                    labelText: "Açıklama",
-                    counterStyle: TextStyle(color: Renkler.Black),
-                    hintText: "Açıklama",
-                    prefixIcon: Icon(Icons.edit, color: Renkler.Black),
-                    hintStyle: TextStyle(color: Renkler.Black),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 5, color: Renkler.Black),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: Renkler.Black),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                  ),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(15),
+              Padding(
+                padding: const EdgeInsets.all(15),
                 child: Row(
                   children: [
                     Expanded(
                       child: TextField(
+                        controller: _urunAdetController,
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: "Miktar",
-                          counterStyle: TextStyle(color: Renkler.Black),
+                          labelStyle: TextStyle(color: Renkler.Black),
                           hintText: "Miktar",
                           prefixIcon: Icon(Icons.edit_road_outlined,
                               color: Renkler.Black),
@@ -176,83 +173,182 @@ class _UrunEkleState extends State<UrunEkle> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 15,
-                  right: 15,
-                ),
-
                 padding: const EdgeInsets.all(15),
-                child: SizedBox(
-                  height: 150,
-                  width: 400,
-                  child: Stack(
-                    children: [
-
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          height: 150 - 48 / 2,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Renkler.Black, width: 2),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text(
-                              "Ürün Görsel Seç",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.image_outlined,
-                                  color: Renkler.Black,
-                                ))
-                          ],
-                        ),
-                      Column(
-                        children: [
-                          _image != null
-                              ? CircleAvatar(
-                                  radius: 50,
-                                  backgroundImage:
-                                      MemoryImage(_image! as Uint8List),
-                                )
-                              : const CircleAvatar(
-                                  radius: 50,
-                                  backgroundImage:
-                                      AssetImage("assets/urunler/ürün-1.png"),
-                                ),
-                          Center(
-                            child: Positioned(
-                              child: IconButton(
-                                onPressed: selectImage,
-                                icon: Icon(Icons.add_a_photo),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                child: TextField(
+                  controller: _aciklamaController,
+                  keyboardType: TextInputType.name,
+                  decoration: const InputDecoration(
+                    labelText: "Açıklama",
+                    labelStyle: TextStyle(color: Renkler.Black),
+                    hintText: "Açıklama",
+                    prefixIcon: Icon(Icons.edit, color: Renkler.Black),
+                    hintStyle: TextStyle(color: Renkler.Black),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(width: 5, color: Renkler.Black),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Renkler.Black),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
                   ),
                 ),
+              ),
+              const SizedBox(height: 30),
+              Column(
+                children: [
+                  const Text(
+                    "Ürün Görsel Seç",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 20),
+                  _image != null
+                      ? CircleAvatar(
+                          radius: 50,
+                          backgroundImage: MemoryImage(_image!),
+                        )
+                      : const CircleAvatar(
+                          radius: 50,
+                          backgroundImage:
+                              AssetImage("assets/urunler/ürün-1.png"),
+                        ),
+                  Center(
+                    child: Positioned(
+                      child: IconButton(
+                        onPressed: selectImage,
+                        icon: const Icon(Icons.add_a_photo),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    String urunAdi = _urunAdiController.text.trim();
+                    String barkodNo = _barkodNoController.text.trim();
+                    String urunAciklama = _aciklamaController.text.trim();
+                    String urunAdet = _urunAdetController.text.trim();
+                    Uint8List urunFoto = _image ?? Uint8List.fromList([]);
+
+                    if (urunAdi.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          duration: Duration(seconds: 1),
+                          content: Text(
+                            'Ürün Adı Boş Bırakılamaz',
+                            style: TextStyle(
+                              color: Renkler.White,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          backgroundColor: Renkler.GoogleRenk,
+                        ),
+                      );
+                      return;
+                    } else if (barkodNo.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          duration: Duration(seconds: 1),
+                          content: Text(
+                            'Ürün Barkod Boş Bırakılamaz',
+                            style: TextStyle(
+                              color: Renkler.White,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          backgroundColor: Renkler.GoogleRenk,
+                        ),
+                      );
+                      return;
+                    } else if (urunAdet.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          duration: Duration(seconds: 1),
+                          content: Text(
+                            'Ürün Miktar Boş Bırakılamaz',
+                            style: TextStyle(
+                              color: Renkler.White,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          backgroundColor: Renkler.GoogleRenk,
+                        ),
+                      );
+                      return;
+                    } else if (urunAciklama.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          duration: Duration(seconds: 1),
+                          content: Text(
+                            'Ürün Açıklama Boş Bırakılamaz',
+                            style: TextStyle(
+                              color: Renkler.White,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          backgroundColor: Renkler.GoogleRenk,
+                        ),
+                      );
+                      return;
+                    } else if (urunFoto.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          duration: Duration(seconds: 1),
+                          content: Text(
+                            'Ürün Fotografı Boş Bırakılamaz',
+                            style: TextStyle(
+                              color: Renkler.White,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          backgroundColor: Renkler.GoogleRenk,
+                        ),
+                      );
+                      return;
+                    }
+
+                    // Veritabanına ekleme işlemi
+                    await _databaseHelper.insertUrun(
+                      urunAdi,
+                      barkodNo,
+                      int.parse(urunAdet),
+                      urunAciklama,
+                      urunFoto,
+                    );
+
+                    // Bilgileri temizle
+                    _urunAdiController.clear();
+                    _barkodNoController.clear();
+                    _aciklamaController.clear();
+                    _urunAdetController.clear();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        duration: Duration(seconds: 1),
+                        content: Text(
+                          'Ürün başarıyla eklendi',
+                          style: TextStyle(
+                              color: Renkler.White,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        backgroundColor: Renkler.Black, // İstediğiniz renk
+                      ),
+                    );
+                  },
                   style: const ButtonStyle(
                       foregroundColor: MaterialStatePropertyAll(Renkler.White),
                       backgroundColor: MaterialStatePropertyAll(Renkler.Black)),
-                  child: const Text("Ürünü Ekle"),
+                  child: const Text(
+                    "Ürün Ekle",
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
               )
             ],
@@ -260,5 +356,23 @@ class _UrunEkleState extends State<UrunEkle> {
         ),
       ),
     );
+  }
+
+  void scanBarcodeNormal() async {
+    String barkodTarama;
+    try {
+      barkodTarama = await FlutterBarcodeScanner.scanBarcode(
+        '#ff6666',
+        'İptal',
+        true,
+        ScanMode.BARCODE,
+      );
+    } on PlatformException {
+      barkodTarama = "Platform sürümü alınamadı";
+    }
+    setState(() {
+      _barkodNoTara = barkodTarama;
+      _barkodNoController.text = _barkodNoTara;
+    });
   }
 }

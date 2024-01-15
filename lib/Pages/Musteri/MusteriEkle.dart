@@ -1,10 +1,9 @@
-// ignore_for_file: file_names, avoid_print
+// ignore_for_file: file_names, avoid_print, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:takip_plus/Models/MusteriModel.dart';
-import 'package:takip_plus/Screen/Musteriler.dart';
+import 'package:takip_plus/Database/DataBaseHelper.dart';
 
 class MusteriEkleScreen extends StatefulWidget {
   const MusteriEkleScreen({super.key});
@@ -16,11 +15,14 @@ class MusteriEkleScreen extends StatefulWidget {
 class _MusteriEkleScreenState extends State<MusteriEkleScreen> {
   final TextEditingController _musteriAdiController = TextEditingController();
   final TextEditingController _musteriTelNoController = TextEditingController();
+  final TextEditingController _musteriAdresController = TextEditingController();
   final TextEditingController _musteriEpostaController =
       TextEditingController();
-  final TextEditingController _musteriAdresController = TextEditingController();
   final TextEditingController _musteriAciklamaController =
       TextEditingController();
+
+  // DatabaseHelper sınıfını kullanmak için instance oluşturduk
+  final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +81,7 @@ class _MusteriEkleScreenState extends State<MusteriEkleScreen> {
                     Expanded(
                       child: TextField(
                         controller: _musteriTelNoController,
-                        keyboardType: TextInputType.name,
+                        keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           labelText: "Telefon No",
                           labelStyle: TextStyle(color: Renkler.Black),
@@ -191,14 +193,17 @@ class _MusteriEkleScreenState extends State<MusteriEkleScreen> {
                 style: const ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(Renkler.Black),
                     foregroundColor: MaterialStatePropertyAll(Renkler.White)),
-                onPressed: () {
-                  String adiSoyadi = _musteriAdiController.text.trim();
-                  String adres = _musteriTelNoController.text.trim();
-                  String telNo = _musteriAdresController.text.trim();
-                  String mail = _musteriAdresController.text.trim();
-                  String aciklama = _musteriAciklamaController.text.trim();
+                onPressed: () async {
+                  String musteriAdi = _musteriAdiController.text.trim();
+                  String musteriTelNo = _musteriTelNoController.text.trim();
+                  String musteriAdres = _musteriAdresController.text.trim();
+                  String musteriEposta = _musteriEpostaController.text.trim();
+                  String musteriAciklama =
+                      _musteriAciklamaController.text.trim();
 
-                  if (adiSoyadi.isEmpty || telNo.isEmpty || adres.isEmpty) {
+                  if (musteriAdi.isEmpty ||
+                      musteriTelNo.isEmpty ||
+                      musteriAdres.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         duration: Duration(seconds: 1),
@@ -215,25 +220,21 @@ class _MusteriEkleScreenState extends State<MusteriEkleScreen> {
                     );
                     return; // Bilgiler eksik olduğunda işlemi sonlandır
                   }
-                  final yeniMusteri = MusteriModel(
-                      adiSoyadi: adiSoyadi,
-                      adres: adres,
-                      telNo: telNo,
-                      mail: mail,
-                      aciklama: aciklama);
-
-                  // Müşteriler listesini güncelle
-                  setState(() {
-                    MusterilerScreen.musteriler.add(yeniMusteri);
-                    print("Müşteri Eklendi");
-                  });
+                  await _databaseHelper.insertMusteri(
+                    musteriAdi,
+                    musteriTelNo,
+                    musteriAdres,
+                    musteriEposta,
+                    musteriAciklama,
+                  );
 
                   // Bilgileri temizle
                   _musteriAdiController.clear();
                   _musteriTelNoController.clear();
-                  _musteriAciklamaController.clear();
                   _musteriAdresController.clear();
                   _musteriEpostaController.clear();
+                  _musteriAciklamaController.clear();
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       duration: Duration(seconds: 1),

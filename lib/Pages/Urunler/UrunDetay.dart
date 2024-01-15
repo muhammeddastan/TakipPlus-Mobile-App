@@ -42,12 +42,20 @@ class _UrunDetayScreenState extends State<UrunDetayScreen> {
             const SizedBox(height: 20),
             CircleAvatar(
               maxRadius: 50,
-              backgroundColor: Renkler.Black.withOpacity(0.4),
-              child: const Icon(
-                IconlyLight.profile,
-                color: Renkler.White,
-                size: 50,
-              ),
+              backgroundColor: Renkler.Black,
+              foregroundImage: widget.urun.urunFoto != null
+                  ? Image.memory(
+                      widget.urun.urunFoto!,
+                      fit: BoxFit.cover,
+                    ).image
+                  : null, // Bu kısmı null bırakınca CircleAvatar içinde bir şey gösterilmeyecektir
+              child: widget.urun.urunFoto == null
+                  ? const Icon(
+                      IconlyLight.image,
+                      size: 50,
+                      color: Renkler.White,
+                    )
+                  : null, // Eğer fotoğraf varsa, bu kısım null bırakılmalıdır
             ),
             const SizedBox(height: 20),
             Padding(
@@ -131,14 +139,14 @@ class _UrunDetayScreenState extends State<UrunDetayScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const Text(
-                        "Adres",
+                        "Barkod",
                         style: TextStyle(
                             color: Renkler.White,
                             fontWeight: FontWeight.w400,
                             fontSize: 15),
                       ),
                       Text(
-                        widget.urun.urunBarkod.toString(),
+                        widget.urun.barkodNo.toString(),
                         style: const TextStyle(
                             color: Renkler.White,
                             fontSize: 17,

@@ -1,10 +1,9 @@
-// ignore_for_file: file_names, avoid_print
+// ignore_for_file: file_names, avoid_print, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:takip_plus/Models/DepoModel.dart';
-import 'package:takip_plus/Pages/Depo/Depolar.dart';
+import 'package:takip_plus/Database/DataBaseHelper.dart';
 
 class DepoEkleScreen extends StatefulWidget {
   const DepoEkleScreen({super.key});
@@ -17,6 +16,9 @@ class _DepoEkleScreenState extends State<DepoEkleScreen> {
   final TextEditingController _depoTelNoController = TextEditingController();
   final TextEditingController _depoSehirController = TextEditingController();
   final TextEditingController _depoAdresController = TextEditingController();
+
+  // DatabaseHelper sınıfını kullanmak için instance oluşturduk
+  final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -70,40 +72,31 @@ class _DepoEkleScreenState extends State<DepoEkleScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _depoTelNoController,
-                        keyboardType: TextInputType.name,
-                        decoration: const InputDecoration(
-                          labelText: "Telefon No",
-                          labelStyle: TextStyle(color: Renkler.Black),
-                          counterStyle: TextStyle(color: Renkler.Black),
-                          hintText: "Telefon No Zorunlu",
-                          prefixIcon: Icon(IconlyBold.call),
-                          hintStyle: TextStyle(color: Renkler.Black),
-                          border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 5, color: Renkler.Black),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2, color: Renkler.Black),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                        ),
-                      ),
+                child: TextField(
+                  controller: _depoTelNoController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: "Telefon No",
+                    labelStyle: TextStyle(color: Renkler.Black),
+                    counterStyle: TextStyle(color: Renkler.Black),
+                    hintText: "Telefon No Zorunlu",
+                    prefixIcon: Icon(IconlyBold.call),
+                    hintStyle: TextStyle(color: Renkler.Black),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(width: 5, color: Renkler.Black),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                  ],
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Renkler.Black),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: TextField(
                   controller: _depoAdresController,
-                  keyboardType: TextInputType.name,
                   decoration: const InputDecoration(
                     labelText: "Adres ",
                     labelStyle: TextStyle(color: Renkler.Black),
@@ -129,7 +122,6 @@ class _DepoEkleScreenState extends State<DepoEkleScreen> {
                     Expanded(
                       child: TextField(
                         controller: _depoSehirController,
-                        keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           labelText: "Şehir",
                           counterStyle: TextStyle(color: Renkler.Black),
@@ -157,7 +149,7 @@ class _DepoEkleScreenState extends State<DepoEkleScreen> {
                 style: const ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(Renkler.Black),
                     foregroundColor: MaterialStatePropertyAll(Renkler.White)),
-                onPressed: () {
+                onPressed: () async {
                   String depoAdi = _depoAdiController.text.trim();
                   String depoTelNo = _depoTelNoController.text.trim();
                   String depoSehir = _depoSehirController.text.trim();
@@ -183,18 +175,12 @@ class _DepoEkleScreenState extends State<DepoEkleScreen> {
                     );
                     return; // Bilgiler eksik olduğunda işlemi sonlandır
                   }
-                  final yeniDepo = DepoModel(
-                    depoAdi: depoAdi,
-                    depoTelno: depoTelNo,
-                    depoSehir: depoSehir,
-                    depoAdres: depoAdres,
+                  await _databaseHelper.insertDepo(
+                    depoAdi,
+                    depoTelNo,
+                    depoSehir,
+                    depoAdres,
                   );
-
-                  // Depolar listesini güncelle
-                  setState(() {
-                    DepolarScreen.depolar.add(yeniDepo);
-                    print("Ürün Eklendi");
-                  });
 
                   // Bilgileri temizle
                   _depoAdiController.clear();

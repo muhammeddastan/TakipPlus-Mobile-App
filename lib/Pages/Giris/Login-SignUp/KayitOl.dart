@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:takip_plus/Models/UyeModel.dart';
 import 'package:takip_plus/Pages/Giris/Login-SignUp/GirisYap.dart';
 
 class KayitOl extends StatefulWidget {
@@ -240,16 +239,6 @@ class _KayitOlState extends State<KayitOl> {
                             backgroundColor: Renkler.Green, // İstediğiniz renk
                           ),
                         );
-                        final yeniUye = UyeModel(
-                          adSoyad: adSoyad,
-                          ePosta: ePosta,
-                          sifre: sifre,
-                        );
-                        // Müşteriler listesini güncelle
-                        setState(() {
-                          LoginPage.uyeler.add(yeniUye);
-                          print("Üye Eklendi $yeniUye");
-                        });
 
                         Navigator.pushAndRemoveUntil(
                           context,
