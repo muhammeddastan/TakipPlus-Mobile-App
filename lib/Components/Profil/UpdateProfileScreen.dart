@@ -29,16 +29,24 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Renkler.Green,
-        foregroundColor: Renkler.White,
-        title: const Text(
-          'Profilim',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-          ),
+        backgroundColor: Renkler.White,
+        centerTitle: false,
+        title: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              "Profilim",
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "Profil Bilgileriniz.",
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
+            ),
+          ],
         ),
       ),
+      backgroundColor: Renkler.White,
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(30),
@@ -74,13 +82,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
                         labelText: "Ad Soyad",
-                        counterStyle: TextStyle(color: Renkler.Green),
+                        counterStyle: TextStyle(color: Renkler.Black),
                         hintText: "Ad Soyad",
                         prefixIcon: Icon(Icons.supervisor_account_rounded,
-                            color: Renkler.Grey),
-                        hintStyle: TextStyle(color: Renkler.Grey),
+                            color: Renkler.Black),
+                        hintStyle: TextStyle(color: Renkler.Black),
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(width: 5, color: Renkler.Grey),
+                          borderSide:
+                              BorderSide(width: 5, color: Renkler.Black),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                         focusedBorder: OutlineInputBorder(
@@ -99,15 +108,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         labelText: "E-posta",
                         hintText: "E-posta",
                         prefixIcon:
-                            Icon(Icons.mail_outline, color: Renkler.Grey),
-                        hintStyle: TextStyle(color: Renkler.Grey),
+                            Icon(Icons.mail_outline, color: Renkler.Black),
+                        hintStyle: TextStyle(color: Renkler.Black),
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(width: 5, color: Renkler.Grey),
+                          borderSide:
+                              BorderSide(width: 5, color: Renkler.Black),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(width: 2, color: Renkler.Green),
+                              BorderSide(width: 2, color: Renkler.Black),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                       ),
@@ -120,15 +130,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       decoration: InputDecoration(
                         labelText: "Telefon",
                         hintText: "Telefon",
-                        prefixIcon: Icon(Icons.phone, color: Renkler.Grey),
-                        hintStyle: TextStyle(color: Renkler.Grey),
+                        prefixIcon: Icon(Icons.phone, color: Renkler.Black),
+                        hintStyle: TextStyle(color: Renkler.Black),
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(width: 5, color: Renkler.Grey),
+                          borderSide:
+                              BorderSide(width: 5, color: Renkler.Black),
                           borderRadius: BorderRadius.all(Radius.circular(100)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(width: 2, color: Renkler.Green),
+                              BorderSide(width: 2, color: Renkler.Black),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                       ),
@@ -141,17 +152,18 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       decoration: InputDecoration(
                         labelText: "Şifreniz",
                         hintText: "Şifreniz",
-                        counterStyle: TextStyle(color: Renkler.Green),
+                        counterStyle: TextStyle(color: Renkler.Black),
                         prefixIcon:
-                            Icon(Icons.lock_open_sharp, color: Renkler.Grey),
-                        hintStyle: TextStyle(color: Renkler.Grey),
+                            Icon(Icons.lock_open_sharp, color: Renkler.Black),
+                        hintStyle: TextStyle(color: Renkler.Black),
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(width: 5, color: Renkler.Grey),
+                          borderSide:
+                              BorderSide(width: 5, color: Renkler.Black),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(width: 2, color: Renkler.Green),
+                              BorderSide(width: 2, color: Renkler.Black),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                       ),
@@ -160,11 +172,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       height: 20,
                     ),
                     SizedBox(
-                      width: double.infinity,
+                      width: 150,
                       child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Renkler.Green,
+                          backgroundColor: Renkler.Black,
                           side: BorderSide.none,
                           shape: const StadiumBorder(),
                         ),
