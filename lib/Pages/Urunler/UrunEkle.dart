@@ -6,7 +6,6 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:takip_plus/Components/Profil/UpdateImage.dart';
 import 'package:takip_plus/Database/DataBaseHelper.dart';
 
 class UrunEkle extends StatefulWidget {
@@ -30,26 +29,9 @@ class _UrunEkleState extends State<UrunEkle> {
   void selectImage() async {
     Uint8List? img = await pickImage(ImageSource.gallery);
 
-    if (img != null) {
-      setState(() {
-        _image = img;
-      });
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          duration: Duration(seconds: 1),
-          content: Text(
-            'Resim seçme işlemi iptal edildi veya bir hata oluştu.',
-            style: TextStyle(
-              color: Renkler.White,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          backgroundColor: Renkler.GoogleRenk,
-        ),
-      );
-    }
+    setState(() {
+      _image = img;
+    });
   }
 
   @override
@@ -82,6 +64,7 @@ class _UrunEkleState extends State<UrunEkle> {
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: TextField(
+                  cursorColor: Renkler.Black,
                   controller: _urunAdiController,
                   keyboardType: TextInputType.name,
                   decoration: const InputDecoration(
@@ -107,6 +90,7 @@ class _UrunEkleState extends State<UrunEkle> {
                   children: [
                     Expanded(
                       child: TextField(
+                        cursorColor: Renkler.Black,
                         controller: _barkodNoController,
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
@@ -143,38 +127,32 @@ class _UrunEkleState extends State<UrunEkle> {
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _urunAdetController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: "Miktar",
-                          labelStyle: TextStyle(color: Renkler.Black),
-                          hintText: "Miktar",
-                          prefixIcon: Icon(Icons.edit_road_outlined,
-                              color: Renkler.Black),
-                          hintStyle: TextStyle(color: Renkler.Black),
-                          border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 5, color: Renkler.Black),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2, color: Renkler.Black),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                        ),
-                      ),
+                child: TextField(
+                  cursorColor: Renkler.Black,
+                  controller: _urunAdetController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: "Miktar",
+                    labelStyle: TextStyle(color: Renkler.Black),
+                    hintText: "Miktar",
+                    prefixIcon:
+                        Icon(Icons.edit_road_outlined, color: Renkler.Black),
+                    hintStyle: TextStyle(color: Renkler.Black),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(width: 5, color: Renkler.Black),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                  ],
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Renkler.Black),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: TextField(
+                  cursorColor: Renkler.Black,
                   controller: _aciklamaController,
                   keyboardType: TextInputType.name,
                   decoration: const InputDecoration(
@@ -342,15 +320,17 @@ class _UrunEkleState extends State<UrunEkle> {
                       ),
                     );
                   },
-                  style: const ButtonStyle(
-                      foregroundColor: MaterialStatePropertyAll(Renkler.White),
-                      backgroundColor: MaterialStatePropertyAll(Renkler.Black)),
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: const Size(200, 50),
+                      backgroundColor: Renkler.Black,
+                      foregroundColor: Renkler.White),
                   child: const Text(
                     "Ürün Ekle",
                     style: TextStyle(fontSize: 18),
                   ),
                 ),
-              )
+              ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -375,4 +355,14 @@ class _UrunEkleState extends State<UrunEkle> {
       _barkodNoController.text = _barkodNoTara;
     });
   }
+}
+
+pickImage(ImageSource source) async {
+  final ImagePicker imagePicker = ImagePicker();
+  XFile? file = await imagePicker.pickImage(source: source);
+
+  if (file != null) {
+    return await file.readAsBytes();
+  }
+  print("Resim seçilmedi.");
 }

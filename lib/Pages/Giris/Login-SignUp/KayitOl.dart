@@ -55,6 +55,7 @@ class _KayitOlState extends State<KayitOl> {
                     Padding(
                       padding: const EdgeInsets.all(15),
                       child: TextField(
+                        cursorColor: Renkler.Black,
                         controller: musteriAdiController,
                         keyboardType: TextInputType.name,
                         decoration: const InputDecoration(
@@ -81,6 +82,7 @@ class _KayitOlState extends State<KayitOl> {
                     Padding(
                       padding: const EdgeInsets.all(15),
                       child: TextField(
+                        cursorColor: Renkler.Black,
                         controller: musteriEPostaController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
@@ -106,77 +108,65 @@ class _KayitOlState extends State<KayitOl> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              controller: musteriSifreController,
-                              obscureText: true,
-                              decoration: const InputDecoration(
-                                labelText: "Şifre",
-                                labelStyle: TextStyle(color: Renkler.Black),
-                                counterStyle: TextStyle(color: Renkler.Black),
-                                hintText: "Şifre",
-                                prefixIcon: Icon(IconlyLight.password,
-                                    color: Renkler.Black),
-                                hintStyle: TextStyle(color: Renkler.Black),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 5, color: Renkler.Black),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 2, color: Renkler.Black),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                ),
-                              ),
-                            ),
+                      child: TextField(
+                        cursorColor: Renkler.Black,
+                        controller: musteriSifreController,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          labelText: "Şifre",
+                          labelStyle: TextStyle(color: Renkler.Black),
+                          counterStyle: TextStyle(color: Renkler.Black),
+                          hintText: "Şifre",
+                          prefixIcon:
+                              Icon(IconlyLight.password, color: Renkler.Black),
+                          hintStyle: TextStyle(color: Renkler.Black),
+                          border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 5, color: Renkler.Black),
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
-                        ],
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 2, color: Renkler.Black),
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                        ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              controller: musteriSifreTekrarController,
-                              obscureText: true,
-                              decoration: const InputDecoration(
-                                labelText: "Şifre Tekrar",
-                                labelStyle: TextStyle(color: Renkler.Black),
-                                counterStyle: TextStyle(color: Renkler.Black),
-                                hintText: "Şifre",
-                                prefixIcon: Icon(IconlyLight.password,
-                                    color: Renkler.Black),
-                                hintStyle: TextStyle(color: Renkler.Black),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 5, color: Renkler.Black),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 2, color: Renkler.Black),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                ),
-                              ),
-                            ),
+                      child: TextField(
+                        cursorColor: Renkler.Black,
+                        controller: musteriSifreTekrarController,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          labelText: "Şifre Tekrar",
+                          labelStyle: TextStyle(color: Renkler.Black),
+                          counterStyle: TextStyle(color: Renkler.Black),
+                          hintText: "Şifre",
+                          prefixIcon:
+                              Icon(IconlyLight.password, color: Renkler.Black),
+                          hintStyle: TextStyle(color: Renkler.Black),
+                          border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 5, color: Renkler.Black),
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
-                        ],
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 2, color: Renkler.Black),
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 20),
-                    InkWell(
-                      borderRadius: BorderRadius.circular(30),
-                      splashColor: Renkler.White,
-                      onTap: () {
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(250, 60),
+                          backgroundColor: Renkler.Black,
+                          foregroundColor: Renkler.White),
+                      onPressed: () {
                         String adSoyad = musteriAdiController.text.trim();
                         String ePosta = musteriEPostaController.text.trim();
                         String sifre = musteriSifreController.text.trim();
@@ -247,22 +237,10 @@ class _KayitOlState extends State<KayitOl> {
                           (route) => false, // Geçmişteki tüm sayfaları kapat
                         );
                       },
-                      child: Container(
-                        height: 60,
-                        width: 250,
-                        decoration: BoxDecoration(
-                          color: Renkler.Black,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            "KAYIT OL",
-                            style: TextStyle(
-                                color: Renkler.White,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                      child: const Text(
+                        "KAYIT OL",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(height: 30),

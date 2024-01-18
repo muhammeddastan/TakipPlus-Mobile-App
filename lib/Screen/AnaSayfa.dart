@@ -5,6 +5,9 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
+import 'package:takip_plus/Database/DataBaseHelper.dart';
+import 'package:takip_plus/Pages/AnaSayfa/Gelirler/Gelirler.dart';
+import 'package:takip_plus/Pages/AnaSayfa/Giderler/Giderler.dart';
 
 class AnaSayfa extends StatefulWidget {
   const AnaSayfa({super.key});
@@ -18,7 +21,37 @@ Future<void> _refresh() {
 }
 
 class _AnaSayfaState extends State<AnaSayfa> {
+  final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
+
+  String gelirAdi = "";
+  String gelirPara = "";
+  String giderAdi = "";
+  String giderPara = "";
+
   int secilenIndex = 0;
+  Future<void> init() async {
+    final lastGelirData = await _databaseHelper.getLastGelirData();
+    final lastGiderData = await _databaseHelper.getLastGiderData();
+
+    if (lastGelirData.isNotEmpty) {
+      gelirAdi = lastGelirData[0]["gelirAdi"];
+      gelirPara = lastGelirData[0]["gelirPara"];
+    }
+
+    if (lastGiderData.isNotEmpty) {
+      giderAdi = lastGiderData[0]["giderAdi"];
+      giderPara = lastGiderData[0]["giderPara"];
+    }
+
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,8 +133,21 @@ class _AnaSayfaState extends State<AnaSayfa> {
                   ),
                   child: Column(
                     children: [
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Gelir - Gider = ",
+                            style: TextStyle(
+                                color: Renkler.White,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w300),
+                          ),
+                        ),
+                      ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -128,36 +174,16 @@ class _AnaSayfaState extends State<AnaSayfa> {
                           ],
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 20.0),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Tüm Zamanlar",
-                            style: TextStyle(
-                                color: Renkler.White,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                      ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 20.0, top: 20),
+                        padding: const EdgeInsets.only(left: 20.0, top: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              "Tümünü Gör",
+                              "Elinizde Kalan Para",
                               style: GoogleFonts.raleway(
                                   color: Renkler.White, fontSize: 30),
                             ),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.arrow_right_alt,
-                                  size: 40,
-                                  color: Renkler.White,
-                                ))
                           ],
                         ),
                       )
@@ -167,145 +193,200 @@ class _AnaSayfaState extends State<AnaSayfa> {
               ),
               const SizedBox(height: 20),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.48,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      color: Renkler.Black,
-                      borderRadius: BorderRadius.circular(30),
+                  //GELİR CONTAINER
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      backgroundColor: Renkler.Black,
+                      foregroundColor: Renkler.White,
+                      fixedSize:
+                          Size(MediaQuery.of(context).size.width * 0.48, 200),
                     ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const GelirlerScreen(),
+                        ),
+                      ).then((value) {
+                        init();
+                      });
+                    },
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 20.0, left: 20, right: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "3600₺",
-                                style: GoogleFonts.josefinSans(
-                                    fontSize: 25, color: Renkler.White),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "$gelirPara₺",
+                              style: GoogleFonts.josefinSans(
+                                  fontSize: 25, color: Renkler.White),
+                            ),
+                            Container(
+                              height: 30,
+                              width: 30,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Renkler.White.withOpacity(0.2)),
+                              child: const Icon(
+                                Iconsax.money_recive,
+                                size: 25,
+                                color: Renkler.White,
                               ),
-                              Container(
-                                height: 40,
-                                width: 40,
+                            )
+                          ],
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            gelirAdi,
+                            style: const TextStyle(
+                                color: Colors.green, fontSize: 17),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Gelirler",
+                              style: GoogleFonts.raleway(
+                                  fontSize: 20,
+                                  color: Renkler.White,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const GelirlerScreen(),
+                                  ),
+                                ).then((value) {
+                                  init();
+                                });
+                              },
+                              icon: Container(
+                                height: 35,
+                                width: 35,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Renkler.White.withOpacity(0.2)),
+                                    color: Renkler.White.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(30)),
                                 child: const Icon(
-                                  Iconsax.money_recive,
+                                  IconlyLight.show,
                                   size: 25,
                                   color: Renkler.White,
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 20.0, top: 10),
-                          child: Text(
-                            "Serhat Güneş",
-                            style: TextStyle(color: Colors.green, fontSize: 17),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 30.0, left: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Gelirler",
-                                style: GoogleFonts.raleway(
-                                    fontSize: 20,
-                                    color: Renkler.White,
-                                    fontWeight: FontWeight.bold),
                               ),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.arrow_right_alt,
-                                    size: 30,
-                                    color: Renkler.White,
-                                  ))
-                            ],
-                          ),
-                        )
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.48,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      color: Renkler.Black,
-                      borderRadius: BorderRadius.circular(30),
+
+                  //GİDER CONTAINER
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      backgroundColor: Renkler.Black,
+                      foregroundColor: Renkler.White,
+                      fixedSize:
+                          Size(MediaQuery.of(context).size.width * 0.48, 200),
                     ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const GiderlerScreen(),
+                        ),
+                      ).then((value) {
+                        init();
+                      });
+                    },
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20.0, top: 20, right: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "1200₺",
-                                style: GoogleFonts.josefinSans(
-                                    fontSize: 25, color: Renkler.White),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "$giderPara ₺",
+                              style: GoogleFonts.josefinSans(
+                                  fontSize: 25, color: Renkler.White),
+                            ),
+                            Container(
+                              height: 30,
+                              width: 30,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Renkler.White.withOpacity(0.2)),
+                              child: const Icon(
+                                Iconsax.money_send,
+                                size: 25,
+                                color: Renkler.White,
                               ),
-                              Container(
-                                height: 40,
-                                width: 40,
+                            )
+                          ],
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            giderAdi,
+                            style: const TextStyle(
+                                color: Renkler.Danger, fontSize: 17),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Giderler",
+                              style: GoogleFonts.raleway(
+                                  fontSize: 20,
+                                  color: Renkler.White,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const GiderlerScreen(),
+                                  ),
+                                ).then((value) {
+                                  init();
+                                });
+                              },
+                              icon: Container(
+                                height: 30,
+                                width: 30,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Renkler.White.withOpacity(0.2)),
+                                    color: Renkler.White.withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(30)),
                                 child: const Icon(
-                                  Iconsax.money_send,
+                                  IconlyLight.show,
                                   size: 25,
                                   color: Renkler.White,
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 20.0, top: 10),
-                          child: Text(
-                            "Mehmet Özbek",
-                            style: TextStyle(color: Colors.red, fontSize: 17),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 30.0, left: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Giderler",
-                                style: GoogleFonts.raleway(
-                                    fontSize: 20,
-                                    color: Renkler.White,
-                                    fontWeight: FontWeight.bold),
                               ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.arrow_right_alt,
-                                  size: 30,
-                                  color: Renkler.White,
-                                ),
-                              ),
-                            ],
-                          ),
+                            )
+                          ],
                         ),
                       ],
                     ),

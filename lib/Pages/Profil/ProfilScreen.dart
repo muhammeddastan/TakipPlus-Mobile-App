@@ -4,18 +4,18 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:takip_plus/Components/Profil/UpdateImage.dart';
 
-class UpdateProfileScreen extends StatefulWidget {
-  const UpdateProfileScreen({Key? key}) : super(key: key);
+class ProfilScreen extends StatefulWidget {
+  const ProfilScreen({Key? key}) : super(key: key);
 
   @override
-  State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
+  State<ProfilScreen> createState() => _ProfilScreenState();
 }
 
-class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
+class _ProfilScreenState extends State<ProfilScreen> {
   Uint8List? _image;
 
   void selectImage() async {
@@ -36,11 +36,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              "Profilim",
+              "PROFİLİM",
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
             Text(
-              "Profil Bilgileriniz.",
+              "Profil bilgilerinize göz atın.",
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
             ),
           ],
@@ -52,40 +52,37 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           padding: const EdgeInsets.all(30),
           child: Column(
             children: [
-              Stack(
-                children: [
-                  _image != null
-                      ? CircleAvatar(
-                          radius: 64,
-                          backgroundImage: MemoryImage(_image!),
-                        )
-                      : const CircleAvatar(
-                          radius: 64,
-                          backgroundImage:
-                              AssetImage("assets/images/avatar.jpg"),
-                        ),
-                  Positioned(
-                    bottom: -10,
-                    left: 80,
-                    child: IconButton(
-                      onPressed: selectImage,
-                      icon: const Icon(Icons.add_a_photo),
+              _image != null
+                  ? CircleAvatar(
+                      radius: 50,
+                      backgroundImage: MemoryImage(_image!),
+                    )
+                  : const CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage("assets/urunler/ürün-1.png"),
                     ),
-                  )
-                ],
+              Center(
+                child: Positioned(
+                  child: IconButton(
+                    onPressed: selectImage,
+                    icon: const Icon(Icons.add_a_photo),
+                  ),
+                ),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               Form(
                 child: Column(
                   children: [
                     const TextField(
+                      cursorColor: Renkler.Black,
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
                         labelText: "Ad Soyad",
+                        labelStyle: TextStyle(color: Renkler.Black),
                         counterStyle: TextStyle(color: Renkler.Black),
                         hintText: "Ad Soyad",
-                        prefixIcon: Icon(Icons.supervisor_account_rounded,
-                            color: Renkler.Black),
+                        prefixIcon:
+                            Icon(IconlyLight.profile, color: Renkler.Black),
                         hintStyle: TextStyle(color: Renkler.Black),
                         border: OutlineInputBorder(
                           borderSide:
@@ -103,12 +100,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       height: 20,
                     ),
                     const TextField(
+                      cursorColor: Renkler.Black,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
+                        labelStyle: TextStyle(color: Renkler.Black),
                         labelText: "E-posta",
                         hintText: "E-posta",
                         prefixIcon:
-                            Icon(Icons.mail_outline, color: Renkler.Black),
+                            Icon(IconlyLight.message, color: Renkler.Black),
                         hintStyle: TextStyle(color: Renkler.Black),
                         border: OutlineInputBorder(
                           borderSide:
@@ -126,20 +125,24 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       height: 20,
                     ),
                     const TextField(
-                      keyboardType: TextInputType.phone,
+                      cursorColor: Renkler.Black,
+                      keyboardType: TextInputType.name,
                       decoration: InputDecoration(
                         labelText: "Telefon",
+                        labelStyle: TextStyle(color: Renkler.Black),
+                        counterStyle: TextStyle(color: Renkler.Black),
                         hintText: "Telefon",
-                        prefixIcon: Icon(Icons.phone, color: Renkler.Black),
+                        prefixIcon:
+                            Icon(IconlyLight.call, color: Renkler.Black),
                         hintStyle: TextStyle(color: Renkler.Black),
                         border: OutlineInputBorder(
                           borderSide:
                               BorderSide(width: 5, color: Renkler.Black),
-                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(width: 2, color: Renkler.Black),
+                              BorderSide(width: 2, color: Renkler.Green),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                       ),
@@ -148,13 +151,15 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       height: 20,
                     ),
                     const TextField(
+                      cursorColor: Renkler.Black,
                       obscureText: true,
                       decoration: InputDecoration(
+                        labelStyle: TextStyle(color: Renkler.Black),
                         labelText: "Şifreniz",
                         hintText: "Şifreniz",
                         counterStyle: TextStyle(color: Renkler.Black),
                         prefixIcon:
-                            Icon(Icons.lock_open_sharp, color: Renkler.Black),
+                            Icon(IconlyLight.password, color: Renkler.Black),
                         hintStyle: TextStyle(color: Renkler.Black),
                         border: OutlineInputBorder(
                           borderSide:
@@ -176,16 +181,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
+                          foregroundColor: Renkler.White,
                           backgroundColor: Renkler.Black,
-                          side: BorderSide.none,
-                          shape: const StadiumBorder(),
+                          fixedSize: const Size(200, 50),
                         ),
                         child: const Text(
                           "Güncelle",
                           style: TextStyle(
                               color: Renkler.White,
                               fontWeight: FontWeight.w400,
-                              fontSize: 20),
+                              fontSize: 18),
                         ),
                       ),
                     ),
@@ -198,4 +203,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       ),
     );
   }
+}
+
+pickImage(ImageSource source) async {
+  final ImagePicker imagePicker = ImagePicker();
+  XFile? file = await imagePicker.pickImage(source: source);
+
+  if (file != null) {
+    return await file.readAsBytes();
+  }
+  print("Resim seçilmedi.");
 }

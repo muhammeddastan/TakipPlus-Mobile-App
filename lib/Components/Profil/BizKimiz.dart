@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
 
-class AboutProfileScreen extends StatefulWidget {
-  const AboutProfileScreen({super.key});
+class BizKimizScreen extends StatefulWidget {
+  const BizKimizScreen({super.key});
 
   @override
-  State<AboutProfileScreen> createState() => _AboutProfileScreenState();
+  State<BizKimizScreen> createState() => _BizKimizScreenState();
 }
 
-class _AboutProfileScreenState extends State<AboutProfileScreen> {
+class _BizKimizScreenState extends State<BizKimizScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
