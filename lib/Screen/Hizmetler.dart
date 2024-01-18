@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:takip_plus/Components/Profil/UpdateProfileScreen.dart';
 import 'package:takip_plus/Components/Profil/UygulamaHakkindaScreen.dart';
 import 'package:takip_plus/Pages/Depo/Depolar.dart';
 import 'package:takip_plus/Pages/Giris/Login-SignUp/GirisYap.dart';
+import 'package:takip_plus/Pages/Profil/ProfilScreen.dart';
 import 'package:takip_plus/Pages/Urunler/UrunEkle.dart';
 
 class HizmetScreen extends StatefulWidget {
@@ -59,7 +59,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const UpdateProfileScreen(),
+                      builder: (context) => const ProfilScreen(),
                     ),
                   );
                 },
@@ -83,7 +83,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => UrunEkle()),
+                      MaterialPageRoute(builder: (context) => const UrunEkle()),
                     );
                   },
                   child: Container(

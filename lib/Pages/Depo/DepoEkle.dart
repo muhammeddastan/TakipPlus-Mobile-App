@@ -50,6 +50,7 @@ class _DepoEkleScreenState extends State<DepoEkleScreen> {
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: TextField(
+                  cursorColor: Renkler.Black,
                   controller: _depoAdiController,
                   keyboardType: TextInputType.name,
                   decoration: const InputDecoration(
@@ -73,6 +74,7 @@ class _DepoEkleScreenState extends State<DepoEkleScreen> {
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: TextField(
+                  cursorColor: Renkler.Black,
                   controller: _depoTelNoController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -96,6 +98,7 @@ class _DepoEkleScreenState extends State<DepoEkleScreen> {
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: TextField(
+                  cursorColor: Renkler.Black,
                   controller: _depoAdresController,
                   decoration: const InputDecoration(
                     labelText: "Adres ",
@@ -121,6 +124,7 @@ class _DepoEkleScreenState extends State<DepoEkleScreen> {
                   children: [
                     Expanded(
                       child: TextField(
+                        cursorColor: Renkler.Black,
                         controller: _depoSehirController,
                         decoration: const InputDecoration(
                           labelText: "Şehir",
@@ -146,9 +150,10 @@ class _DepoEkleScreenState extends State<DepoEkleScreen> {
               ),
               const SizedBox(height: 30),
               ElevatedButton(
-                style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Renkler.Black),
-                    foregroundColor: MaterialStatePropertyAll(Renkler.White)),
+                style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(200, 50),
+                    backgroundColor: Renkler.Black,
+                    foregroundColor: Renkler.White),
                 onPressed: () async {
                   String depoAdi = _depoAdiController.text.trim();
                   String depoTelNo = _depoTelNoController.text.trim();
@@ -201,7 +206,10 @@ class _DepoEkleScreenState extends State<DepoEkleScreen> {
                     ),
                   );
                 },
-                child: const Text("KAYDET"),
+                child: const Text(
+                  "DEPO EKLE",
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
             ],
           ),

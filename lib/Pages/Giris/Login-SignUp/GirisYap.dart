@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:takip_plus/Components/AnaSayfa/NavigationBar.dart';
 import 'package:takip_plus/Models/UyeModel.dart';
+import 'package:takip_plus/Pages/AnaSayfa/NavigationBar.dart';
 import 'package:takip_plus/Pages/Giris/Login-SignUp/KayitOl.dart';
 
 class LoginPage extends StatefulWidget {
@@ -58,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: TextField(
                         controller: ePostaController,
                         keyboardType: TextInputType.emailAddress,
+                        cursorColor: Renkler.Black,
                         decoration: const InputDecoration(
                           labelText: "E-Posta",
                           labelStyle: TextStyle(color: Renkler.Black),
@@ -85,6 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Expanded(
                             child: TextField(
+                              cursorColor: Renkler.Black,
                               controller: sifreController,
                               obscureText: true,
                               decoration: const InputDecoration(
@@ -114,10 +116,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    InkWell(
-                      borderRadius: BorderRadius.circular(30),
-                      splashColor: Renkler.White,
-                      onTap: () {
+                    ElevatedButton(
+                      onPressed: () {
                         String girilenEposta = ePostaController.text.trim();
                         String girilenSifre = sifreController.text.trim();
                         print("Girilen E-Posta: $girilenEposta");
@@ -177,53 +177,40 @@ class _LoginPageState extends State<LoginPage> {
                           );
                         }
                       },
-                      child: Container(
-                        height: 60,
-                        width: 250,
-                        decoration: BoxDecoration(
-                          color: Renkler.Black,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            "OTURUM AÇ",
-                            style: TextStyle(
-                                color: Renkler.White,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(250, 60),
+                          backgroundColor: Renkler.Black,
+                          foregroundColor: Renkler.White),
+                      child: const Text(
+                        "OTURUM AÇ",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(height: 20),
                     const Text("VEYA"),
                     const SizedBox(height: 20),
-                    InkWell(
-                      onTap: () {
-                        //Google ile giriş butonu
-                      },
-                      child: Container(
-                        height: 60,
-                        width: 250,
-                        decoration: BoxDecoration(
-                          color: Renkler.GoogleRenk,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset("assets/icons/gmail.png", height: 20),
-                            const SizedBox(width: 10),
-                            const Text(
-                              "Google ile Giriş Yap",
-                              style: TextStyle(
-                                  color: Renkler.White,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(250, 60),
+                          backgroundColor: Renkler.GoogleRenk,
+                          foregroundColor: Renkler.White),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            "assets/icons/gmail.png",
+                            height: 20,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          const Text(
+                            "Google ile Giriş Yap",
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          )
+                        ],
                       ),
                     ),
                   ],
@@ -243,6 +230,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(width: 10),
                   InkWell(
+                    borderRadius: BorderRadius.circular(5),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -251,7 +239,7 @@ class _LoginPageState extends State<LoginPage> {
                       );
                     },
                     child: const Text(
-                      "Kayıt Ol",
+                      " Kayıt Ol ",
                       style: TextStyle(
                           color: Renkler.GoogleRenk,
                           fontSize: 18,

@@ -57,7 +57,7 @@ class _UrunListeState extends State<UrunListe> {
               color: Renkler.Black.withOpacity(0.1),
               borderRadius: BorderRadius.circular(50)),
           child: const Icon(
-            IconlyBold.buy,
+            IconlyLight.buy,
             size: 30,
           ),
         ),

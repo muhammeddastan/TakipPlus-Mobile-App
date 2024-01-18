@@ -54,6 +54,7 @@ class _MusteriEkleScreenState extends State<MusteriEkleScreen> {
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: TextField(
+                  cursorColor: Renkler.Black,
                   controller: _musteriAdiController,
                   keyboardType: TextInputType.name,
                   decoration: const InputDecoration(
@@ -76,38 +77,32 @@ class _MusteriEkleScreenState extends State<MusteriEkleScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _musteriTelNoController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: "Telefon No",
-                          labelStyle: TextStyle(color: Renkler.Black),
-                          counterStyle: TextStyle(color: Renkler.Black),
-                          hintText: "Telefon No Zorunlu",
-                          prefixIcon: Icon(IconlyBold.call),
-                          hintStyle: TextStyle(color: Renkler.Black),
-                          border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 5, color: Renkler.Black),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2, color: Renkler.Black),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                        ),
-                      ),
+                child: TextField(
+                  cursorColor: Renkler.Black,
+                  controller: _musteriTelNoController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: "Telefon No",
+                    labelStyle: TextStyle(color: Renkler.Black),
+                    counterStyle: TextStyle(color: Renkler.Black),
+                    hintText: "Telefon No Zorunlu",
+                    prefixIcon: Icon(IconlyBold.call),
+                    hintStyle: TextStyle(color: Renkler.Black),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(width: 5, color: Renkler.Black),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                  ],
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Renkler.Black),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: TextField(
+                  cursorColor: Renkler.Black,
                   controller: _musteriAdresController,
                   decoration: const InputDecoration(
                     labelText: "Adres",
@@ -129,70 +124,57 @@ class _MusteriEkleScreenState extends State<MusteriEkleScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _musteriEpostaController,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: const InputDecoration(
-                          labelText: "E-posta",
-                          labelStyle: TextStyle(color: Renkler.Black),
-                          counterStyle: TextStyle(color: Renkler.Black),
-                          hintText: "E-posta Zorunlu Değil",
-                          prefixIcon: Icon(IconlyBold.message),
-                          hintStyle: TextStyle(color: Renkler.Black),
-                          border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 5, color: Renkler.Black),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2, color: Renkler.Black),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                        ),
-                      ),
+                child: TextField(
+                  cursorColor: Renkler.Black,
+                  controller: _musteriEpostaController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    labelText: "E-posta",
+                    labelStyle: TextStyle(color: Renkler.Black),
+                    counterStyle: TextStyle(color: Renkler.Black),
+                    hintText: "E-posta Zorunlu Değil",
+                    prefixIcon: Icon(IconlyBold.message),
+                    hintStyle: TextStyle(color: Renkler.Black),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(width: 5, color: Renkler.Black),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                  ],
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Renkler.Black),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _musteriAciklamaController,
-                        decoration: const InputDecoration(
-                          labelText: "Açıklama",
-                          labelStyle: TextStyle(color: Renkler.Black),
-                          counterStyle: TextStyle(color: Renkler.Black),
-                          hintText: "Açıklama Zorunlu Değil",
-                          prefixIcon: Icon(IconlyBold.star),
-                          hintStyle: TextStyle(color: Renkler.Black),
-                          border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 5, color: Renkler.Black),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2, color: Renkler.Black),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                        ),
-                      ),
+                child: TextField(
+                  cursorColor: Renkler.Black,
+                  controller: _musteriAciklamaController,
+                  decoration: const InputDecoration(
+                    labelText: "Açıklama",
+                    labelStyle: TextStyle(color: Renkler.Black),
+                    counterStyle: TextStyle(color: Renkler.Black),
+                    hintText: "Açıklama Zorunlu Değil",
+                    prefixIcon: Icon(IconlyBold.star),
+                    hintStyle: TextStyle(color: Renkler.Black),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(width: 5, color: Renkler.Black),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                  ],
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Renkler.Black),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 30),
               ElevatedButton(
-                style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Renkler.Black),
-                    foregroundColor: MaterialStatePropertyAll(Renkler.White)),
+                style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(200, 50),
+                    foregroundColor: Renkler.White,
+                    backgroundColor: Renkler.Black),
                 onPressed: () async {
                   String musteriAdi = _musteriAdiController.text.trim();
                   String musteriTelNo = _musteriTelNoController.text.trim();
@@ -249,7 +231,10 @@ class _MusteriEkleScreenState extends State<MusteriEkleScreen> {
                     ),
                   );
                 },
-                child: const Text("KAYDET"),
+                child: const Text(
+                  "MÜŞTERİ EKLE",
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
             ],
           ),
