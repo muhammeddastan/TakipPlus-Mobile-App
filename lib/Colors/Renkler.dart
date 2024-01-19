@@ -7,7 +7,7 @@ class Renkler {
   static const Color DarkBlue = Color(0XFF0094D6);
   static const Color White = Color(0XFFECECEC);
   static const Color Grey = Color(0XFF616161);
-  static const Color Black = Color(0XFF000000);
+  static const Color Black = Color(0XFF1b1f2b);
   static const Color Danger = Color(0XFFdd4e40);
   static const Color BlueDark = Color(0XFF1345FF);
   static const Color GoogleRenk = Color(0XFFd14938);
