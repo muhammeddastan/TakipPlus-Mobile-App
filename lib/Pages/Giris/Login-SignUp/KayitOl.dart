@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
+import 'package:takip_plus/Database/DataBaseHelper.dart';
 import 'package:takip_plus/Pages/Giris/Login-SignUp/GirisYap.dart';
 
 class KayitOl extends StatefulWidget {
@@ -23,6 +24,9 @@ class _KayitOlState extends State<KayitOl> {
         TextEditingController();
     final TextEditingController musteriSifreTekrarController =
         TextEditingController();
+
+    // DatabaseHelper sınıfını kullanmak için instance oluşturduk
+    final DatabaseHelper databaseHelper = DatabaseHelper.instance;
 
     return Scaffold(
       backgroundColor: Renkler.White,
@@ -166,17 +170,17 @@ class _KayitOlState extends State<KayitOl> {
                           fixedSize: const Size(250, 60),
                           backgroundColor: Renkler.Black,
                           foregroundColor: Renkler.White),
-                      onPressed: () {
-                        String adSoyad = musteriAdiController.text.trim();
-                        String ePosta = musteriEPostaController.text.trim();
-                        String sifre = musteriSifreController.text.trim();
-                        String sifreTekrar =
+                      onPressed: () async {
+                        String uyeAdSoyad = musteriAdiController.text.trim();
+                        String uyeEposta = musteriEPostaController.text.trim();
+                        String uyeSifre = musteriSifreController.text.trim();
+                        String uyeSifreTekrar =
                             musteriSifreTekrarController.text.trim();
 
-                        if (adSoyad.isEmpty ||
-                            ePosta.isEmpty ||
-                            sifre.isEmpty ||
-                            sifreTekrar.isEmpty) {
+                        if (uyeAdSoyad.isEmpty ||
+                            uyeEposta.isEmpty ||
+                            uyeSifre.isEmpty ||
+                            uyeSifreTekrar.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               duration: Duration(seconds: 2),
@@ -193,7 +197,7 @@ class _KayitOlState extends State<KayitOl> {
                           );
                           return;
                         }
-                        if (sifre != sifreTekrar) {
+                        if (uyeSifre != uyeSifreTekrar) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               duration: Duration(seconds: 2),
@@ -211,6 +215,33 @@ class _KayitOlState extends State<KayitOl> {
                           );
                           return;
                         }
+
+                        bool ePostaKontrol =
+                            await databaseHelper.ePostaDogrulama(uyeEposta);
+                        if (ePostaKontrol) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              duration: Duration(seconds: 2),
+                              content: Text(
+                                'Bu e-posta adresi zaten kayıtlı!',
+                                style: TextStyle(
+                                  color: Renkler.White,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              backgroundColor: Renkler.GoogleRenk,
+                            ),
+                          );
+                          return;
+                        }
+
+                        //VERİ TABANINA EKLEME İŞLEMİ
+                        await databaseHelper.insertUye(
+                          uyeAdSoyad,
+                          uyeEposta,
+                          uyeSifre,
+                        );
 
                         musteriAdiController.clear();
                         musteriEPostaController.clear();

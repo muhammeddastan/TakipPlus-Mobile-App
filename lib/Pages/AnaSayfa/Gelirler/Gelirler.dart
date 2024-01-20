@@ -113,7 +113,7 @@ class _GelirlerScreenState extends State<GelirlerScreen> {
               onDismissed: (direction) async {
                 await _databaseHelper.deleteGelir(gelir.id);
                 setState(() {
-                  _databaseHelper.deleteMusteri(_gelirler[index].id);
+                  _databaseHelper.deleteGelir(_gelirler[index].id);
                   setState(() {
                     _gelirler.removeAt(index);
                   });

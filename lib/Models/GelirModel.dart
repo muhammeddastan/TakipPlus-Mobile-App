@@ -2,7 +2,7 @@ class GelirModel {
   late final int id;
   late final String gelirAdi;
   late final String gelirTip;
-  late final String gelirPara;
+  late final int gelirPara;
   late final String gelirTarih;
 
   GelirModel(
@@ -17,7 +17,7 @@ class GelirModel {
       id: map['id'] ?? "",
       gelirAdi: map['gelirAdi'] ?? "",
       gelirTip: map['gelirTip'] ?? "",
-      gelirPara: map['gelirPara'] ?? "",
+      gelirPara: int.parse(map['gelirPara'].toString()),
       gelirTarih: map['gelirTarih'] ?? "",
     );
   }

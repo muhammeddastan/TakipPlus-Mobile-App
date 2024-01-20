@@ -12,4 +12,12 @@ class UyeModel {
     required this.uyeEposta,
     required this.uyeSifre,
   });
+  factory UyeModel.fromMap(Map<String, dynamic> map) {
+    return UyeModel(
+      id: map['id'] ?? "",
+      uyeAdSoyad: map['uyeAdSoyad'] ?? "",
+      uyeEposta: map['uyeEposta'] ?? "",
+      uyeSifre: map['uyeSifre'] ?? "",
+    );
+  }
 }

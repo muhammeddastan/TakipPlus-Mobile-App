@@ -1,26 +1,44 @@
-// ignore_for_file: file_names, avoid_print
+// ignore_for_file: file_names, avoid_print, use_build_context_synchronously, unused_field
 
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
+import 'package:takip_plus/Components/NavigationBar.dart';
+import 'package:takip_plus/Database/DataBaseHelper.dart';
 import 'package:takip_plus/Models/UyeModel.dart';
-import 'package:takip_plus/Pages/AnaSayfa/NavigationBar.dart';
 import 'package:takip_plus/Pages/Giris/Login-SignUp/KayitOl.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
-
-  static List<UyeModel> uyeler = [
-    UyeModel(uyeAdSoyad: "Ali Cabbar", uyeEposta: "1", uyeSifre: "1", id: 0),
-    UyeModel(uyeAdSoyad: "feridun", uyeEposta: "2", uyeSifre: "2", id: 1)
-  ];
-
+  static UyeModel? girisYapanKullanici;
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
+
+  List<UyeModel> _uyeler = [];
+  @override
+  void initState() {
+    super.initState();
+    _getUyeler(); // Uygulama başladığında verileri çekiyoruz
+  }
+
+// Veritabanından ürünleri çekmek için bu işlevi kullanıyoruz
+  void _getUyeler() async {
+    final List<Map<String, dynamic>> uyelerMapList =
+        await _databaseHelper.queryAllUyeData();
+
+    List<UyeModel> uyeler =
+        uyelerMapList.map((map) => UyeModel.fromMap(map)).toList();
+
+    setState(() {
+      _uyeler = uyeler;
+    });
+  }
+
   final TextEditingController ePostaController = TextEditingController();
   final TextEditingController sifreController = TextEditingController();
   @override
@@ -117,24 +135,19 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: () {
-                        String girilenEposta = ePostaController.text.trim();
-                        String girilenSifre = sifreController.text.trim();
-                        print("Girilen E-Posta: $girilenEposta");
-                        print("Girilen Şifre: $girilenSifre");
+                      onPressed: () async {
+                        String uyeEposta = ePostaController.text.trim();
+                        String uyeSifre = sifreController.text.trim();
+                        print("Girilen E-Posta: $uyeEposta");
+                        print("Girilen Şifre: $uyeSifre");
 
-                        UyeModel? kullanici = LoginPage.uyeler.firstWhere(
-                          (uye) =>
-                              uye.uyeEposta == girilenEposta &&
-                              uye.uyeSifre == girilenSifre,
-                          orElse: () => UyeModel(
-                              uyeAdSoyad: '',
-                              uyeEposta: '',
-                              uyeSifre: '',
-                              id: 1),
+                        // Kullanıcı giriş işlemi
+                        bool loginSuccess = await _databaseHelper.login(
+                          uyeEposta,
+                          uyeSifre,
                         );
 
-                        if (kullanici.uyeAdSoyad.isNotEmpty) {
+                        if (loginSuccess) {
                           // Başarılı giriş
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -151,7 +164,6 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           );
 
-                          // AnaSayfa'ya geçiş yaparken adSoyad'ı iletebilirsiniz
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(

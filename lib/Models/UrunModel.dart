@@ -3,12 +3,12 @@
 import 'dart:typed_data';
 
 class UrunModel {
-  late final int id;
-  late final String urunAdi;
-  late final String barkodNo;
-  late final int urunAdet;
-  late final String urunAciklama;
-  late final Uint8List? urunFoto;
+  final int id;
+  final String urunAdi;
+  final String barkodNo;
+  final int urunAdet;
+  final String urunAciklama;
+  final Uint8List? urunFoto;
 
   UrunModel(
       {required this.id,
@@ -19,13 +19,13 @@ class UrunModel {
       required this.urunFoto});
 
   factory UrunModel.fromMap(Map<String, dynamic> map) {
+    print(map['urunAdet']);
     return UrunModel(
       id: map['id'] ?? "",
       urunAdi: map['urunAdi'] ?? "",
       barkodNo: map['barkodNo'] ?? "",
       urunAdet: map['urunAdet'] ?? "",
       urunAciklama: map['urunAciklama'] ?? "",
-      // Fotoğraf verisi eğer null değilse direkt atama yapılıyor, null ise null bırakılıyor
       urunFoto: map['urunFoto'],
     );
   }

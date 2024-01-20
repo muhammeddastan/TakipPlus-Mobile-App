@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
@@ -74,11 +75,11 @@ class _GiderEkleScreenState extends State<GiderEkleScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              "GELİR EKLE",
+              "GİDER EKLE",
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
             Text(
-              "giderlerinizi görebilmek için ekleyin.",
+              "Giderlerinizi görebilmek için ekleyin.",
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
             ),
           ],
@@ -153,6 +154,11 @@ class _GiderEkleScreenState extends State<GiderEkleScreen> {
               child: TextField(
                 cursorColor: Renkler.Black,
                 controller: giderParaController,
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  //cihat adamdır
+                ],
                 decoration: const InputDecoration(
                   labelText: "Para",
                   labelStyle: TextStyle(color: Renkler.Black),
@@ -210,8 +216,9 @@ class _GiderEkleScreenState extends State<GiderEkleScreen> {
                   },
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(100, 65),
-                    backgroundColor: Renkler.White,
-                    foregroundColor: Renkler.Black,
+                    backgroundColor: Renkler.Black,
+                    foregroundColor: Renkler.White,
+                    shadowColor: Renkler.Black,
                     elevation: 5,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -278,7 +285,7 @@ class _GiderEkleScreenState extends State<GiderEkleScreen> {
                 await _databaseHelper.insertGider(
                   giderAdi,
                   giderTip,
-                  giderPara,
+                  int.parse(giderPara),
                   giderTarih,
                 );
 
@@ -290,7 +297,7 @@ class _GiderEkleScreenState extends State<GiderEkleScreen> {
                   const SnackBar(
                     duration: Duration(seconds: 1),
                     content: Text(
-                      'GELİR EKLENDİ',
+                      'GİDER EKLENDİ',
                       style: TextStyle(
                         color: Renkler.White,
                         fontSize: 18,
@@ -302,7 +309,7 @@ class _GiderEkleScreenState extends State<GiderEkleScreen> {
                 );
               },
               child: const Text(
-                "GELİR EKLE",
+                "GİDER EKLE",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),

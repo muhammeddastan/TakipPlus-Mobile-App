@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
-import 'package:takip_plus/Components/Profil/UygulamaHakkindaScreen.dart';
+import 'package:takip_plus/Pages/AnaSayfa/Gelirler/Gelirler.dart';
+import 'package:takip_plus/Pages/AnaSayfa/Giderler/Giderler.dart';
 import 'package:takip_plus/Pages/Depo/Depolar.dart';
 import 'package:takip_plus/Pages/Giris/Login-SignUp/GirisYap.dart';
-import 'package:takip_plus/Pages/Profil/ProfilScreen.dart';
+import 'package:takip_plus/Pages/Hizmetler/UygulamaHakkindaScreen.dart';
 import 'package:takip_plus/Pages/Urunler/UrunEkle.dart';
 
 class HizmetScreen extends StatefulWidget {
@@ -47,25 +48,25 @@ class _HizmetScreenState extends State<HizmetScreen> {
             ),
           ],
         ),
-        actions: [
-          Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: Renkler.Black.withOpacity(0.1)),
-            child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ProfilScreen(),
-                    ),
-                  );
-                },
-                icon: const Icon(IconlyLight.profile)),
-          ),
-          const SizedBox(width: 10),
+        actions: const [
+          // Container(
+          //   height: 40,
+          //   width: 40,
+          //   decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(50),
+          //       color: Renkler.Black.withOpacity(0.1)),
+          //   child: IconButton(
+          //       onPressed: () {
+          //         Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //             builder: (context) => const ProfilScreen(),
+          //           ),
+          //         );
+          //       },
+          //       icon: const Icon(IconlyLight.profile)),
+          // ),
+          // SizedBox(width: 10),
         ],
       ),
       backgroundColor: Renkler.White,
@@ -129,6 +130,10 @@ class _HizmetScreenState extends State<HizmetScreen> {
                 child: InkWell(
                   onTap: () {
                     //SAYFA YÖNLENDİRME ALANI
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (builder) => const GiderlerScreen()));
                   },
                   child: Container(
                     height: 50,
@@ -173,6 +178,10 @@ class _HizmetScreenState extends State<HizmetScreen> {
                 child: InkWell(
                   onTap: () {
                     //SAYFA YÖNLENDİRME ALANI
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (builder) => const GelirlerScreen()));
                   },
                   child: Container(
                     height: 50,
@@ -188,14 +197,14 @@ class _HizmetScreenState extends State<HizmetScreen> {
                         Padding(
                           padding: EdgeInsets.only(left: 20.0),
                           child: Icon(
-                            IconlyLight.graph,
+                            Iconsax.money_recive,
                             color: Renkler.White,
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 20.0),
                           child: Text(
-                            "Raporlar",
+                            "Gelirler",
                             style: TextStyle(color: Renkler.White),
                           ),
                         ),
@@ -518,7 +527,7 @@ class _HizmetScreenState extends State<HizmetScreen> {
                             onPressed: () => Navigator.pop(context, 'İptal'),
                             style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Renkler.Green),
+                                  MaterialStateProperty.all(Renkler.Black),
                             ),
                             child: const Text(
                               'İptal',

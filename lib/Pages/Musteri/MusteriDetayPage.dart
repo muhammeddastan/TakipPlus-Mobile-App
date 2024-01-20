@@ -75,7 +75,7 @@ class _MusteriDetayPageState extends State<MusteriDetayPage> {
                             fontSize: 15),
                       ),
                       Text(
-                        widget.musteri.musteriAdi,
+                        widget.musteri.musteriAdSoyad,
                         style: const TextStyle(
                             color: Renkler.White,
                             fontSize: 17,

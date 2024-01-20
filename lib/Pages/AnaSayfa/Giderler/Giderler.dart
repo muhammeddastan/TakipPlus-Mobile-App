@@ -83,7 +83,11 @@ class _GiderlerScreenState extends State<GiderlerScreen> {
                     MaterialPageRoute(
                       builder: (context) => const GiderEkleScreen(),
                     ),
-                  ).then((value) => {setState(() {})});
+                  ).then((value) => {
+                        setState(() {
+                          _getGiderler();
+                        })
+                      });
                 },
                 icon: const Icon(
                   IconlyLight.plus,
