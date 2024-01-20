@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
@@ -155,6 +156,11 @@ class _GelirEkleScreenState extends State<GelirEkleScreen> {
               child: TextField(
                 cursorColor: Renkler.Black,
                 controller: gelirParaController,
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  //cihat adamdır
+                ],
                 decoration: const InputDecoration(
                   labelText: "Para",
                   labelStyle: TextStyle(color: Renkler.Black),
@@ -212,8 +218,9 @@ class _GelirEkleScreenState extends State<GelirEkleScreen> {
                   },
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(100, 65),
-                    backgroundColor: Renkler.White,
-                    foregroundColor: Renkler.Black,
+                    backgroundColor: Renkler.Black,
+                    foregroundColor: Renkler.White,
+                    shadowColor: Renkler.Black,
                     elevation: 5,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -280,7 +287,7 @@ class _GelirEkleScreenState extends State<GelirEkleScreen> {
                 await _databaseHelper.insertGelir(
                   gelirAdi,
                   gelirTip,
-                  gelirPara,
+                  int.parse(gelirPara),
                   gelirTarih,
                 );
 

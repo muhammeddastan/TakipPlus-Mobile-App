@@ -52,6 +52,7 @@ dependencies:
   sqflite: ^2.3.0
   path: ^1.8.3
   flutter_swipe_detector: ^2.0.0
+  carbon_icons: ^0.0.1+2
   
   
 

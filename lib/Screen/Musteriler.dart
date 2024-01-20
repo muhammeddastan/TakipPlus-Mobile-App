@@ -164,7 +164,7 @@ class _MusterilerScreenState extends State<MusterilerScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                musteri.musteriAdi,
+                                musteri.musteriAdSoyad,
                                 style: const TextStyle(
                                   color: Renkler.White,
                                   fontWeight: FontWeight.bold,
@@ -317,7 +317,7 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     List<MusteriModel> filteredMusteriler = musteriler
         .where((musteri) =>
-            musteri.musteriAdi.toLowerCase().contains(query.toLowerCase()))
+            musteri.musteriAdSoyad.toLowerCase().contains(query.toLowerCase()))
         .toList();
 
     return ListView.builder(
@@ -325,7 +325,7 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         MusteriModel musteri = filteredMusteriler[index];
         return ListTile(
-          title: Text(musteri.musteriAdi),
+          title: Text(musteri.musteriAdSoyad),
           onTap: () {
             // Burada tıklanan müşteriye ait detay sayfasına git
             Navigator.push(
@@ -344,8 +344,8 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     List<String> suggestions = musteriler
         .where((musteri) =>
-            musteri.musteriAdi.toLowerCase().contains(query.toLowerCase()))
-        .map((musteri) => musteri.musteriAdi)
+            musteri.musteriAdSoyad.toLowerCase().contains(query.toLowerCase()))
+        .map((musteri) => musteri.musteriAdSoyad)
         .toList();
 
     return ListView.builder(

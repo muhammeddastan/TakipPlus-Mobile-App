@@ -2,7 +2,7 @@
 
 class MusteriModel {
   late final int id;
-  late final String musteriAdi;
+  late final String musteriAdSoyad;
   late final String musteriTelNo;
   late final String musteriAdres;
   late final String musteriEposta;
@@ -10,7 +10,7 @@ class MusteriModel {
 
   MusteriModel(
       {required this.id,
-      required this.musteriAdi,
+      required this.musteriAdSoyad,
       required this.musteriTelNo,
       required this.musteriAdres,
       required this.musteriEposta,
@@ -19,7 +19,7 @@ class MusteriModel {
   factory MusteriModel.fromMap(Map<String, dynamic> map) {
     return MusteriModel(
         id: map['id'] ?? "",
-        musteriAdi: map['musteriAdi'] ?? "",
+        musteriAdSoyad: map['musteriAdSoyad'] ?? "",
         musteriTelNo: map['musteriTelNo'] ?? "",
         musteriAdres: map['musteriAdres'] ?? "",
         musteriEposta: map['musteriEposta'] ?? "",

@@ -1,11 +1,5 @@
-// ignore: unused_import
-// ignore_for_file: file_names
-
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:takip_plus/Colors/Renkler.dart';
 
 class ProfilScreen extends StatefulWidget {
@@ -16,17 +10,15 @@ class ProfilScreen extends StatefulWidget {
 }
 
 class _ProfilScreenState extends State<ProfilScreen> {
-  Uint8List? _image;
-
-  void selectImage() async {
-    Uint8List img = await pickImage(ImageSource.gallery);
-    setState(() {
-      _image = img;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    // Uint8List? _image;
+
+    // void selectImage() async {
+    //   Uint8List img = await pickImage(ImageSource.gallery);
+    //   setState(() {
+    //     _image = img;
+    //   });
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Renkler.White,
@@ -52,23 +44,34 @@ class _ProfilScreenState extends State<ProfilScreen> {
           padding: const EdgeInsets.all(30),
           child: Column(
             children: [
-              _image != null
-                  ? CircleAvatar(
-                      radius: 50,
-                      backgroundImage: MemoryImage(_image!),
-                    )
-                  : const CircleAvatar(
-                      radius: 50,
-                      backgroundImage: AssetImage("assets/urunler/ürün-1.png"),
-                    ),
-              Center(
-                child: Positioned(
-                  child: IconButton(
-                    onPressed: selectImage,
-                    icon: const Icon(Icons.add_a_photo),
+              const CircleAvatar(
+                maxRadius: 50,
+                backgroundColor: Renkler.Black,
+                child: Center(
+                  child: Icon(
+                    IconlyLight.profile,
+                    color: Renkler.White,
+                    size: 50,
                   ),
                 ),
               ),
+              // _image != null
+              //     ? CircleAvatar(
+              //         radius: 50,
+              //         backgroundImage: MemoryImage(_image!),
+              //       )
+              //     : const CircleAvatar(
+              //         radius: 50,
+              //         backgroundImage: AssetImage("assets/urunler/ürün-1.png"),
+              //       ),
+              // Center(
+              //   child: Positioned(
+              //     child: IconButton(
+              //       onPressed: selectImage,
+              //       icon: const Icon(Icons.add_a_photo),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(height: 20),
               Form(
                 child: Column(
@@ -203,14 +206,14 @@ class _ProfilScreenState extends State<ProfilScreen> {
       ),
     );
   }
-}
 
-pickImage(ImageSource source) async {
-  final ImagePicker imagePicker = ImagePicker();
-  XFile? file = await imagePicker.pickImage(source: source);
+  // pickImage(ImageSource source) async {
+  //   final ImagePicker imagePicker = ImagePicker();
+  //   XFile? file = await imagePicker.pickImage(source: source);
 
-  if (file != null) {
-    return await file.readAsBytes();
-  }
-  print("Resim seçilmedi.");
+  //   if (file != null) {
+  //     return await file.readAsBytes();
+  //   }
+  //   print("Resim seçilmedi.");
+  // }
 }

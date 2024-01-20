@@ -2,7 +2,7 @@ class GiderModel {
   late final int id;
   late final String giderAdi;
   late final String giderTip;
-  late final String giderPara;
+  late final int giderPara;
   late final String giderTarih;
 
   GiderModel(
@@ -17,7 +17,7 @@ class GiderModel {
       id: map['id'] ?? "",
       giderAdi: map['giderAdi'] ?? "",
       giderTip: map['giderTip'] ?? "",
-      giderPara: map['giderPara'] ?? "",
+      giderPara: int.parse(map['giderPara'].toString()),
       giderTarih: map['giderTarih'] ?? "",
     );
   }
