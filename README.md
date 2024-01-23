@@ -17,4 +17,4 @@ Proje Ekibi
 -Serhat Güneş
 -Mehmet Özbek
 
-Ekip arkadaşlarımıza bu güzel projede de benimle beraber çalıştıkları için çok teşekkür ediyorum. Nice güzel projelere.
+Ekip arkadaşlarıma bu güzel projede de benimle beraber çalıştıkları için çok teşekkür ediyorum. Nice güzel projelere.
